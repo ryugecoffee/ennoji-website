@@ -40,27 +40,6 @@
     }
     .intro-inner p:last-child { margin-bottom: 0; }
 
-    /* 料金表 */
-    .fee-section { background: var(--black); padding: 5rem 2.5rem; }
-    .fee-inner { max-width: 860px; margin: 0 auto; }
-    .fee-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-    .fee-table tr { border-bottom: 1px solid rgba(255,255,255,0.07); }
-    .fee-table tr:last-child { border-bottom: none; }
-    .fee-table td {
-      padding: 1.6rem 0; font-size: 0.88rem;
-      letter-spacing: 0.06em; color: var(--cream); vertical-align: top;
-    }
-    .fee-table td.name { color: var(--white); font-weight: 400; min-width: 180px; }
-    .fee-table td.note { color: var(--mist); font-size: 0.78rem; padding-left: 1rem; }
-    .fee-table td.price {
-      text-align: right; color: var(--gold); font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem; letter-spacing: 0.1em; white-space: nowrap;
-    }
-    .fee-note {
-      margin-top: 2rem; font-size: 0.8rem; line-height: 1.9;
-      color: var(--mist); letter-spacing: 0.05em;
-    }
-
     /* 年間行事 */
     .events-section {
       background: var(--off-black); padding: 5rem 2.5rem;
@@ -149,84 +128,19 @@
           <p>お墓の無い方、又は霊園にお墓をお持ちの方の葬儀・法要を勤めます。</p>
           <p>お寺の墓地を利用されている方はそのお寺さんにご相談してください。</p>
           <p>円応寺和尚に葬儀・法要を依頼希望される方は直接円応寺へ電話を下さい。葬儀社・霊園事務所経由ですと円応寺に伝わらない事があります。</p>
-          <p>葬儀・法要における、お布施の金額を問いあわされる方が多くおられますので、一応の目安として以下に示します。</p>
         </div>
         <div data-lang="en">
           <p>The head priest of Ennoji conducts services with sincere devotion.</p>
           <p>We perform funerals and memorial services for those without a family temple, or those whose graves are at another cemetery.</p>
           <p>If you use a temple cemetery, please consult with that temple directly.</p>
           <p>Those wishing to request services from Ennoji's priest should contact us directly by phone. Requests through funeral homes or cemetery offices may not always reach us.</p>
-          <p>As we receive many inquiries about suggested offering amounts, we provide the following as a general reference.</p>
         </div>
         <div data-lang="zh">
           <p>圆应寺住持诚心为您供养。</p>
           <p>我们为没有家族寺院或在其他墓地有墓地的人举办葬礼和法事。</p>
           <p>使用寺院墓地的人请直接向该寺院咨询。</p>
           <p>希望委托圆应寺和尚举办葬礼或法事的人，请直接致电圆应寺。通过葬礼公司或墓园事务所可能无法及时传达。</p>
-          <p>由于有很多人询问布施金额，以下提供参考标准。</p>
         </div>
-      </div>
-    </section>
-
-    <!-- 料金 -->
-    <section class="fee-section">
-      <div class="fee-inner">
-        <p class="section-label">
-          <span data-lang="ja" class="active">お布施の目安</span>
-          <span data-lang="en">Suggested Offerings</span>
-          <span data-lang="zh">布施参考金额</span>
-        </p>
-        <h2 class="section-title">
-          <span data-lang="ja" class="active">料金案内</span>
-          <span data-lang="en">Fee Schedule</span>
-          <span data-lang="zh">费用说明</span>
-        </h2>
-        <table class="fee-table">
-          <tr>
-            <td class="name">
-              <span data-lang="ja" class="active">通夜・葬儀</span>
-              <span data-lang="en">Wake &amp; Funeral</span>
-              <span data-lang="zh">守灵・葬礼</span>
-            </td>
-            <td class="note">
-              <span data-lang="ja" class="active">葬儀のお布施です。戒名を付けても付け無くても同じです。</span>
-              <span data-lang="en">Offering for funeral service. The same whether or not a posthumous Buddhist name is given.</span>
-              <span data-lang="zh">葬礼布施。无论是否赐予法名，金额相同。</span>
-            </td>
-            <td class="price">300,000<span style="font-size:0.7rem;"> 円</span></td>
-          </tr>
-          <tr>
-            <td class="name">
-              <span data-lang="ja" class="active">一日葬儀</span>
-              <span data-lang="en">One-Day Funeral</span>
-              <span data-lang="zh">一日葬礼</span>
-            </td>
-            <td class="note">
-              <span data-lang="ja" class="active">葬儀のお布施です。戒名を付けても付け無くても同じです。</span>
-              <span data-lang="en">Offering for one-day funeral service.</span>
-              <span data-lang="zh">一日葬礼布施。</span>
-            </td>
-            <td class="price">200,000<span style="font-size:0.7rem;"> 円</span></td>
-          </tr>
-          <tr>
-            <td class="name">
-              <span data-lang="ja" class="active">法事</span>
-              <span data-lang="en">Memorial Service</span>
-              <span data-lang="zh">法事</span>
-            </td>
-            <td class="note">
-              <span data-lang="ja" class="active">年忌法要など</span>
-              <span data-lang="en">Annual memorial services, etc.</span>
-              <span data-lang="zh">年忌法要等</span>
-            </td>
-            <td class="price">50,000<span style="font-size:0.7rem;"> 円</span></td>
-          </tr>
-        </table>
-        <p class="fee-note">
-          <span data-lang="ja" class="active">以上、一応の目安です。依頼希望の方は、電話でお申し込みください。ご相談に対応します。</span>
-          <span data-lang="en">The above are approximate guidelines. Please contact us by phone to make arrangements. We are happy to consult with you.</span>
-          <span data-lang="zh">以上为参考标准。希望委托的人请致电申请，我们将为您提供咨询服务。</span>
-        </p>
       </div>
     </section>
 
