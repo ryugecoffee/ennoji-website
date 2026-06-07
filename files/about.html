@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>圓應寺のご案内 | 圓應寺</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_shared.css">
+  <style>
+    .page-hero {
+      position: relative; height: 50vh; min-height: 360px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .page-hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(10,10,8,0.3), rgba(10,10,8,0.7)),
+        url('images/about.jpg') center/cover no-repeat;
+      background-color: #1a1510;
+    }
+    .page-hero h1 {
+      position: relative; z-index: 1;
+      font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 300;
+      letter-spacing: 0.4em; color: var(--white);
+      opacity: 0; animation: fadeUp 1s ease 0.3s forwards;
+    }
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(16px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    .content-section { padding: 5rem 2.5rem; }
+    .content-inner { max-width: 860px; margin: 0 auto; }
+
+    .engi {
+      background: var(--off-black);
+      border-top: 1px solid rgba(184,149,90,0.15);
+      border-bottom: 1px solid rgba(184,149,90,0.15);
+    }
+    .engi p {
+      font-size: 0.9rem; line-height: 2.2; color: var(--cream);
+      letter-spacing: 0.06em; margin-bottom: 1.6rem;
+    }
+    .engi p:last-child { margin-bottom: 0; }
+
+    .img-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      background: rgba(184,149,90,0.1); border: 1px solid rgba(184,149,90,0.1);
+      margin: 4rem 0;
+    }
+    .img-cell {
+      aspect-ratio: 4/3; overflow: hidden; background: var(--stone);
+      position: relative;
+    }
+    .img-cell img { width:100%; height:100%; object-fit:cover; display:block; }
+    .img-cell .caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 0.6rem 1rem;
+      background: rgba(10,10,8,0.75);
+      font-size: 0.7rem; letter-spacing: 0.12em; color: var(--mist);
+      text-align: center;
+    }
+
+    /* 仏教セクション */
+    .bukkyou { background: var(--black); }
+    .bukkyou-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+      margin-top: 2rem;
+    }
+    .bukkyou-block h3 {
+      font-size: 1rem; letter-spacing: 0.2em; color: var(--gold);
+      margin-bottom: 1rem; font-weight: 400;
+    }
+    .bukkyou-block p {
+      font-size: 0.85rem; line-height: 2; color: var(--mist); letter-spacing: 0.05em;
+    }
+
+    /* 懺悔文 */
+    .sange {
+      background: var(--off-black);
+      border-top: 1px solid rgba(184,149,90,0.15);
+      padding: 5rem 2.5rem;
+    }
+    .sange-inner { max-width: 860px; margin: 0 auto; }
+    .sange-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+      align-items: start; margin-top: 2rem;
+    }
+    .sange-text-jp {
+      font-size: 1.6rem; line-height: 2.2; letter-spacing: 0.3em;
+      color: var(--cream); font-weight: 300;
+    }
+    .sange-text-jp .furigana { font-size: 0.55rem; display: block; color: var(--mist); letter-spacing: 0.1em; }
+    .sange-desc { font-size: 0.85rem; line-height: 2.1; color: var(--mist); letter-spacing: 0.05em; }
+    .sange-note {
+      margin-top: 1.5rem; padding: 1.2rem 1.5rem;
+      border: 1px solid rgba(184,149,90,0.3);
+      font-size: 0.8rem; line-height: 1.9; color: var(--mist);
+    }
+  </style>
+</head>
+<body>
+  <div class="lang-bar">
+    <span class="site-tagline">Shingiyama — Temple of Enma / 新居山 閻魔様の寺</span>
+    <div class="lang-switcher">
+      <button onclick="setLang('ja')" id="btn-ja">JP</button>
+      <button onclick="setLang('en')" id="btn-en">EN</button>
+      <button onclick="setLang('zh')" id="btn-zh">ZH</button>
+    </div>
+  </div>
+  <nav>
+    <a href="index.html" class="nav-logo">圓應寺</a>
+    <ul class="nav-links">
+      <li><a href="index.html" data-ja="トップページ" data-en="Home" data-zh="首页">トップページ</a></li>
+      <li><a href="about.html" class="current" data-ja="圓應寺のご案内" data-en="About" data-zh="寺院介绍">圓應寺のご案内</a></li>
+      <li><a href="funeral.html" data-ja="葬儀・法事" data-en="Funeral" data-zh="葬礼法事">葬儀・法事</a></li>
+      <li><a href="cemetery.html" data-ja="墓地分譲" data-en="Cemetery" data-zh="墓地">墓地分譲</a></li>
+      <li><a href="access.html" data-ja="アクセス・お問い合わせ" data-en="Access" data-zh="交通・联系">アクセス・お問い合わせ</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-top">
+    <!-- HERO -->
+    <div class="page-hero">
+      <div class="page-hero-bg"></div>
+      <h1>
+        <span data-lang="ja" class="active">圓應寺のご案内</span>
+        <span data-lang="en">About Ennoji</span>
+        <span data-lang="zh">圆应寺介绍</span>
+      </h1>
+    </div>
+
+    <!-- 縁起 -->
+    <section class="content-section engi">
+      <div class="content-inner">
+        <p class="section-label">
+          <span data-lang="ja" class="active">圓應寺縁起</span>
+          <span data-lang="en">History</span>
+          <span data-lang="zh">寺院历史</span>
+        </p>
+        <h2 class="section-title">
+          <span data-lang="ja" class="active">寺の歴史</span>
+          <span data-lang="en">The Story of Ennoji</span>
+          <span data-lang="zh">寺院沿革</span>
+        </h2>
+
+        <div data-lang="ja" class="active">
+          <p>円応寺は、建長二年（1250年）に造られた閻魔大王を本尊とするお寺です。建長寺開山大覚禅師の弟子であり、建長寺第九世の知覚禅師が開山（最初の住職）です。閻魔堂、十王堂とも呼ばれ、亡者が冥界において出合う「十王」を祀っています。</p>
+          <p>円応寺は初め見越嶽（大仏様の近く）にありましたが、鎌倉幕府滅亡後足利尊氏が由比ヶ浜に移築しその後、江戸時代の元禄十六年（1703年）に起きた大地震後に現在の地に移りました。</p>
+          <p>本尊の閻魔大王座像（国重要文化財）は、仏師「運慶」作と伝わります。運慶は頓死をして閻魔大王の前に引き出されましたが、閻魔様の「汝は生前の慳貪心（物惜しみし、欲深いこと）の罪により、地獄に落ちるべきところであるが、もし汝が我が姿を彫刻し、その像を見た人々が悪行を成さず、善縁に趣くのであれば、汝を娑婆に戻してやろう。」といわれ、現世に生き返った運慶が彫刻したと言われています。運慶は生き返った事を喜び、笑いながら彫像したため閻魔様のお顔も笑っているように見えることから、古来「笑い閻魔」と呼ばれています。又、山賊から守る為赤ちゃんを飲み込んだ事から「子喰い閻魔」その後その赤ちゃんが無事に成長出来た為「子育て閻魔」と呼ばれています。</p>
+        </div>
+        <div data-lang="en">
+          <p>Ennoji was founded in 1250 and enshrines Enma Daio (the King of Hell) as its principal deity. The temple was established by Chikaku Zenji, the ninth head priest of Kenchoji, a disciple of the great monk Daikaku Zenji.</p>
+          <p>Originally located near the Great Buddha, the temple was moved to Yuigahama after the fall of the Kamakura shogunate, and again to its current location after the great earthquake of 1703.</p>
+          <p>The principal statue of Enma Daio (an Important Cultural Property) is said to have been carved by the master sculptor Unkei. Legend tells that Unkei fell into a sudden death and was brought before Enma, who offered him a second chance at life if he would carve his likeness. Unkei carved the statue joyfully upon returning to life, which is why Enma's face appears to be smiling — earning the nickname "Laughing Enma."</p>
+        </div>
+        <div data-lang="zh">
+          <p>圆应寺建于建长二年（1250年），供奉阎魔大王为本尊。寺院由建长寺第九代住持知觉禅师开山，是建长寺开山大觉禅师的弟子。</p>
+          <p>寺院最初位于见越岳（大佛附近），镰仓幕府灭亡后迁至由比滨，元禄十六年（1703年）大地震后移至现址。</p>
+          <p>本尊阎魔大王坐像（国家重要文化财产）相传为佛师运庆所作。传说运庆死后被带到阎魔面前，阎魔允许他重返人间，条件是为其雕刻像。运庆因重获生命而喜笑颜开，因此雕像面带微笑，古来被称为"笑阎魔"。</p>
+        </div>
+
+        <!-- 像の写真 -->
+        <div class="img-row">
+          <div class="img-cell">
+            <img src="images/enma.jpg" alt="閻魔大王座像" onerror="this.style.display='none'">
+            <div class="caption">
+              <span data-lang="ja" class="active">閻魔大王座像（国重要文化財）</span>
+              <span data-lang="en">Enma Daio — Important Cultural Property</span>
+              <span data-lang="zh">阎魔大王坐像（国家重要文化财产）</span>
+            </div>
+          </div>
+          <div class="img-cell">
+            <img src="images/juoh.jpg" alt="十王" onerror="this.style.display='none'">
+            <div class="caption">
+              <span data-lang="ja" class="active">十王</span>
+              <span data-lang="en">The Ten Kings</span>
+              <span data-lang="zh">十王</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 仏教における十王 -->
+    <section class="content-section bukkyou">
+      <div class="content-inner">
+        <p class="section-label">
+          <span data-lang="ja" class="active">仏教における十王</span>
+          <span data-lang="en">Buddhism &amp; the Ten Kings</span>
+          <span data-lang="zh">佛教中的十王</span>
+        </p>
+        <h2 class="section-title">
+          <span data-lang="ja" class="active">冥界の裁き</span>
+          <span data-lang="en">Judgment in the Afterlife</span>
+          <span data-lang="zh">冥界的审判</span>
+        </h2>
+        <div data-lang="ja" class="active">
+          <p style="font-size:0.9rem; line-height:2.2; color:var(--cream); letter-spacing:0.05em; margin-bottom:1.6rem;">お釈迦様は死後の世界は説きませんでした。しかし「死」という事実は仏教の出発点でもあります。死への恐怖があるかぎり平安な人生は送れません。仏教において死への恐怖を解決し、充実した人生を送るために「十王」は存在します。</p>
+          <p style="font-size:0.9rem; line-height:2.2; color:var(--cream); letter-spacing:0.05em; margin-bottom:1.6rem;">十王とは、亡者が冥界において出合う十人の王のことです。亡者は冥界において七日ごとに七回、さらに百ヶ日、一周忌、三回忌の合計十回、それぞれの王の取り調べを受けます。</p>
+          <p style="font-size:0.9rem; line-height:2.2; color:var(--cream); letter-spacing:0.05em;">亡者はまず、初七日の秦広王、二・七日の初江王、三・七日の宋帝王、四・七日の五官王と、生前の罪を取り調べられます。その結果により五・七日（三十五日）の閻魔大王が、六道（天上、人間、修羅、畜生、餓鬼、地獄）のどこに生まれ変わるかを決定します。</p>
+        </div>
+        <div data-lang="en">
+          <p style="font-size:0.9rem; line-height:2.2; color:var(--cream); letter-spacing:0.05em; margin-bottom:1.6rem;">While the Buddha did not speak of the afterlife directly, death is the very starting point of Buddhist teaching. As long as we fear death, we cannot live in peace. The Ten Kings exist to help resolve that fear and guide us toward a more fulfilled life.</p>
+          <p style="font-size:0.9rem; line-height:2.2; color:var(--cream); letter-spacing:0.05em;">The Ten Kings are ten judges the deceased encounters in the underworld. The soul faces each king in turn — seven times at seven-day intervals, then at 100 days, one year, and three years after death.</p>
+        </div>
+        <div data-lang="zh">
+          <p style="font-size:0.9rem; line-height:2.2; color:var(--cream); letter-spacing:0.05em; margin-bottom:1.6rem;">释迦牟尼虽未直接阐述死后世界，但"死亡"是佛教的出发点。对死亡的恐惧使人无法安心生活，十王的存在正是为了帮助解决这种恐惧，引导人们过上充实的生活。</p>
+          <p style="font-size:0.9rem; line-height:2.2; color:var(--cream); letter-spacing:0.05em;">十王是亡者在冥界依次遇见的十位审判者。亡者在死后每七天接受一次审判，共七次，另加百日、一周年、三周年，共十次审判。</p>
+        </div>
+
+        <div class="bukkyou-grid" style="margin-top:3rem;">
+          <div class="bukkyou-block">
+            <h3><span data-lang="ja" class="active">閻魔様の願い</span><span data-lang="en">The Wish of Enma</span><span data-lang="zh">阎魔王的愿望</span></h3>
+            <p>
+              <span data-lang="ja" class="active">仏教（閻魔様）は全ての人を救いたいと願っています。前生で悪業を行い地獄の苦しみを受けている者でも自らの罪を認め心から懺悔すれば、閻魔様はお地蔵様に身を変えて地獄の底まで救いに行きます。</span>
+              <span data-lang="en">Buddhism — and Enma — wishes to save all beings. Even those suffering in hell for past misdeeds can be saved if they sincerely acknowledge and repent their sins. Enma then transforms into Jizo and descends to the depths of hell to rescue them.</span>
+              <span data-lang="zh">佛教（阎魔王）希望拯救所有众生。即使是因前世恶业而在地狱受苦的人，只要真心认罪悔改，阎魔王便会化身地藏菩萨，下至地狱深处救度他们。</span>
+            </p>
+          </div>
+          <div class="bukkyou-block">
+            <h3><span data-lang="ja" class="active">十三仏信仰</span><span data-lang="en">The Thirteen Buddhas</span><span data-lang="zh">十三佛信仰</span></h3>
+            <p>
+              <span data-lang="ja" class="active">十三仏信仰においてはお地蔵様と閻魔様は一体のものであるとされています。命あるものはいつか必ず死を迎えます。同じ人生などありえません。しかし死は等しくおとずれます。</span>
+              <span data-lang="en">In the tradition of the Thirteen Buddhas, Jizo and Enma are understood as one. All living beings must face death — no two lives are alike, yet death comes equally to all.</span>
+              <span data-lang="zh">在十三佛信仰中，地藏菩萨与阎魔王被视为一体。所有有生命的存在终将面对死亡——没有两条人生完全相同，但死亡平等地降临于所有人。</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 懺悔文 -->
+    <section class="sange">
+      <div class="sange-inner">
+        <p class="section-label">
+          <span data-lang="ja" class="active">懺悔文</span>
+          <span data-lang="en">Prayer of Repentance</span>
+          <span data-lang="zh">忏悔文</span>
+        </p>
+        <h2 class="section-title">
+          <span data-lang="ja" class="active">罪を許す言葉</span>
+          <span data-lang="en">Words of Forgiveness</span>
+          <span data-lang="zh">忏悔之词</span>
+        </h2>
+        <div class="sange-grid">
+          <div>
+            <div class="sange-text-jp">
+              我 昔 所 造 諸 惡 業<br>
+              皆 由 無 始 貪 瞋 癡<br>
+              從 身 口 意 之 所 生<br>
+              一 切 我 今 皆 懺 悔
+            </div>
+          </div>
+          <div>
+            <p class="sange-desc">
+              <span data-lang="ja" class="active">私達は毎日の生活において知らず知らずのうちに罪を犯しているのではないでしょうか、なにげない一言が人をキズつけているかも知れません。それは私達に貪瞋癡の三毒がそなわっているからです。</span>
+              <span data-lang="en">In the course of daily life, we often commit wrongs without realizing it. A careless word may hurt someone. This comes from the three poisons within us: greed, anger, and ignorance.</span>
+              <span data-lang="zh">在日常生活中，我们常常在不知不觉中犯下过错，随口说出的一句话可能伤害他人。这是因为我们内心存在贪、嗔、痴三毒。</span>
+            </p>
+            <div class="sange-note">
+              <span data-lang="ja" class="active">この懺悔文を閻魔大王様の前にて合掌して心静かに三度唱えると、今まで犯した罪は全て許されます。</span>
+              <span data-lang="en">Reciting this prayer three times before Enma Daio, with hands joined in prayer and a quiet heart, is said to absolve all past wrongdoings.</span>
+              <span data-lang="zh">在阎魔大王像前合掌，静心诵念此忏悔文三遍，据说可消除所有曾犯的罪过。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-logo">圓應寺</div>
+        <div class="footer-info">
+          <p><span data-lang="ja" class="active">臨済宗 建長寺派　圓應寺</span><span data-lang="en">Rinzai Sect, Kenchoji Branch — Ennoji</span><span data-lang="zh">临济宗 建长寺派　圆应寺</span></p>
+          <p><span class="label"><span data-lang="ja" class="active">住所</span><span data-lang="en">Address</span><span data-lang="zh">地址</span></span>〒247-0062　神奈川県鎌倉市山ノ内1543</p>
+          <p><span class="label">TEL</span>0467-25-1095</p>
+          <p><span class="label"><span data-lang="ja" class="active">拝観時間</span><span data-lang="en">Hours</span><span data-lang="zh">参观时间</span></span><span data-lang="ja" class="active">春〜秋（3〜11月）9:00〜16:00　冬（12〜2月）9:00〜15:30</span><span data-lang="en">Spring–Autumn (Mar–Nov) 9:00–16:00 &nbsp; Winter (Dec–Feb) 9:00–15:30</span><span data-lang="zh">春秋（3〜11月）9:00〜16:00　冬（12〜2月）9:00〜15:30</span></p>
+        </div>
+        <p class="footer-copy">© 2026 鎌倉 圓應寺</p>
+      </div>
+    </footer>
+  </div>
+  <script src="_lang.js"></script>
+</body>
+</html>

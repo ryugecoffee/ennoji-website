@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>アクセス・お問い合わせ | 圓應寺</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_shared.css">
+  <style>
+    .page-hero {
+      position: relative; height: 50vh; min-height: 360px;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .page-hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(10,10,8,0.25), rgba(10,10,8,0.8)),
+        url('images/access.jpg') center/cover no-repeat;
+      background-color: #141418;
+    }
+    .page-hero h1 {
+      position: relative; z-index: 1;
+      font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 300;
+      letter-spacing: 0.35em; color: var(--white);
+      opacity: 0; animation: fadeUp 1s ease 0.3s forwards;
+    }
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(16px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    .access-section {
+      background: var(--off-black); padding: 5rem 2.5rem;
+      border-top: 1px solid rgba(184,149,90,0.15);
+    }
+    .access-inner { max-width: 960px; margin: 0 auto; }
+
+    /* Basic info */
+    .info-block { margin-bottom: 3rem; }
+    .info-row {
+      display: grid; grid-template-columns: 140px 1fr;
+      gap: 1rem; padding: 1.2rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      align-items: start;
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-label {
+      font-size: 0.68rem; letter-spacing: 0.25em; color: var(--gold);
+      padding-top: 0.15rem; font-family: 'Cormorant Garamond', serif;
+    }
+    .info-value { font-size: 0.88rem; line-height: 1.9; color: var(--cream); letter-spacing: 0.06em; }
+    .info-value a { color: var(--gold); text-decoration: none; }
+    .info-value a:hover { text-decoration: underline; }
+
+    /* Map embed */
+    .map-embed {
+      width: 100%; height: 360px; border: 0;
+      border: 1px solid rgba(184,149,90,0.15);
+      filter: grayscale(0.3) invert(0.05);
+      margin-top: 3rem;
+    }
+
+    /* Transit */
+    .transit-section {
+      background: var(--black); padding: 5rem 2.5rem;
+    }
+    .transit-inner { max-width: 960px; margin: 0 auto; }
+    .transit-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem;
+    }
+    .transit-block {
+      padding: 2rem; border: 1px solid rgba(184,149,90,0.15);
+    }
+    .transit-block h3 {
+      font-size: 0.85rem; letter-spacing: 0.2em; color: var(--gold);
+      margin-bottom: 1.5rem; font-weight: 400;
+      padding-bottom: 1rem; border-bottom: 1px solid rgba(184,149,90,0.15);
+    }
+    .transit-item {
+      display: grid; grid-template-columns: 80px 1fr;
+      gap: 0.8rem; margin-bottom: 1rem;
+      font-size: 0.82rem; letter-spacing: 0.06em; color: var(--cream); line-height: 1.7;
+    }
+    .transit-method { color: var(--mist); font-size: 0.75rem; }
+
+    /* Contact */
+    .contact-section {
+      background: var(--off-black); padding: 5rem 2.5rem;
+      border-top: 1px solid rgba(184,149,90,0.15);
+    }
+    .contact-inner { max-width: 960px; margin: 0 auto; }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 2rem;
+    }
+    .tel-block { }
+    .tel-block p { font-size: 0.85rem; line-height: 2; color: var(--mist); margin-bottom: 2rem; }
+    .tel-number {
+      display: block; font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; letter-spacing: 0.15em; color: var(--gold);
+      text-decoration: none; transition: color 0.3s;
+    }
+    .tel-number:hover { color: var(--gold-light); }
+    .tel-label { font-size: 0.65rem; letter-spacing: 0.3em; color: var(--mist); display: block; margin-bottom: 0.5rem; }
+    .hours-block { }
+    .hours-block h3 {
+      font-size: 0.85rem; letter-spacing: 0.2em; color: var(--gold);
+      margin-bottom: 1.5rem; font-weight: 400;
+    }
+    .hours-row {
+      display: flex; justify-content: space-between;
+      padding: 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.82rem; letter-spacing: 0.06em; color: var(--cream);
+    }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-season { color: var(--mist); }
+
+    /* denomination badge */
+    .denom {
+      display: inline-block; border: 1px solid rgba(184,149,90,0.3);
+      padding: 0.3rem 1rem; font-size: 0.7rem; letter-spacing: 0.2em;
+      color: var(--mist); margin-bottom: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="lang-bar">
+    <span class="site-tagline">Shingiyama — Temple of Enma / 新居山 閻魔様の寺</span>
+    <div class="lang-switcher">
+      <button onclick="setLang('ja')" id="btn-ja">JP</button>
+      <button onclick="setLang('en')" id="btn-en">EN</button>
+      <button onclick="setLang('zh')" id="btn-zh">ZH</button>
+    </div>
+  </div>
+  <nav>
+    <a href="index.html" class="nav-logo">圓應寺</a>
+    <ul class="nav-links">
+      <li><a href="index.html" data-ja="トップページ" data-en="Home" data-zh="首页">トップページ</a></li>
+      <li><a href="about.html" data-ja="圓應寺のご案内" data-en="About" data-zh="寺院介绍">圓應寺のご案内</a></li>
+      <li><a href="funeral.html" data-ja="葬儀・法事" data-en="Funeral" data-zh="葬礼法事">葬儀・法事</a></li>
+      <li><a href="cemetery.html" data-ja="墓地分譲" data-en="Cemetery" data-zh="墓地">墓地分譲</a></li>
+      <li><a href="access.html" class="current" data-ja="アクセス・お問い合わせ" data-en="Access" data-zh="交通・联系">アクセス・お問い合わせ</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-top">
+    <div class="page-hero">
+      <div class="page-hero-bg"></div>
+      <h1>
+        <span data-lang="ja" class="active">アクセス・お問い合わせ</span>
+        <span data-lang="en">Access &amp; Contact</span>
+        <span data-lang="zh">交通・联系方式</span>
+      </h1>
+    </div>
+
+    <!-- ACCESS INFO -->
+    <section class="access-section">
+      <div class="access-inner">
+        <p class="section-label">
+          <span data-lang="ja" class="active">基本情報</span>
+          <span data-lang="en">Information</span>
+          <span data-lang="zh">基本信息</span>
+        </p>
+        <h2 class="section-title">
+          <span data-lang="ja" class="active">アクセス</span>
+          <span data-lang="en">Access</span>
+          <span data-lang="zh">交通方式</span>
+        </h2>
+
+        <div class="denom">
+          <span data-lang="ja" class="active">臨済宗 建長寺派　圓應寺　／　鎌倉十三仏第五番霊場　鎌倉二十四地蔵第八番霊場</span>
+          <span data-lang="en">Rinzai Sect, Kenchoji Branch — Ennoji　/　Kamakura 13 Buddha Site #5　/　Kamakura 24 Jizo Site #8</span>
+          <span data-lang="zh">临济宗建长寺派　圆应寺　／　镰仓十三佛第五番　镰仓二十四地藏第八番</span>
+        </div>
+
+        <div class="info-block">
+          <div class="info-row">
+            <span class="info-label">
+              <span data-lang="ja" class="active">住所</span>
+              <span data-lang="en">Address</span>
+              <span data-lang="zh">地址</span>
+            </span>
+            <span class="info-value">〒247-0062　神奈川県鎌倉市山ノ内1543</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">TEL</span>
+            <span class="info-value"><a href="tel:0467251095">0467-25-1095</a></span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">
+              <span data-lang="ja" class="active">拝観時間</span>
+              <span data-lang="en">Hours</span>
+              <span data-lang="zh">参观时间</span>
+            </span>
+            <span class="info-value">
+              <span data-lang="ja" class="active">春〜秋（3月〜11月）　9:00〜16:00<br>冬　（12月〜2月）　　9:00〜15:30</span>
+              <span data-lang="en">Spring–Autumn (March–November)　9:00–16:00<br>Winter (December–February)　9:00–15:30</span>
+              <span data-lang="zh">春秋（3月〜11月）　9:00〜16:00<br>冬季（12月〜2月）　9:00〜15:30</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Google Map -->
+        <iframe
+          class="map-embed"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3251.3!2d139.5529!3d35.3366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60184d497b2f9e0f%3A0x5ef4e6b0c8e1c7f0!2z5ZyT5b2T5a-6!5e0!3m2!1sja!2sjp!4v1620000000000!5m2!1sja!2sjp"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="圓應寺 地図">
+        </iframe>
+      </div>
+    </section>
+
+    <!-- TRANSIT -->
+    <section class="transit-section">
+      <div class="transit-inner">
+        <p class="section-label">
+          <span data-lang="ja" class="active">電車でお越しの場合</span>
+          <span data-lang="en">By Train</span>
+          <span data-lang="zh">乘电车前往</span>
+        </p>
+        <h2 class="section-title">
+          <span data-lang="ja" class="active">交通案内</span>
+          <span data-lang="en">Getting Here</span>
+          <span data-lang="zh">交通指南</span>
+        </h2>
+        <div class="transit-grid">
+          <div class="transit-block">
+            <h3>
+              <span data-lang="ja" class="active">JR横須賀線　北鎌倉駅下車</span>
+              <span data-lang="en">JR Yokosuka Line — Kita-Kamakura Station</span>
+              <span data-lang="zh">JR横须贺线　北镰仓站下车</span>
+            </h3>
+            <div class="transit-item">
+              <span class="transit-method">
+                <span data-lang="ja" class="active">徒歩</span>
+                <span data-lang="en">Walk</span>
+                <span data-lang="zh">步行</span>
+              </span>
+              <span>
+                <span data-lang="ja" class="active">約15分</span>
+                <span data-lang="en">approx. 15 min</span>
+                <span data-lang="zh">约15分钟</span>
+              </span>
+            </div>
+            <div class="transit-item">
+              <span class="transit-method">
+                <span data-lang="ja" class="active">江ノ電バス</span>
+                <span data-lang="en">Enoden Bus</span>
+                <span data-lang="zh">江之电巴士</span>
+              </span>
+              <span>
+                <span data-lang="ja" class="active">約5分（鎌倉駅行き → 建長寺下車）</span>
+                <span data-lang="en">approx. 5 min (toward Kamakura Sta. → get off at Kenchoji)</span>
+                <span data-lang="zh">约5分钟（开往镰仓站方向 → 建长寺站下车）</span>
+              </span>
+            </div>
+          </div>
+          <div class="transit-block">
+            <h3>
+              <span data-lang="ja" class="active">JR横須賀線　鎌倉駅下車</span>
+              <span data-lang="en">JR Yokosuka Line — Kamakura Station</span>
+              <span data-lang="zh">JR横须贺线　镰仓站下车</span>
+            </h3>
+            <div class="transit-item">
+              <span class="transit-method">
+                <span data-lang="ja" class="active">徒歩</span>
+                <span data-lang="en">Walk</span>
+                <span data-lang="zh">步行</span>
+              </span>
+              <span>
+                <span data-lang="ja" class="active">約25分</span>
+                <span data-lang="en">approx. 25 min</span>
+                <span data-lang="zh">约25分钟</span>
+              </span>
+            </div>
+            <div class="transit-item">
+              <span class="transit-method">
+                <span data-lang="ja" class="active">江ノ電バス</span>
+                <span data-lang="en">Enoden Bus</span>
+                <span data-lang="zh">江之电巴士</span>
+              </span>
+              <span>
+                <span data-lang="ja" class="active">約10分（大船方面行き → 建長寺下車）</span>
+                <span data-lang="en">approx. 10 min (toward Ofuna → get off at Kenchoji)</span>
+                <span data-lang="zh">约10分钟（开往大船方向 → 建长寺站下车）</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT (phone only, no email) -->
+    <section class="contact-section">
+      <div class="contact-inner">
+        <p class="section-label">
+          <span data-lang="ja" class="active">お問い合わせ</span>
+          <span data-lang="en">Contact</span>
+          <span data-lang="zh">联系方式</span>
+        </p>
+        <h2 class="section-title">
+          <span data-lang="ja" class="active">お電話でのお問い合わせ</span>
+          <span data-lang="en">Contact by Phone</span>
+          <span data-lang="zh">电话联系</span>
+        </h2>
+        <div class="contact-grid">
+          <div class="tel-block">
+            <p>
+              <span data-lang="ja" class="active">葬儀・法要・墓地分譲など、お気軽にお電話ください。</span>
+              <span data-lang="en">Please feel free to call us for inquiries about funerals, memorial services, or cemetery lots.</span>
+              <span data-lang="zh">关于葬礼、法事、墓地等事宜，欢迎随时来电咨询。</span>
+            </p>
+            <span class="tel-label">TEL</span>
+            <a class="tel-number" href="tel:0467251095">0467-25-1095</a>
+          </div>
+          <div class="hours-block">
+            <h3>
+              <span data-lang="ja" class="active">お問い合わせ時間</span>
+              <span data-lang="en">Inquiry Hours</span>
+              <span data-lang="zh">受理时间</span>
+            </h3>
+            <div class="hours-row">
+              <span class="hours-season">
+                <span data-lang="ja" class="active">春〜秋（3〜11月）</span>
+                <span data-lang="en">Spring–Autumn (Mar–Nov)</span>
+                <span data-lang="zh">春秋（3〜11月）</span>
+              </span>
+              <span>9:00 — 16:00</span>
+            </div>
+            <div class="hours-row">
+              <span class="hours-season">
+                <span data-lang="ja" class="active">冬（12〜2月）</span>
+                <span data-lang="en">Winter (Dec–Feb)</span>
+                <span data-lang="zh">冬季（12〜2月）</span>
+              </span>
+              <span>9:00 — 15:30</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-logo">圓應寺</div>
+        <div class="footer-info">
+          <p><span data-lang="ja" class="active">臨済宗 建長寺派　圓應寺</span><span data-lang="en">Rinzai Sect, Kenchoji Branch — Ennoji</span><span data-lang="zh">临济宗 建长寺派　圆应寺</span></p>
+          <p><span class="label"><span data-lang="ja" class="active">住所</span><span data-lang="en">Address</span><span data-lang="zh">地址</span></span>〒247-0062　神奈川県鎌倉市山ノ内1543</p>
+          <p><span class="label">TEL</span>0467-25-1095</p>
+          <p><span class="label"><span data-lang="ja" class="active">拝観時間</span><span data-lang="en">Hours</span><span data-lang="zh">参观时间</span></span><span data-lang="ja" class="active">春〜秋（3〜11月）9:00〜16:00　冬（12〜2月）9:00〜15:30</span><span data-lang="en">Spring–Autumn (Mar–Nov) 9:00–16:00 &nbsp; Winter (Dec–Feb) 9:00–15:30</span><span data-lang="zh">春秋（3〜11月）9:00〜16:00　冬（12〜2月）9:00〜15:30</span></p>
+        </div>
+        <p class="footer-copy">© 2026 鎌倉 圓應寺</p>
+      </div>
+    </footer>
+  </div>
+  <script src="_lang.js"></script>
+</body>
+</html>

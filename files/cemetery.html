@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>墓地分譲 | 圓應寺</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_shared.css">
+  <style>
+    .page-hero {
+      position: relative; height: 50vh; min-height: 360px;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .page-hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(10,10,8,0.2), rgba(10,10,8,0.75)),
+        url('images/cemetery.jpg') center/cover no-repeat;
+      background-color: #151a15;
+    }
+    .page-hero h1 {
+      position: relative; z-index: 1;
+      font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 300;
+      letter-spacing: 0.4em; color: var(--white);
+      opacity: 0; animation: fadeUp 1s ease 0.3s forwards;
+    }
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(16px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    .intro-section {
+      background: var(--off-black); padding: 5rem 2.5rem;
+      border-top: 1px solid rgba(184,149,90,0.15);
+    }
+    .intro-inner { max-width: 860px; margin: 0 auto; }
+    .intro-inner p {
+      font-size: 0.9rem; line-height: 2.1; color: var(--cream);
+      letter-spacing: 0.05em; margin-bottom: 1rem;
+    }
+
+    /* 価格表 */
+    .price-table { width: 100%; border-collapse: collapse; margin-top: 2.5rem; }
+    .price-table tr { border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .price-table tr:last-child { border-bottom: none; }
+    .price-table td { padding: 1.4rem 0; font-size: 0.88rem; letter-spacing: 0.06em; color: var(--cream); vertical-align: middle; }
+    .price-table td.size { color: var(--white); font-weight: 400; min-width: 200px; }
+    .price-table td.note { color: var(--mist); font-size: 0.76rem; padding-left: 1rem; }
+    .price-table td.price {
+      text-align: right; color: var(--gold);
+      font-family: 'Cormorant Garamond', serif; font-size: 1.1rem;
+      letter-spacing: 0.1em; white-space: nowrap;
+    }
+    .dot { width: 12px; height: 12px; border-radius: 2px; display: inline-block; margin-right: 6px; vertical-align: middle; }
+
+    /* MAP SECTION */
+    .map-section { background: var(--black); padding: 5rem 2.5rem; }
+    .map-inner { max-width: 900px; margin: 0 auto; }
+
+    .legend {
+      display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 2.5rem;
+      padding: 1.2rem 1.5rem; border: 1px solid rgba(184,149,90,0.15);
+    }
+    .legend-group { display: flex; align-items: center; gap: 1.5rem; }
+    .legend-title { font-size: 0.68rem; letter-spacing: 0.2em; color: var(--mist); margin-right: 0.5rem; }
+    .legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; letter-spacing: 0.1em; color: var(--mist); }
+    .legend-box { width: 16px; height: 16px; border-radius: 2px; flex-shrink: 0; }
+    .legend-sep { width: 1px; height: 24px; background: rgba(184,149,90,0.2); }
+
+    /* SVG MAP */
+    .cemetery-map-wrap {
+      position: relative;
+      background: #0d120d;
+      border: 1px solid rgba(184,149,90,0.15);
+      overflow: hidden;
+    }
+    .cemetery-map-wrap svg { display: block; width: 100%; }
+
+    /* DETAIL PANEL */
+    .detail-panel {
+      margin-top: 2rem;
+      border: 1px solid rgba(184,149,90,0.25);
+      background: var(--off-black);
+      padding: 2rem 2.5rem;
+      display: none;
+    }
+    .detail-panel.visible { display: block; }
+    .detail-panel h3 {
+      font-size: 1.1rem; letter-spacing: 0.2em; color: var(--white);
+      margin-bottom: 0.5rem; font-weight: 400;
+    }
+    .detail-panel .detail-size {
+      font-family: 'Cormorant Garamond', serif; font-size: 0.85rem;
+      color: var(--gold); letter-spacing: 0.15em; margin-bottom: 1rem;
+    }
+    .detail-panel .detail-status {
+      font-size: 0.75rem; letter-spacing: 0.2em; padding: 0.3rem 0.8rem;
+      border-radius: 2px; display: inline-block; margin-bottom: 1rem;
+    }
+    .detail-panel .detail-status.available { background: rgba(91,163,91,0.15); color: #8bc48b; border: 1px solid rgba(91,163,91,0.3); }
+    .detail-panel .detail-status.taken { background: rgba(180,80,80,0.15); color: #c48b8b; border: 1px solid rgba(180,80,80,0.3); }
+    .detail-panel .detail-photo {
+      width: 100%; max-width: 400px; aspect-ratio: 4/3;
+      background: var(--stone); margin-top: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--mist); font-size: 0.75rem; letter-spacing: 0.1em;
+      border: 1px solid rgba(184,149,90,0.1);
+      overflow: hidden;
+    }
+    .detail-panel .detail-photo img { width:100%; height:100%; object-fit:cover; }
+    .detail-close {
+      float: right; background: none; border: 1px solid rgba(184,149,90,0.3);
+      color: var(--mist); font-size: 0.7rem; letter-spacing: 0.2em;
+      padding: 0.3rem 0.8rem; cursor: pointer; transition: all 0.3s;
+    }
+    .detail-close:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* CTA */
+    .cta-section { background: var(--off-black); padding: 5rem 2.5rem; text-align: center; border-top: 1px solid rgba(184,149,90,0.15); }
+    .cta-inner { max-width: 600px; margin: 0 auto; }
+    .cta-inner p { font-size: 0.85rem; line-height: 2; color: var(--mist); margin-bottom: 2.5rem; }
+    .btn-tel {
+      display: inline-block; padding: 1rem 3rem;
+      border: 1px solid var(--gold); color: var(--gold);
+      font-size: 1.1rem; letter-spacing: 0.2em; text-decoration: none;
+      font-family: 'Cormorant Garamond', serif; transition: background 0.3s, color 0.3s;
+    }
+    .btn-tel:hover { background: var(--gold); color: var(--black); }
+    .btn-tel span { font-size: 0.65rem; display: block; letter-spacing: 0.3em; margin-bottom: 0.2rem; font-family: 'Noto Serif JP', serif; }
+  </style>
+</head>
+<body>
+  <div class="lang-bar">
+    <span class="site-tagline">Shingiyama — Temple of Enma / 新居山 閻魔様の寺</span>
+    <div class="lang-switcher">
+      <button onclick="setLang('ja')" id="btn-ja">JP</button>
+      <button onclick="setLang('en')" id="btn-en">EN</button>
+      <button onclick="setLang('zh')" id="btn-zh">ZH</button>
+    </div>
+  </div>
+  <nav>
+    <a href="index.html" class="nav-logo">圓應寺</a>
+    <ul class="nav-links">
+      <li><a href="index.html" data-ja="トップページ" data-en="Home" data-zh="首页">トップページ</a></li>
+      <li><a href="about.html" data-ja="圓應寺のご案内" data-en="About" data-zh="寺院介绍">圓應寺のご案内</a></li>
+      <li><a href="funeral.html" data-ja="葬儀・法事" data-en="Funeral" data-zh="葬礼法事">葬儀・法事</a></li>
+      <li><a href="cemetery.html" class="current" data-ja="墓地分譲" data-en="Cemetery" data-zh="墓地">墓地分譲</a></li>
+      <li><a href="access.html" data-ja="アクセス・お問い合わせ" data-en="Access" data-zh="交通・联系">アクセス・お問い合わせ</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-top">
+    <div class="page-hero">
+      <div class="page-hero-bg"></div>
+      <h1>
+        <span data-lang="ja" class="active">墓地分譲</span>
+        <span data-lang="en">Cemetery Lots</span>
+        <span data-lang="zh">墓地出售</span>
+      </h1>
+    </div>
+
+    <!-- INTRO + PRICE -->
+    <section class="intro-section">
+      <div class="intro-inner">
+        <p class="section-label">
+          <span data-lang="ja" class="active">墓地のご案内</span>
+          <span data-lang="en">About Our Cemetery</span>
+          <span data-lang="zh">墓地介绍</span>
+        </p>
+        <h2 class="section-title">
+          <span data-lang="ja" class="active">墓地分譲</span>
+          <span data-lang="en">Cemetery Lots for Sale</span>
+          <span data-lang="zh">墓地出售</span>
+        </h2>
+        <p>
+          <span data-lang="ja" class="active">円応寺の墓地をご紹介します。樹木墓まだ空きございます。</span>
+          <span data-lang="en">We introduce the cemetery of Ennoji. Natural burial plots are still available.</span>
+          <span data-lang="zh">为您介绍圆应寺墓地。树木葬墓地尚有空位。</span>
+        </p>
+        <table class="price-table">
+          <tr>
+            <td class="size">
+              <span class="dot" style="background:#4a9aba;"></span>
+              <span data-lang="ja" class="active">幅100cm 奥行120cm</span>
+              <span data-lang="en">100cm × 120cm</span>
+              <span data-lang="zh">宽100cm 深120cm</span>
+            </td>
+            <td class="note">
+              <span data-lang="ja" class="active">墓地使用料、墓石、工事費</span>
+              <span data-lang="en">Includes land use fee, gravestone, construction</span>
+              <span data-lang="zh">含墓地使用费、墓石、施工费</span>
+            </td>
+            <td class="price">5,000,000<span style="font-size:0.7rem;"> 円</span></td>
+          </tr>
+          <tr>
+            <td class="size">
+              <span class="dot" style="background:#3a82a0;"></span>
+              <span data-lang="ja" class="active">幅90cm 奥行90cm</span>
+              <span data-lang="en">90cm × 90cm</span>
+              <span data-lang="zh">宽90cm 深90cm</span>
+            </td>
+            <td class="note">
+              <span data-lang="ja" class="active">墓地使用料、墓石、工事費</span>
+              <span data-lang="en">Includes land use fee, gravestone, construction</span>
+              <span data-lang="zh">含墓地使用费、墓石、施工费</span>
+            </td>
+            <td class="price">4,000,000<span style="font-size:0.7rem;"> 円</span></td>
+          </tr>
+          <tr>
+            <td class="size">
+              <span class="dot" style="background:#2a6880;"></span>
+              <span data-lang="ja" class="active">幅60cm 奥行60cm</span>
+              <span data-lang="en">60cm × 60cm</span>
+              <span data-lang="zh">宽60cm 深60cm</span>
+            </td>
+            <td class="note">
+              <span data-lang="ja" class="active">墓地使用料、墓石、工事費</span>
+              <span data-lang="en">Includes land use fee, gravestone, construction</span>
+              <span data-lang="zh">含墓地使用费、墓石、施工费</span>
+            </td>
+            <td class="price">2,500,000<span style="font-size:0.7rem;"> 円</span></td>
+          </tr>
+          <tr>
+            <td class="size">
+              <span class="dot" style="background:#5a8a5a;"></span>
+              <span data-lang="ja" class="active">樹木墓</span>
+              <span data-lang="en">Natural Burial</span>
+              <span data-lang="zh">树木葬</span>
+            </td>
+            <td class="note">
+              <span data-lang="ja" class="active">まだ空きございます</span>
+              <span data-lang="en">Still available</span>
+              <span data-lang="zh">尚有空位</span>
+            </td>
+            <td class="price">700,000〜<span style="font-size:0.7rem;"> 円</span></td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE MAP -->
+    <section class="map-section">
+      <div class="map-inner">
+        <p class="section-label">
+          <span data-lang="ja" class="active">墓地全体図</span>
+          <span data-lang="en">Cemetery Map</span>
+          <span data-lang="zh">墓地全图</span>
+        </p>
+        <h2 class="section-title">
+          <span data-lang="ja" class="active">区画をクリックして詳細を見る</span>
+          <span data-lang="en">Click a plot to view details</span>
+          <span data-lang="zh">点击墓位查看详情</span>
+        </h2>
+
+        <div class="legend">
+          <span class="legend-title">
+            <span data-lang="ja" class="active">サイズ</span>
+            <span data-lang="en">Size</span>
+            <span data-lang="zh">尺寸</span>
+          </span>
+          <div class="legend-group">
+            <div class="legend-item"><div class="legend-box" style="background:#4a9aba;"></div>100×120cm</div>
+            <div class="legend-item"><div class="legend-box" style="background:#3a82a0;"></div>90×90cm</div>
+            <div class="legend-item"><div class="legend-box" style="background:#2a6880;"></div>60×60cm</div>
+            <div class="legend-item"><div class="legend-box" style="background:#5a8a5a;"></div>
+              <span data-lang="ja" class="active">樹木墓</span>
+              <span data-lang="en">Natural</span>
+              <span data-lang="zh">树木葬</span>
+            </div>
+          </div>
+          <div class="legend-sep"></div>
+          <span class="legend-title">
+            <span data-lang="ja" class="active">ご契約状況</span>
+            <span data-lang="en">Status</span>
+            <span data-lang="zh">状态</span>
+          </span>
+          <div class="legend-group">
+            <div class="legend-item">
+              <div class="legend-box" style="background:#4a9aba; opacity:1;"></div>
+              <span data-lang="ja" class="active">空き</span><span data-lang="en">Available</span><span data-lang="zh">空位</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-box" style="background:#c04878;"></div>
+              <span data-lang="ja" class="active">契約済み</span><span data-lang="en">Taken</span><span data-lang="zh">已售</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cemetery-map-wrap">
+          <!-- SVG MAP: green border = trees/ground, plots colored by size, pink=taken, blue=available -->
+          <svg viewBox="0 0 500 420" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background ground -->
+            <rect width="500" height="420" fill="#0d120d"/>
+            <!-- Green border (trees) -->
+            <rect x="20" y="20" width="460" height="270" fill="none" stroke="#2d5a2d" stroke-width="18" rx="4"/>
+            <!-- Paths -->
+            <rect x="29" y="150" width="55" height="130" fill="#1a241a"/>
+            <rect x="29" y="160" width="4" height="10" fill="#3a7a3a" rx="1"/>
+            <rect x="29" y="180" width="4" height="10" fill="#3a7a3a" rx="1"/>
+            <rect x="29" y="200" width="4" height="10" fill="#3a7a3a" rx="1"/>
+            <rect x="29" y="220" width="4" height="10" fill="#3a7a3a" rx="1"/>
+            <rect x="29" y="240" width="4" height="10" fill="#3a7a3a" rx="1"/>
+            <rect x="29" y="260" width="4" height="10" fill="#3a7a3a" rx="1"/>
+
+            <!-- ROW A: large plots (100x120) -->
+            <!-- plot A1 taken -->
+            <rect class="plot" data-id="A1" data-size="100x120" data-status="taken"
+              x="90" y="35" width="50" height="60" fill="#c04878" rx="2" cursor="pointer"/>
+            <!-- plot A2 available -->
+            <rect class="plot" data-id="A2" data-size="100x120" data-status="available"
+              x="150" y="35" width="50" height="60" fill="#4a9aba" rx="2" cursor="pointer"/>
+            <!-- plot A3 available -->
+            <rect class="plot" data-id="A3" data-size="100x120" data-status="available"
+              x="210" y="35" width="50" height="60" fill="#4a9aba" rx="2" cursor="pointer"/>
+            <!-- plot A4 taken -->
+            <rect class="plot" data-id="A4" data-size="100x120" data-status="taken"
+              x="270" y="35" width="50" height="60" fill="#c04878" rx="2" cursor="pointer"/>
+            <!-- plot A5 available -->
+            <rect class="plot" data-id="A5" data-size="100x120" data-status="available"
+              x="330" y="35" width="50" height="60" fill="#4a9aba" rx="2" cursor="pointer"/>
+            <!-- plot A6 taken -->
+            <rect class="plot" data-id="A6" data-size="100x120" data-status="taken"
+              x="390" y="35" width="50" height="60" fill="#c04878" rx="2" cursor="pointer"/>
+
+            <!-- ROW B: medium plots (90x90) mixed -->
+            <rect class="plot" data-id="B1" data-size="90x90" data-status="taken"
+              x="90" y="108" width="42" height="42" fill="#c04878" rx="2" cursor="pointer"/>
+            <rect class="plot" data-id="B2" data-size="90x90" data-status="taken"
+              x="140" y="108" width="42" height="42" fill="#c04878" rx="2" cursor="pointer"/>
+            <rect class="plot" data-id="B3" data-size="90x90" data-status="available"
+              x="190" y="108" width="42" height="42" fill="#3a82a0" rx="2" cursor="pointer"/>
+            <rect class="plot" data-id="B4" data-size="90x90" data-status="taken"
+              x="240" y="108" width="42" height="42" fill="#c04878" rx="2" cursor="pointer"/>
+            <rect class="plot" data-id="B5" data-size="90x90" data-status="available"
+              x="290" y="108" width="42" height="42" fill="#3a82a0" rx="2" cursor="pointer"/>
+            <rect class="plot" data-id="B6" data-size="90x90" data-status="taken"
+              x="390" y="108" width="42" height="42" fill="#c04878" rx="2" cursor="pointer"/>
+
+            <!-- ROW C: small plots (60x60) -->
+            <rect class="plot" data-id="C1" data-size="60x60" data-status="taken"
+              x="90" y="165" width="32" height="32" fill="#c04878" rx="2" cursor="pointer"/>
+            <rect class="plot" data-id="C2" data-size="60x60" data-status="taken"
+              x="130" y="165" width="32" height="32" fill="#c04878" rx="2" cursor="pointer"/>
+            <rect class="plot" data-id="C3" data-size="60x60" data-status="available"
+              x="170" y="165" width="32" height="32" fill="#2a6880" rx="2" cursor="pointer"/>
+            <rect class="plot" data-id="C4" data-size="60x60" data-status="taken"
+              x="210" y="165" width="32" height="32" fill="#c04878" rx="2" cursor="pointer"/>
+            <rect class="plot" data-id="C5" data-size="60x60" data-status="available"
+              x="250" y="165" width="32" height="32" fill="#2a6880" rx="2" cursor="pointer"/>
+            <rect class="plot" data-id="C6" data-size="60x60" data-status="taken"
+              x="290" y="165" width="32" height="32" fill="#c04878" rx="2" cursor="pointer"/>
+            <rect class="plot" data-id="C7" data-size="60x60" data-status="available"
+              x="330" y="165" width="32" height="32" fill="#2a6880" rx="2" cursor="pointer"/>
+            <rect class="plot" data-id="C8" data-size="60x60" data-status="taken"
+              x="390" y="165" width="32" height="32" fill="#c04878" rx="2" cursor="pointer"/>
+            <rect class="plot" data-id="C9" data-size="60x60" data-status="available"
+              x="430" y="165" width="32" height="32" fill="#2a6880" rx="2" cursor="pointer"/>
+
+            <!-- ROW D: small plots -->
+            <rect class="plot" data-id="D1" data-size="60x60" data-status="available"
+              x="90" y="210" width="32" height="32" fill="#2a6880" rx="2" cursor="pointer"/>
+            <rect class="plot" data-id="D2" data-size="60x60" data-status="taken"
+              x="130" y="210" width="32" height="32" fill="#c04878" rx="2" cursor="pointer"/>
+            <rect class="plot" data-id="D3" data-size="60x60" data-status="taken"
+              x="170" y="210" width="32" height="32" fill="#c04878" rx="2" cursor="pointer"/>
+            <rect class="plot" data-id="D4" data-size="60x60" data-status="available"
+              x="210" y="210" width="32" height="32" fill="#2a6880" rx="2" cursor="pointer"/>
+            <rect class="plot" data-id="D5" data-size="60x60" data-status="taken"
+              x="250" y="210" width="32" height="32" fill="#c04878" rx="2" cursor="pointer"/>
+            <rect class="plot" data-id="D6" data-size="60x60" data-status="taken"
+              x="290" y="210" width="32" height="32" fill="#c04878" rx="2" cursor="pointer"/>
+            <rect class="plot" data-id="D7" data-size="60x60" data-status="available"
+              x="390" y="210" width="32" height="32" fill="#2a6880" rx="2" cursor="pointer"/>
+            <rect class="plot" data-id="D8" data-size="60x60" data-status="taken"
+              x="430" y="210" width="32" height="32" fill="#c04878" rx="2" cursor="pointer"/>
+
+            <!-- ROW E: small plots -->
+            <rect class="plot" data-id="E1" data-size="60x60" data-status="taken"
+              x="390" y="250" width="32" height="32" fill="#c04878" rx="2" cursor="pointer"/>
+            <rect class="plot" data-id="E2" data-size="60x60" data-status="available"
+              x="430" y="250" width="32" height="32" fill="#2a6880" rx="2" cursor="pointer"/>
+
+            <!-- 樹木墓 area -->
+            <rect x="90" y="300" width="220" height="100" fill="#2d5a2d" rx="4"/>
+            <text x="200" y="358" text-anchor="middle" fill="#8bc48b" font-size="18" font-family="serif" letter-spacing="4">樹木墓</text>
+
+            <!-- Hover overlay (invisible, for JS) -->
+            <rect id="hover-overlay" x="0" y="0" width="0" height="0" fill="rgba(255,255,255,0.15)" pointer-events="none"/>
+          </svg>
+        </div>
+
+        <!-- DETAIL PANEL -->
+        <div class="detail-panel" id="detail-panel">
+          <button class="detail-close" onclick="closeDetail()">✕ 閉じる</button>
+          <h3 id="detail-id">—</h3>
+          <div class="detail-size" id="detail-size">—</div>
+          <div class="detail-status" id="detail-status">—</div>
+          <div class="detail-photo" id="detail-photo">
+            <span data-lang="ja" class="active">写真準備中</span>
+            <span data-lang="en">Photo coming soon</span>
+            <span data-lang="zh">照片准备中</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="cta-inner">
+        <p>
+          <span data-lang="ja" class="active">ご見学・お問い合わせはお電話にて承ります。</span>
+          <span data-lang="en">Please contact us by phone to arrange a visit or for inquiries.</span>
+          <span data-lang="zh">请致电预约参观或咨询。</span>
+        </p>
+        <a class="btn-tel" href="tel:0467251095">
+          <span>TEL</span>
+          0467-25-1095
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-logo">圓應寺</div>
+        <div class="footer-info">
+          <p><span data-lang="ja" class="active">臨済宗 建長寺派　圓應寺</span><span data-lang="en">Rinzai Sect, Kenchoji Branch — Ennoji</span><span data-lang="zh">临济宗 建长寺派　圆应寺</span></p>
+          <p><span class="label"><span data-lang="ja" class="active">住所</span><span data-lang="en">Address</span><span data-lang="zh">地址</span></span>〒247-0062　神奈川県鎌倉市山ノ内1543</p>
+          <p><span class="label">TEL</span>0467-25-1095</p>
+          <p><span class="label"><span data-lang="ja" class="active">拝観時間</span><span data-lang="en">Hours</span><span data-lang="zh">参观时间</span></span><span data-lang="ja" class="active">春〜秋（3〜11月）9:00〜16:00　冬（12〜2月）9:00〜15:30</span><span data-lang="en">Spring–Autumn (Mar–Nov) 9:00–16:00 &nbsp; Winter (Dec–Feb) 9:00–15:30</span><span data-lang="zh">春秋（3〜11月）9:00〜16:00　冬（12〜2月）9:00〜15:30</span></p>
+        </div>
+        <p class="footer-copy">© 2026 鎌倉 圓應寺</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="_lang.js"></script>
+  <script>
+    const plotInfo = {
+      '100x120': { ja: '幅100cm 奥行120cm', en: '100cm × 120cm', zh: '宽100cm 深120cm', price: '500万円' },
+      '90x90':   { ja: '幅90cm 奥行90cm',  en: '90cm × 90cm',   zh: '宽90cm 深90cm',  price: '400万円' },
+      '60x60':   { ja: '幅60cm 奥行60cm',  en: '60cm × 60cm',   zh: '宽60cm 深60cm',  price: '250万円' },
+    };
+
+    document.querySelectorAll('.plot').forEach(el => {
+      el.addEventListener('mouseenter', function() {
+        if (this.dataset.status === 'available') {
+          this.setAttribute('opacity', '0.75');
+        } else {
+          this.setAttribute('opacity', '0.75');
+        }
+      });
+      el.addEventListener('mouseleave', function() {
+        this.setAttribute('opacity', '1');
+      });
+      el.addEventListener('click', function() {
+        const id = this.dataset.id;
+        const size = this.dataset.size;
+        const status = this.dataset.status;
+        const lang = localStorage.getItem('ennoji-lang') || 'ja';
+        const info = plotInfo[size];
+
+        const panel = document.getElementById('detail-panel');
+        document.getElementById('detail-id').textContent = '区画 ' + id;
+
+        const sizeEl = document.getElementById('detail-size');
+        sizeEl.textContent = (info ? info[lang] : size) + '　' + (info ? info.price : '');
+
+        const statusEl = document.getElementById('detail-status');
+        if (status === 'available') {
+          statusEl.textContent = lang === 'ja' ? '空きあり' : lang === 'en' ? 'Available' : '有空位';
+          statusEl.className = 'detail-status available';
+        } else {
+          statusEl.textContent = lang === 'ja' ? 'ご契約済み' : lang === 'en' ? 'Contracted' : '已售出';
+          statusEl.className = 'detail-status taken';
+        }
+
+        // Photo: try to load images/cemetery_{id}.jpg
+        const photoEl = document.getElementById('detail-photo');
+        photoEl.innerHTML = `<img src="images/cemetery_${id}.jpg" alt="${id}" onerror="this.parentElement.innerHTML='<span>${lang==='ja'?'写真準備中':lang==='en'?'Photo coming soon':'照片准备中'}</span>'">`;
+
+        panel.classList.add('visible');
+        panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+    });
+
+    function closeDetail() {
+      document.getElementById('detail-panel').classList.remove('visible');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>圓應寺 | 新居山 閻魔様の寺</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_shared.css">
+  <style>
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      padding: 0 2.5rem 5rem;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(10,10,8,0.1) 0%, rgba(10,10,8,0.65) 65%, var(--black) 100%),
+        url('images/hero.jpg') center/cover no-repeat;
+      background-color: #1a1814;
+    }
+    .hero-bg::after {
+      content: ''; position: absolute; inset: 0; opacity: 0.3;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 0.9rem; letter-spacing: 0.25em; color: var(--gold);
+      margin-bottom: 1rem;
+      opacity: 0; animation: fadeUp 1.2s ease 0.3s forwards;
+    }
+    .hero-title {
+      font-size: clamp(3.5rem, 9vw, 6.5rem); font-weight: 300;
+      letter-spacing: 0.3em; line-height: 1.1; color: var(--white);
+      margin-bottom: 1.5rem;
+      opacity: 0; animation: fadeUp 1.2s ease 0.6s forwards;
+    }
+    .hero-desc {
+      font-size: 0.8rem; letter-spacing: 0.2em; color: var(--mist);
+      opacity: 0; animation: fadeUp 1.2s ease 0.9s forwards;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* NEWS */
+    .news {
+      background: var(--off-black);
+      border-top: 1px solid rgba(184,149,90,0.15);
+      border-bottom: 1px solid rgba(184,149,90,0.15);
+      padding: 5rem 2.5rem;
+    }
+    .news-inner { max-width: 860px; margin: 0 auto; }
+    .news-item {
+      display: grid; grid-template-columns: 140px 1fr; gap: 2rem;
+      padding: 1.6rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+      align-items: start;
+    }
+    .news-item:last-child { border-bottom: none; }
+    .news-date {
+      font-family: 'Cormorant Garamond', serif; font-size: 0.82rem;
+      letter-spacing: 0.1em; color: var(--gold); padding-top: 0.1rem;
+    }
+    .news-text { font-size: 0.85rem; line-height: 1.9; color: var(--cream); letter-spacing: 0.05em; }
+
+    /* CARDS */
+    .cards { background: var(--black); padding: 6rem 2.5rem; }
+    .cards-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: rgba(184,149,90,0.1);
+      border: 1px solid rgba(184,149,90,0.1);
+      max-width: 1100px; margin: 0 auto;
+    }
+    .card {
+      position: relative; height: 300px; overflow: hidden;
+      background: var(--stone); display: flex; align-items: flex-end;
+      padding: 2rem; text-decoration: none; cursor: pointer;
+    }
+    .card.wide { grid-column: span 2; height: 220px; }
+    .card-bg {
+      position: absolute; inset: 0; background: center/cover no-repeat;
+      transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .card:hover .card-bg { transform: scale(1.04); }
+    .card::before {
+      content: ''; position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(to top, rgba(10,10,8,0.88) 0%, rgba(10,10,8,0.15) 60%);
+    }
+    .card-content { position: relative; z-index: 2; }
+    .card-label {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 0.7rem; letter-spacing: 0.25em; color: var(--gold); margin-bottom: 0.4rem;
+    }
+    .card-title { font-size: 1.15rem; letter-spacing: 0.2em; color: var(--white); font-weight: 400; }
+    .card-arrow {
+      position: absolute; right: 2rem; bottom: 2rem; z-index: 2;
+      font-family: 'Cormorant Garamond', serif; font-size: 0.8rem;
+      color: var(--gold); letter-spacing: 0.1em; opacity: 0;
+      transition: opacity 0.3s, transform 0.3s; transform: translateX(-8px);
+    }
+    .card:hover .card-arrow { opacity: 1; transform: translateX(0); }
+
+    /* GALLERY CTA */
+    .gallery-cta {
+      background: var(--off-black);
+      border-top: 1px solid rgba(184,149,90,0.15);
+      padding: 5rem 2.5rem; text-align: center;
+    }
+    .gallery-cta-inner { max-width: 680px; margin: 0 auto; }
+    .gallery-cta p {
+      font-size: 0.85rem; line-height: 2; color: var(--mist);
+      letter-spacing: 0.08em; margin-bottom: 2.5rem;
+    }
+    .btn-gold {
+      display: inline-block; padding: 0.9rem 2.8rem;
+      border: 1px solid var(--gold); color: var(--gold);
+      font-size: 0.75rem; letter-spacing: 0.25em; text-decoration: none;
+      font-family: 'Noto Serif JP', serif;
+      transition: background 0.3s, color 0.3s;
+    }
+    .btn-gold:hover { background: var(--gold); color: var(--black); }
+  </style>
+</head>
+<body>
+  <div class="lang-bar">
+    <span class="site-tagline">Shingiyama — Temple of Enma / 新居山 閻魔様の寺</span>
+    <div class="lang-switcher">
+      <button onclick="setLang('ja')" id="btn-ja">JP</button>
+      <button onclick="setLang('en')" id="btn-en">EN</button>
+      <button onclick="setLang('zh')" id="btn-zh">ZH</button>
+    </div>
+  </div>
+  <nav>
+    <a href="index.html" class="nav-logo">圓應寺</a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="current" data-ja="トップページ" data-en="Home" data-zh="首页">トップページ</a></li>
+      <li><a href="about.html" data-ja="圓應寺のご案内" data-en="About" data-zh="寺院介绍">圓應寺のご案内</a></li>
+      <li><a href="funeral.html" data-ja="葬儀・法事" data-en="Funeral" data-zh="葬礼法事">葬儀・法事</a></li>
+      <li><a href="cemetery.html" data-ja="墓地分譲" data-en="Cemetery" data-zh="墓地">墓地分譲</a></li>
+      <li><a href="access.html" data-ja="アクセス・お問い合わせ" data-en="Access" data-zh="交通・联系">アクセス・お問い合わせ</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-sub">
+        <span data-lang="ja" class="active">新居山 — 閻魔様の寺</span>
+        <span data-lang="en">Shingiyama — Temple of Enma</span>
+        <span data-lang="zh">新居山 — 阎魔王之寺</span>
+      </p>
+      <h1 class="hero-title">圓應寺</h1>
+      <p class="hero-desc">
+        <span data-lang="ja" class="active">建長二年（1250年）創建　鎌倉</span>
+        <span data-lang="en">Founded 1250 — Kamakura</span>
+        <span data-lang="zh">建长二年（1250年）创建　镰仓</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- NEWS -->
+  <section class="news">
+    <div class="news-inner">
+      <p class="section-label">
+        <span data-lang="ja" class="active">お知らせ</span>
+        <span data-lang="en">News</span>
+        <span data-lang="zh">通知</span>
+      </p>
+      <h2 class="section-title">
+        <span data-lang="ja" class="active">最新情報</span>
+        <span data-lang="en">Latest Updates</span>
+        <span data-lang="zh">最新资讯</span>
+      </h2>
+      <div class="news-item">
+        <span class="news-date">2026 / 06 / 02</span>
+        <p class="news-text">
+          <span data-lang="ja" class="active">明日、六月三日は台風接近が予想されておりますので、拝観中止と致します。</span>
+          <span data-lang="en">Due to an approaching typhoon, the temple will be closed on June 3rd.</span>
+          <span data-lang="zh">因台风临近，六月三日暂停参观。</span>
+        </p>
+      </div>
+      <div class="news-item">
+        <span class="news-date">2026 / 01 / 02</span>
+        <p class="news-text">
+          <span data-lang="ja" class="active">お正月三日間、拝観中止とさせて頂きます。四日より拝観と致します。</span>
+          <span data-lang="en">The temple will be closed for three days during the New Year holiday. Visits resume from January 4th.</span>
+          <span data-lang="zh">元旦三天暂停参观，1月4日起恢复。</span>
+        </p>
+      </div>
+      <div class="news-item">
+        <span class="news-date">2025 / 10 / 30</span>
+        <p class="news-text">
+          <span data-lang="ja" class="active">日中韓文化交流 in 円応寺</span>
+          <span data-lang="en">Japan–China–Korea Cultural Exchange at Ennoji</span>
+          <span data-lang="zh">日中韩文化交流活动在圆应寺举办</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARDS -->
+  <section class="cards">
+    <div class="cards-grid">
+      <a class="card" href="about.html">
+        <div class="card-bg" style="background-image:url('images/about.jpg'); background-color:#1a1510;"></div>
+        <div class="card-content">
+          <p class="card-label"><span data-lang="ja" class="active">寺院案内</span><span data-lang="en">About</span><span data-lang="zh">寺院介绍</span></p>
+          <h3 class="card-title"><span data-lang="ja" class="active">圓應寺のご案内</span><span data-lang="en">About Ennoji</span><span data-lang="zh">圆应寺介绍</span></h3>
+        </div>
+        <span class="card-arrow">→</span>
+      </a>
+      <a class="card" href="funeral.html">
+        <div class="card-bg" style="background-image:url('images/funeral.jpg'); background-color:#1c1a14;"></div>
+        <div class="card-content">
+          <p class="card-label"><span data-lang="ja" class="active">法要・供養</span><span data-lang="en">Ceremonies</span><span data-lang="zh">法事</span></p>
+          <h3 class="card-title"><span data-lang="ja" class="active">葬儀・法事</span><span data-lang="en">Funeral &amp; Memorial</span><span data-lang="zh">葬礼・法事</span></h3>
+        </div>
+        <span class="card-arrow">→</span>
+      </a>
+      <a class="card" href="cemetery.html">
+        <div class="card-bg" style="background-image:url('images/cemetery.jpg'); background-color:#151a15;"></div>
+        <div class="card-content">
+          <p class="card-label"><span data-lang="ja" class="active">墓地</span><span data-lang="en">Cemetery</span><span data-lang="zh">墓地</span></p>
+          <h3 class="card-title"><span data-lang="ja" class="active">墓地分譲</span><span data-lang="en">Cemetery Lots</span><span data-lang="zh">墓地出售</span></h3>
+        </div>
+        <span class="card-arrow">→</span>
+      </a>
+      <a class="card" href="access.html">
+        <div class="card-bg" style="background-image:url('images/access.jpg'); background-color:#141418;"></div>
+        <div class="card-content">
+          <p class="card-label"><span data-lang="ja" class="active">アクセス</span><span data-lang="en">Access</span><span data-lang="zh">交通</span></p>
+          <h3 class="card-title"><span data-lang="ja" class="active">アクセス・お問い合わせ</span><span data-lang="en">Access &amp; Contact</span><span data-lang="zh">交通・联系</span></h3>
+        </div>
+        <span class="card-arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- DIGITAL GALLERY CTA -->
+  <section class="gallery-cta">
+    <div class="gallery-cta-inner">
+      <p class="section-label" style="text-align:center;">
+        <span data-lang="ja" class="active">デジタル展示室</span>
+        <span data-lang="en">Digital Gallery</span>
+        <span data-lang="zh">数字展示室</span>
+      </p>
+      <h2 class="section-title" style="text-align:center;">
+        <span data-lang="ja" class="active">円応寺デジタル展示室</span>
+        <span data-lang="en">Ennoji Digital Gallery</span>
+        <span data-lang="zh">圆应寺数字展示室</span>
+      </h2>
+      <p>
+        <span data-lang="ja" class="active">閻魔大王と十王の像を、見る・知る・考える。本堂でスマホをかざしながら読む「冥界の図録」。像それぞれの物語と役割を、静かにめぐってください。</span>
+        <span data-lang="en">Explore the statues of Enma and the Ten Kings — see, learn, and reflect. A digital guide to the underworld, designed to accompany your visit to the main hall.</span>
+        <span data-lang="zh">探索阎魔王与十王的雕像——观看、了解与思考。这是一本数字冥界图录，专为您在本堂参观时使用。</span>
+      </p>
+      <a class="btn-gold" href="https://ennoji-digital-gallery-ennoji-guide-omega.vercel.app" target="_blank" rel="noopener">
+        <span data-lang="ja" class="active">展示室へ入る</span>
+        <span data-lang="en">Enter the Gallery</span>
+        <span data-lang="zh">进入展示室</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">圓應寺</div>
+      <div class="footer-info">
+        <p><span data-lang="ja" class="active">臨済宗 建長寺派　圓應寺</span><span data-lang="en">Rinzai Sect, Kenchoji Branch — Ennoji</span><span data-lang="zh">临济宗 建长寺派　圆应寺</span></p>
+        <p><span class="label"><span data-lang="ja" class="active">住所</span><span data-lang="en">Address</span><span data-lang="zh">地址</span></span>〒247-0062　神奈川県鎌倉市山ノ内1543</p>
+        <p><span class="label">TEL</span>0467-25-1095</p>
+        <p><span class="label"><span data-lang="ja" class="active">拝観時間</span><span data-lang="en">Hours</span><span data-lang="zh">参观时间</span></span><span data-lang="ja" class="active">春〜秋（3〜11月）9:00〜16:00　冬（12〜2月）9:00〜15:30</span><span data-lang="en">Spring–Autumn (Mar–Nov) 9:00–16:00 &nbsp; Winter (Dec–Feb) 9:00–15:30</span><span data-lang="zh">春秋（3〜11月）9:00〜16:00　冬（12〜2月）9:00〜15:30</span></p>
+      </div>
+      <p class="footer-copy">© 2026 鎌倉 圓應寺</p>
+    </div>
+  </footer>
+  <script src="_lang.js"></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+/* ============ SHARED STYLES ============ */
+:root {
+  --black: #0a0a08;
+  --off-black: #111110;
+  --stone: #2a2a27;
+  --gold: #b8955a;
+  --gold-light: #d4aa6e;
+  --cream: #e8e0d0;
+  --mist: #a89e8e;
+  --white: #f5f0e8;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--black);
+  color: var(--cream);
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+.lang-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 2.5rem; height: 52px;
+  background: rgba(10,10,8,0.9); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(184,149,90,0.15);
+}
+.lang-bar .site-tagline {
+  font-size: 0.7rem; letter-spacing: 0.2em; color: var(--mist);
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+}
+.lang-switcher { display: flex; gap: 1.2rem; }
+.lang-switcher button {
+  background: none; border: none; color: var(--mist);
+  font-size: 0.7rem; letter-spacing: 0.15em; cursor: pointer;
+  padding: 0.2rem 0; border-bottom: 1px solid transparent;
+  transition: color 0.3s, border-color 0.3s;
+  font-family: 'Cormorant Garamond', serif;
+}
+.lang-switcher button.active, .lang-switcher button:hover {
+  color: var(--gold); border-color: var(--gold);
+}
+nav {
+  position: fixed; top: 52px; left: 0; right: 0; z-index: 99;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 2.5rem; height: 64px;
+  background: rgba(10,10,8,0.92); backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(184,149,90,0.1);
+}
+.nav-logo {
+  font-size: 1.4rem; letter-spacing: 0.25em; color: var(--white);
+  font-family: 'Noto Serif JP', serif; font-weight: 400; text-decoration: none;
+}
+.nav-links { display: flex; gap: 0; list-style: none; }
+.nav-links a {
+  display: block; padding: 0 1.1rem;
+  font-size: 0.68rem; letter-spacing: 0.1em; color: var(--mist);
+  text-decoration: none; transition: color 0.3s;
+  border-right: 1px solid rgba(184,149,90,0.15); line-height: 64px;
+}
+.nav-links li:first-child a { border-left: 1px solid rgba(184,149,90,0.15); }
+.nav-links a:hover, .nav-links a.current { color: var(--gold-light); }
+.page-top { margin-top: 116px; }
+.section-label {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.75rem; letter-spacing: 0.3em; color: var(--gold); margin-bottom: 0.6rem;
+}
+.section-title {
+  font-size: 1.8rem; font-weight: 300; letter-spacing: 0.2em;
+  color: var(--white); margin-bottom: 3rem;
+}
+footer {
+  background: var(--off-black); border-top: 1px solid rgba(184,149,90,0.15);
+  padding: 4rem 2.5rem;
+}
+.footer-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: auto 1fr auto;
+  gap: 4rem; align-items: start;
+}
+.footer-logo {
+  font-size: 1.8rem; letter-spacing: 0.3em; color: var(--white);
+  writing-mode: vertical-rl; font-weight: 400;
+}
+.footer-info { display: flex; flex-direction: column; gap: 0.8rem; }
+.footer-info p { font-size: 0.75rem; letter-spacing: 0.1em; color: var(--mist); line-height: 1.8; }
+.footer-info .label { color: var(--gold); font-size: 0.65rem; letter-spacing: 0.2em; margin-right: 0.8rem; }
+.footer-copy {
+  font-family: 'Cormorant Garamond', serif; font-size: 0.7rem;
+  letter-spacing: 0.1em; color: var(--stone); align-self: flex-end;
+}
+[data-lang] { display: none; }
+[data-lang].active { display: block; }
+span[data-lang] { display: none; }
+span[data-lang].active { display: inline; }
