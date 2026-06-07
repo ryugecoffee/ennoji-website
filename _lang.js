@@ -11,3 +11,21 @@ function setLang(lang) {
 }
 const saved = localStorage.getItem('ennoji-lang') || 'ja';
 setLang(saved);
+
+// ハンバーガーメニュー
+(function() {
+  const toggle = document.getElementById('nav-toggle');
+  const links  = document.getElementById('nav-links');
+  if (!toggle || !links) return;
+  toggle.addEventListener('click', function() {
+    const open = links.classList.toggle('open');
+    toggle.classList.toggle('open', open);
+  });
+  // リンククリックで閉じる
+  links.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      links.classList.remove('open');
+      toggle.classList.remove('open');
+    });
+  });
+})();
