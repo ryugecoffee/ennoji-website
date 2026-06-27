@@ -97,7 +97,7 @@
       font-size: 0.75rem; letter-spacing: 0.2em; padding: 0.3rem 0.8rem;
       border-radius: 2px; display: inline-block; margin-bottom: 1rem;
     }
-    .detail-panel .detail-status.available { background: rgba(91,163,91,0.15); color: #8bc48b; border: 1px solid rgba(91,163,91,0.3); }
+    .detail-panel .detail-status.available { background: #1a2a1a; color: #c8c8c8; border: 1px solid #3a5a3a; }
     .detail-panel .detail-status.taken { background: rgba(180,80,80,0.15); color: #c48b8b; border: 1px solid rgba(180,80,80,0.3); }
     .detail-panel .detail-photo {
       width: 100%; max-width: 400px; aspect-ratio: 4/3;
@@ -181,7 +181,7 @@
         <table class="price-table">
           <tr>
             <td class="size">
-              <span class="dot" style="background:#4a9aba;"></span>
+              <span class="dot" style="background:#e8e8e8;"></span>
               <span data-lang="ja" class="active">幅100cm 奥行120cm</span>
               <span data-lang="en">100cm × 120cm</span>
               <span data-lang="zh">宽100cm 深120cm</span>
@@ -195,7 +195,7 @@
           </tr>
           <tr>
             <td class="size">
-              <span class="dot" style="background:#3a82a0;"></span>
+              <span class="dot" style="background:#d0d0d0;"></span>
               <span data-lang="ja" class="active">幅90cm 奥行90cm</span>
               <span data-lang="en">90cm × 90cm</span>
               <span data-lang="zh">宽90cm 深90cm</span>
@@ -209,7 +209,7 @@
           </tr>
           <tr>
             <td class="size">
-              <span class="dot" style="background:#2a6880;"></span>
+              <span class="dot" style="background:#b8b8b8;"></span>
               <span data-lang="ja" class="active">幅60cm 奥行60cm</span>
               <span data-lang="en">60cm × 60cm</span>
               <span data-lang="zh">宽60cm 深60cm</span>
@@ -223,7 +223,7 @@
           </tr>
           <tr>
             <td class="size">
-              <span class="dot" style="background:#5a8a5a;"></span>
+              <span class="dot" style="background:#c0c0c0;"></span>
               <span data-lang="ja" class="active">樹木墓</span>
               <span data-lang="en">Natural Burial</span>
               <span data-lang="zh">树木葬</span>
@@ -260,10 +260,10 @@
             <span data-lang="zh">尺寸</span>
           </span>
           <div class="legend-group">
-            <div class="legend-item"><div class="legend-box" style="background:#4a9aba;"></div>100×120cm</div>
-            <div class="legend-item"><div class="legend-box" style="background:#3a82a0;"></div>90×90cm</div>
-            <div class="legend-item"><div class="legend-box" style="background:#2a6880;"></div>60×60cm</div>
-            <div class="legend-item"><div class="legend-box" style="background:#5a8a5a;"></div>
+            <div class="legend-item"><div class="legend-box" style="background:#e8e8e8;"></div>100×120cm</div>
+            <div class="legend-item"><div class="legend-box" style="background:#d0d0d0;"></div>90×90cm</div>
+            <div class="legend-item"><div class="legend-box" style="background:#b8b8b8;"></div>60×60cm</div>
+            <div class="legend-item"><div class="legend-box" style="background:#c0c0c0;"></div>
               <span data-lang="ja" class="active">樹木墓</span>
               <span data-lang="en">Natural</span>
               <span data-lang="zh">树木葬</span>
@@ -277,11 +277,11 @@
           </span>
           <div class="legend-group">
             <div class="legend-item">
-              <div class="legend-box" style="background:#4a9aba; opacity:1;"></div>
+              <div class="legend-box" style="background:#e8e8e8; opacity:1;"></div>
               <span data-lang="ja" class="active">空き</span><span data-lang="en">Available</span><span data-lang="zh">空位</span>
             </div>
             <div class="legend-item">
-              <div class="legend-box" style="background:#c04878;"></div>
+              <div class="legend-box" style="background:#3a3a3a;"></div>
               <span data-lang="ja" class="active">契約済み</span><span data-lang="en">Taken</span><span data-lang="zh">已售</span>
             </div>
           </div>
@@ -293,7 +293,7 @@
             <!-- Background ground -->
             <rect width="520" height="430" fill="#0d120d"/>
             <!-- Green border (trees) -->
-            <rect x="20" y="20" width="460" height="270" fill="none" stroke="#2d5a2d" stroke-width="18" rx="4"/>
+            <rect x="20" y="20" width="460" height="270" fill="none" stroke="#2a4a2a" stroke-width="5" rx="4"/>
             <!-- Paths -->
             <rect x="29" y="150" width="55" height="130" fill="#1a241a"/>
             <rect x="29" y="160" width="4" height="10" fill="#3a7a3a" rx="1"/>
@@ -306,83 +306,83 @@
             <!-- ROW A: large plots (100x120) -->
             <!-- plot A1 taken -->
             <rect class="plot" data-id="A1" data-size="100x120" data-status="taken"
-              x="90" y="35" width="50" height="60" fill="#c04878" rx="2" cursor="pointer"/>
+              x="90" y="35" width="50" height="60" fill="#3a3a3a" rx="2" cursor="pointer"/>
             <!-- plot A2 available -->
             <rect class="plot" data-id="A2" data-size="100x120" data-status="available"
-              x="150" y="35" width="50" height="60" fill="#4a9aba" rx="2" cursor="pointer"/>
+              x="150" y="35" width="50" height="60" fill="#e8e8e8" rx="2" cursor="pointer"/>
             <!-- plot A3 available -->
             <rect class="plot" data-id="A3" data-size="100x120" data-status="available"
-              x="210" y="35" width="50" height="60" fill="#4a9aba" rx="2" cursor="pointer"/>
+              x="210" y="35" width="50" height="60" fill="#e8e8e8" rx="2" cursor="pointer"/>
             <!-- plot A4 taken -->
             <rect class="plot" data-id="A4" data-size="100x120" data-status="taken"
-              x="270" y="35" width="50" height="60" fill="#c04878" rx="2" cursor="pointer"/>
+              x="270" y="35" width="50" height="60" fill="#3a3a3a" rx="2" cursor="pointer"/>
             <!-- plot A5 available -->
             <rect class="plot" data-id="A5" data-size="100x120" data-status="available"
-              x="330" y="35" width="50" height="60" fill="#4a9aba" rx="2" cursor="pointer"/>
+              x="330" y="35" width="50" height="60" fill="#e8e8e8" rx="2" cursor="pointer"/>
             <!-- plot A6 taken -->
             <rect class="plot" data-id="A6" data-size="100x120" data-status="taken"
-              x="390" y="35" width="50" height="60" fill="#c04878" rx="2" cursor="pointer"/>
+              x="390" y="35" width="50" height="60" fill="#3a3a3a" rx="2" cursor="pointer"/>
 
             <!-- ROW B: medium plots (90x90) mixed -->
             <rect class="plot" data-id="B1" data-size="90x90" data-status="taken"
-              x="90" y="108" width="42" height="42" fill="#c04878" rx="2" cursor="pointer"/>
+              x="90" y="108" width="42" height="42" fill="#3a3a3a" rx="2" cursor="pointer"/>
             <rect class="plot" data-id="B2" data-size="90x90" data-status="taken"
-              x="140" y="108" width="42" height="42" fill="#c04878" rx="2" cursor="pointer"/>
+              x="140" y="108" width="42" height="42" fill="#3a3a3a" rx="2" cursor="pointer"/>
             <rect class="plot" data-id="B3" data-size="90x90" data-status="available"
-              x="190" y="108" width="42" height="42" fill="#3a82a0" rx="2" cursor="pointer"/>
+              x="190" y="108" width="42" height="42" fill="#d0d0d0" rx="2" cursor="pointer"/>
             <rect class="plot" data-id="B4" data-size="90x90" data-status="taken"
-              x="240" y="108" width="42" height="42" fill="#c04878" rx="2" cursor="pointer"/>
+              x="240" y="108" width="42" height="42" fill="#3a3a3a" rx="2" cursor="pointer"/>
             <rect class="plot" data-id="B5" data-size="90x90" data-status="available"
-              x="290" y="108" width="42" height="42" fill="#3a82a0" rx="2" cursor="pointer"/>
+              x="290" y="108" width="42" height="42" fill="#d0d0d0" rx="2" cursor="pointer"/>
             <rect class="plot" data-id="B6" data-size="90x90" data-status="taken"
-              x="390" y="108" width="42" height="42" fill="#c04878" rx="2" cursor="pointer"/>
+              x="390" y="108" width="42" height="42" fill="#3a3a3a" rx="2" cursor="pointer"/>
 
             <!-- ROW C: small plots (60x60) -->
             <rect class="plot" data-id="C1" data-size="60x60" data-status="taken"
-              x="90" y="165" width="32" height="32" fill="#c04878" rx="2" cursor="pointer"/>
+              x="90" y="165" width="32" height="32" fill="#3a3a3a" rx="2" cursor="pointer"/>
             <rect class="plot" data-id="C2" data-size="60x60" data-status="taken"
-              x="130" y="165" width="32" height="32" fill="#c04878" rx="2" cursor="pointer"/>
+              x="130" y="165" width="32" height="32" fill="#3a3a3a" rx="2" cursor="pointer"/>
             <rect class="plot" data-id="C3" data-size="60x60" data-status="available"
-              x="170" y="165" width="32" height="32" fill="#2a6880" rx="2" cursor="pointer"/>
+              x="170" y="165" width="32" height="32" fill="#b8b8b8" rx="2" cursor="pointer"/>
             <rect class="plot" data-id="C4" data-size="60x60" data-status="taken"
-              x="210" y="165" width="32" height="32" fill="#c04878" rx="2" cursor="pointer"/>
+              x="210" y="165" width="32" height="32" fill="#3a3a3a" rx="2" cursor="pointer"/>
             <rect class="plot" data-id="C5" data-size="60x60" data-status="available"
-              x="250" y="165" width="32" height="32" fill="#2a6880" rx="2" cursor="pointer"/>
+              x="250" y="165" width="32" height="32" fill="#b8b8b8" rx="2" cursor="pointer"/>
             <rect class="plot" data-id="C6" data-size="60x60" data-status="taken"
-              x="290" y="165" width="32" height="32" fill="#c04878" rx="2" cursor="pointer"/>
+              x="290" y="165" width="32" height="32" fill="#3a3a3a" rx="2" cursor="pointer"/>
             <rect class="plot" data-id="C7" data-size="60x60" data-status="available"
-              x="330" y="165" width="32" height="32" fill="#2a6880" rx="2" cursor="pointer"/>
+              x="330" y="165" width="32" height="32" fill="#b8b8b8" rx="2" cursor="pointer"/>
             <rect class="plot" data-id="C8" data-size="60x60" data-status="taken"
-              x="390" y="165" width="32" height="32" fill="#c04878" rx="2" cursor="pointer"/>
+              x="390" y="165" width="32" height="32" fill="#3a3a3a" rx="2" cursor="pointer"/>
             <rect class="plot" data-id="C9" data-size="60x60" data-status="available"
-              x="430" y="165" width="32" height="32" fill="#2a6880" rx="2" cursor="pointer"/>
+              x="430" y="165" width="32" height="32" fill="#b8b8b8" rx="2" cursor="pointer"/>
 
             <!-- ROW D: small plots -->
             <rect class="plot" data-id="D1" data-size="60x60" data-status="available"
-              x="90" y="210" width="32" height="32" fill="#2a6880" rx="2" cursor="pointer"/>
+              x="90" y="210" width="32" height="32" fill="#b8b8b8" rx="2" cursor="pointer"/>
             <rect class="plot" data-id="D2" data-size="60x60" data-status="taken"
-              x="130" y="210" width="32" height="32" fill="#c04878" rx="2" cursor="pointer"/>
+              x="130" y="210" width="32" height="32" fill="#3a3a3a" rx="2" cursor="pointer"/>
             <rect class="plot" data-id="D3" data-size="60x60" data-status="taken"
-              x="170" y="210" width="32" height="32" fill="#c04878" rx="2" cursor="pointer"/>
+              x="170" y="210" width="32" height="32" fill="#3a3a3a" rx="2" cursor="pointer"/>
             <rect class="plot" data-id="D4" data-size="60x60" data-status="available"
-              x="210" y="210" width="32" height="32" fill="#2a6880" rx="2" cursor="pointer"/>
+              x="210" y="210" width="32" height="32" fill="#b8b8b8" rx="2" cursor="pointer"/>
             <rect class="plot" data-id="D5" data-size="60x60" data-status="taken"
-              x="250" y="210" width="32" height="32" fill="#c04878" rx="2" cursor="pointer"/>
+              x="250" y="210" width="32" height="32" fill="#3a3a3a" rx="2" cursor="pointer"/>
             <rect class="plot" data-id="D6" data-size="60x60" data-status="taken"
-              x="290" y="210" width="32" height="32" fill="#c04878" rx="2" cursor="pointer"/>
+              x="290" y="210" width="32" height="32" fill="#3a3a3a" rx="2" cursor="pointer"/>
             <rect class="plot" data-id="D7" data-size="60x60" data-status="available"
-              x="390" y="210" width="32" height="32" fill="#2a6880" rx="2" cursor="pointer"/>
+              x="390" y="210" width="32" height="32" fill="#b8b8b8" rx="2" cursor="pointer"/>
             <rect class="plot" data-id="D8" data-size="60x60" data-status="taken"
-              x="430" y="210" width="32" height="32" fill="#c04878" rx="2" cursor="pointer"/>
+              x="430" y="210" width="32" height="32" fill="#3a3a3a" rx="2" cursor="pointer"/>
 
             <!-- ROW E: small plots -->
             <rect class="plot" data-id="E1" data-size="60x60" data-status="taken"
-              x="390" y="250" width="32" height="32" fill="#c04878" rx="2" cursor="pointer"/>
+              x="390" y="250" width="32" height="32" fill="#3a3a3a" rx="2" cursor="pointer"/>
             <rect class="plot" data-id="E2" data-size="60x60" data-status="available"
-              x="430" y="250" width="32" height="32" fill="#2a6880" rx="2" cursor="pointer"/>
+              x="430" y="250" width="32" height="32" fill="#b8b8b8" rx="2" cursor="pointer"/>
 
             <!-- 樹木墓エリア背景 -->
-            <rect x="20" y="300" width="460" height="110" fill="#1a2e1a" rx="4"/>
+            <rect x="20" y="300" width="460" height="120" fill="#111a11" rx="4"/>
             <text x="250" y="295" text-anchor="middle" fill="#8bc48b" font-size="11" font-family="serif" letter-spacing="2">樹木墓</text>
 
             <!-- N区画ラベル -->
@@ -393,147 +393,147 @@
             <text x="340" y="415" text-anchor="middle" fill="#6a9a6a" font-size="10" font-family="serif">J</text>
 
             <!-- N区画 行1（上）: 35-46 -->
-            <circle class="plot" data-id="N35" data-size="tree" data-status="taken"    cx="60"  cy="312" r="9" fill="#4a7a9a" cursor="pointer"/>
-            <circle class="plot" data-id="N36" data-size="tree" data-status="taken"    cx="75"  cy="312" r="9" fill="#4a7a9a" cursor="pointer"/>
-            <circle class="plot" data-id="N37" data-size="tree" data-status="available" cx="90"  cy="312" r="9" fill="#8a9a4a" cursor="pointer"/>
-            <circle class="plot" data-id="N38" data-size="tree" data-status="available" cx="105" cy="312" r="9" fill="#8a9a4a" cursor="pointer"/>
-            <circle class="plot" data-id="N39" data-size="tree" data-status="available" cx="120" cy="312" r="9" fill="#8a9a4a" cursor="pointer"/>
-            <circle class="plot" data-id="N40" data-size="tree" data-status="available" cx="135" cy="312" r="9" fill="#8a9a4a" cursor="pointer"/>
-            <circle class="plot" data-id="N41" data-size="tree" data-status="available" cx="150" cy="312" r="9" fill="#8a9a4a" cursor="pointer"/>
-            <circle class="plot" data-id="N42" data-size="tree" data-status="available" cx="165" cy="312" r="9" fill="#8a9a4a" cursor="pointer"/>
-            <circle class="plot" data-id="N43" data-size="tree" data-status="available" cx="42"  cy="312" r="9" fill="#4a7a9a" cursor="pointer"/>
-            <circle class="plot" data-id="N44" data-size="tree" data-status="available" cx="57"  cy="299" r="9" fill="#4a7a9a" cursor="pointer"/>
-            <circle class="plot" data-id="N45" data-size="tree" data-status="available" cx="72"  cy="299" r="9" fill="#4a7a9a" cursor="pointer"/>
-            <circle class="plot" data-id="N46" data-size="tree" data-status="available" cx="87"  cy="299" r="9" fill="#4a7a9a" cursor="pointer"/>
+            <circle class="plot" data-id="N35" data-size="tree" data-status="taken"    cx="49.4"  cy="312.6" r="6" fill="#888888" cursor="pointer"/>
+            <circle class="plot" data-id="N36" data-size="tree" data-status="taken"    cx="65.2"  cy="312.6" r="6" fill="#888888" cursor="pointer"/>
+            <circle class="plot" data-id="N37" data-size="tree" data-status="available" cx="80.9"  cy="312.6" r="6" fill="#c0c0c0" cursor="pointer"/>
+            <circle class="plot" data-id="N38" data-size="tree" data-status="available" cx="96.7" cy="312.6" r="6" fill="#c0c0c0" cursor="pointer"/>
+            <circle class="plot" data-id="N39" data-size="tree" data-status="available" cx="112.4" cy="312.6" r="6" fill="#c0c0c0" cursor="pointer"/>
+            <circle class="plot" data-id="N40" data-size="tree" data-status="available" cx="128.2" cy="312.6" r="6" fill="#c0c0c0" cursor="pointer"/>
+            <circle class="plot" data-id="N41" data-size="tree" data-status="available" cx="143.9" cy="312.6" r="6" fill="#c0c0c0" cursor="pointer"/>
+            <circle class="plot" data-id="N42" data-size="tree" data-status="available" cx="159.7" cy="312.6" r="6" fill="#c0c0c0" cursor="pointer"/>
+            <circle class="plot" data-id="N43" data-size="tree" data-status="available" cx="30.5"  cy="312.6" r="6" fill="#888888" cursor="pointer"/>
+            <circle class="plot" data-id="N44" data-size="tree" data-status="available" cx="46.3"  cy="299" r="6" fill="#888888" cursor="pointer"/>
+            <circle class="plot" data-id="N45" data-size="tree" data-status="available" cx="62"  cy="299" r="6" fill="#888888" cursor="pointer"/>
+            <circle class="plot" data-id="N46" data-size="tree" data-status="available" cx="77.8"  cy="299" r="6" fill="#888888" cursor="pointer"/>
 
             <!-- N区画 行2: 19-26 -->
-            <circle class="plot" data-id="N19" data-size="tree" data-status="available" cx="42"  cy="325" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="N20" data-size="tree" data-status="available" cx="57"  cy="325" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="N21" data-size="tree" data-status="available" cx="72"  cy="325" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="N22" data-size="tree" data-status="taken"    cx="87"  cy="325" r="9" fill="#4a7a9a" cursor="pointer"/>
-            <circle class="plot" data-id="N23" data-size="tree" data-status="taken"    cx="102" cy="325" r="9" fill="#4a7a9a" cursor="pointer"/>
-            <circle class="plot" data-id="N24" data-size="tree" data-status="available" cx="117" cy="325" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="N25" data-size="tree" data-status="available" cx="132" cy="325" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="N26" data-size="tree" data-status="available" cx="147" cy="325" r="9" fill="#c8b840" cursor="pointer"/>
+            <circle class="plot" data-id="N19" data-size="tree" data-status="available" cx="30.5"  cy="326.3" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="N20" data-size="tree" data-status="available" cx="46.3"  cy="326.3" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="N21" data-size="tree" data-status="available" cx="62"  cy="326.3" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="N22" data-size="tree" data-status="taken"    cx="77.8"  cy="326.3" r="6" fill="#888888" cursor="pointer"/>
+            <circle class="plot" data-id="N23" data-size="tree" data-status="taken"    cx="93.5" cy="326.3" r="6" fill="#888888" cursor="pointer"/>
+            <circle class="plot" data-id="N24" data-size="tree" data-status="available" cx="109.3" cy="326.3" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="N25" data-size="tree" data-status="available" cx="125" cy="326.3" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="N26" data-size="tree" data-status="available" cx="140.8" cy="326.3" r="6" fill="#d8d8d8" cursor="pointer"/>
 
             <!-- N区画 行3: 10-18 -->
-            <circle class="plot" data-id="N10" data-size="tree" data-status="taken"    cx="42"  cy="340" r="9" fill="#2a6880" cursor="pointer"/>
-            <circle class="plot" data-id="N11" data-size="tree" data-status="taken"    cx="57"  cy="340" r="9" fill="#2a6880" cursor="pointer"/>
-            <circle class="plot" data-id="N12" data-size="tree" data-status="available" cx="72"  cy="340" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="N13" data-size="tree" data-status="available" cx="87"  cy="340" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="N14" data-size="tree" data-status="available" cx="102" cy="340" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="N15" data-size="tree" data-status="available" cx="117" cy="340" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="N16" data-size="tree" data-status="available" cx="42"  cy="355" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="N17" data-size="tree" data-status="taken"    cx="57"  cy="355" r="9" fill="#c04878" cursor="pointer"/>
-            <circle class="plot" data-id="N18" data-size="tree" data-status="available" cx="72"  cy="355" r="9" fill="#c8b840" cursor="pointer"/>
+            <circle class="plot" data-id="N10" data-size="tree" data-status="taken"    cx="30.5"  cy="342.1" r="6" fill="#666666" cursor="pointer"/>
+            <circle class="plot" data-id="N11" data-size="tree" data-status="taken"    cx="46.3"  cy="342.1" r="6" fill="#666666" cursor="pointer"/>
+            <circle class="plot" data-id="N12" data-size="tree" data-status="available" cx="62"  cy="342.1" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="N13" data-size="tree" data-status="available" cx="77.8"  cy="342.1" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="N14" data-size="tree" data-status="available" cx="93.5" cy="342.1" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="N15" data-size="tree" data-status="available" cx="109.3" cy="342.1" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="N16" data-size="tree" data-status="available" cx="30.5"  cy="357.8" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="N17" data-size="tree" data-status="taken"    cx="46.3"  cy="357.8" r="6" fill="#3a3a3a" cursor="pointer"/>
+            <circle class="plot" data-id="N18" data-size="tree" data-status="available" cx="62"  cy="357.8" r="6" fill="#d8d8d8" cursor="pointer"/>
 
             <!-- N区画 行4: 3-9 -->
-            <circle class="plot" data-id="N3"  data-size="tree" data-status="taken"    cx="42"  cy="370" r="9" fill="#2a6880" cursor="pointer"/>
-            <circle class="plot" data-id="N4"  data-size="tree" data-status="taken"    cx="57"  cy="370" r="9" fill="#2a6880" cursor="pointer"/>
-            <circle class="plot" data-id="N5"  data-size="tree" data-status="available" cx="72"  cy="370" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="N1"  data-size="tree" data-status="available" cx="87"  cy="370" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="N2"  data-size="tree" data-status="available" cx="102" cy="370" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="N6"  data-size="tree" data-status="available" cx="117" cy="370" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="N7"  data-size="tree" data-status="available" cx="132" cy="370" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="N8"  data-size="tree" data-status="available" cx="147" cy="370" r="9" fill="#c8b840" cursor="pointer"/>
+            <circle class="plot" data-id="N3"  data-size="tree" data-status="taken"    cx="30.5"  cy="373.6" r="6" fill="#666666" cursor="pointer"/>
+            <circle class="plot" data-id="N4"  data-size="tree" data-status="taken"    cx="46.3"  cy="373.6" r="6" fill="#666666" cursor="pointer"/>
+            <circle class="plot" data-id="N5"  data-size="tree" data-status="available" cx="62"  cy="373.6" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="N1"  data-size="tree" data-status="available" cx="77.8"  cy="373.6" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="N2"  data-size="tree" data-status="available" cx="93.5" cy="373.6" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="N6"  data-size="tree" data-status="available" cx="109.3" cy="373.6" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="N7"  data-size="tree" data-status="available" cx="125" cy="373.6" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="N8"  data-size="tree" data-status="available" cx="140.8" cy="373.6" r="6" fill="#d8d8d8" cursor="pointer"/>
 
             <!-- E区画（中央）: 1-18 -->
-            <circle class="plot" data-id="E-1"  data-size="tree" data-status="available" cx="215" cy="312" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="E-2"  data-size="tree" data-status="available" cx="230" cy="312" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="E-3"  data-size="tree" data-status="available" cx="245" cy="312" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="E-4"  data-size="tree" data-status="available" cx="215" cy="327" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="E-5"  data-size="tree" data-status="available" cx="230" cy="327" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="E-6"  data-size="tree" data-status="available" cx="245" cy="327" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="E-7"  data-size="tree" data-status="available" cx="260" cy="327" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="E-8"  data-size="tree" data-status="available" cx="215" cy="342" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="E-9"  data-size="tree" data-status="available" cx="230" cy="342" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="E-10" data-size="tree" data-status="available" cx="215" cy="357" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="E-11" data-size="tree" data-status="available" cx="230" cy="357" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="E-12" data-size="tree" data-status="available" cx="245" cy="357" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="E-13" data-size="tree" data-status="available" cx="260" cy="357" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="E-14" data-size="tree" data-status="available" cx="230" cy="372" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="E-15" data-size="tree" data-status="available" cx="215" cy="299" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="E-16" data-size="tree" data-status="available" cx="260" cy="372" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="E-17" data-size="tree" data-status="taken"    cx="200" cy="305" r="9" fill="#c04878" cursor="pointer"/>
-            <circle class="plot" data-id="E-18" data-size="tree" data-status="taken"    cx="270" cy="305" r="9" fill="#c04878" cursor="pointer"/>
+            <circle class="plot" data-id="E-1"  data-size="tree" data-status="available" cx="212.2" cy="312.6" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="E-2"  data-size="tree" data-status="available" cx="227.9" cy="312.6" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="E-3"  data-size="tree" data-status="available" cx="243.7" cy="312.6" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="E-4"  data-size="tree" data-status="available" cx="212.2" cy="328.4" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="E-5"  data-size="tree" data-status="available" cx="227.9" cy="328.4" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="E-6"  data-size="tree" data-status="available" cx="243.7" cy="328.4" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="E-7"  data-size="tree" data-status="available" cx="259.4" cy="328.4" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="E-8"  data-size="tree" data-status="available" cx="212.2" cy="344.1" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="E-9"  data-size="tree" data-status="available" cx="227.9" cy="344.1" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="E-10" data-size="tree" data-status="available" cx="212.2" cy="359.9" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="E-11" data-size="tree" data-status="available" cx="227.9" cy="359.9" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="E-12" data-size="tree" data-status="available" cx="243.7" cy="359.9" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="E-13" data-size="tree" data-status="available" cx="259.4" cy="359.9" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="E-14" data-size="tree" data-status="available" cx="227.9" cy="375.6" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="E-15" data-size="tree" data-status="available" cx="212.2" cy="299" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="E-16" data-size="tree" data-status="available" cx="259.4" cy="375.6" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="E-17" data-size="tree" data-status="taken"    cx="196.4" cy="305.3" r="6" fill="#3a3a3a" cursor="pointer"/>
+            <circle class="plot" data-id="E-18" data-size="tree" data-status="taken"    cx="269.9" cy="305.3" r="6" fill="#3a3a3a" cursor="pointer"/>
 
             <!-- J区画（右）: 上段 47-58 -->
-            <circle class="plot" data-id="J55" data-size="tree" data-status="available" cx="295" cy="299" r="9" fill="#4a7a9a" cursor="pointer"/>
-            <circle class="plot" data-id="J56" data-size="tree" data-status="available" cx="310" cy="299" r="9" fill="#4a7a9a" cursor="pointer"/>
-            <circle class="plot" data-id="J57" data-size="tree" data-status="available" cx="325" cy="299" r="9" fill="#4a7a9a" cursor="pointer"/>
-            <circle class="plot" data-id="J58" data-size="tree" data-status="available" cx="340" cy="299" r="9" fill="#4a7a9a" cursor="pointer"/>
-            <circle class="plot" data-id="J47" data-size="tree" data-status="available" cx="295" cy="312" r="9" fill="#4a7a9a" cursor="pointer"/>
-            <circle class="plot" data-id="J48" data-size="tree" data-status="available" cx="310" cy="312" r="9" fill="#4a7a9a" cursor="pointer"/>
-            <circle class="plot" data-id="J49" data-size="tree" data-status="available" cx="325" cy="312" r="9" fill="#4a7a9a" cursor="pointer"/>
-            <circle class="plot" data-id="J50" data-size="tree" data-status="available" cx="340" cy="312" r="9" fill="#4a7a9a" cursor="pointer"/>
-            <circle class="plot" data-id="J51" data-size="tree" data-status="available" cx="355" cy="312" r="9" fill="#4a7a9a" cursor="pointer"/>
-            <circle class="plot" data-id="J52" data-size="tree" data-status="available" cx="370" cy="312" r="9" fill="#4a7a9a" cursor="pointer"/>
-            <circle class="plot" data-id="J53" data-size="tree" data-status="available" cx="385" cy="312" r="9" fill="#4a7a9a" cursor="pointer"/>
-            <circle class="plot" data-id="J54" data-size="tree" data-status="available" cx="400" cy="312" r="9" fill="#4a7a9a" cursor="pointer"/>
+            <circle class="plot" data-id="J55" data-size="tree" data-status="available" cx="296.2" cy="299" r="6" fill="#888888" cursor="pointer"/>
+            <circle class="plot" data-id="J56" data-size="tree" data-status="available" cx="311.9" cy="299" r="6" fill="#888888" cursor="pointer"/>
+            <circle class="plot" data-id="J57" data-size="tree" data-status="available" cx="327.7" cy="299" r="6" fill="#888888" cursor="pointer"/>
+            <circle class="plot" data-id="J58" data-size="tree" data-status="available" cx="343.4" cy="299" r="6" fill="#888888" cursor="pointer"/>
+            <circle class="plot" data-id="J47" data-size="tree" data-status="available" cx="296.2" cy="312.6" r="6" fill="#888888" cursor="pointer"/>
+            <circle class="plot" data-id="J48" data-size="tree" data-status="available" cx="311.9" cy="312.6" r="6" fill="#888888" cursor="pointer"/>
+            <circle class="plot" data-id="J49" data-size="tree" data-status="available" cx="327.7" cy="312.6" r="6" fill="#888888" cursor="pointer"/>
+            <circle class="plot" data-id="J50" data-size="tree" data-status="available" cx="343.4" cy="312.6" r="6" fill="#888888" cursor="pointer"/>
+            <circle class="plot" data-id="J51" data-size="tree" data-status="available" cx="359.2" cy="312.6" r="6" fill="#888888" cursor="pointer"/>
+            <circle class="plot" data-id="J52" data-size="tree" data-status="available" cx="374.9" cy="312.6" r="6" fill="#888888" cursor="pointer"/>
+            <circle class="plot" data-id="J53" data-size="tree" data-status="available" cx="390.7" cy="312.6" r="6" fill="#888888" cursor="pointer"/>
+            <circle class="plot" data-id="J54" data-size="tree" data-status="available" cx="406.5" cy="312.6" r="6" fill="#888888" cursor="pointer"/>
 
             <!-- J区画 中段: 27-46 -->
-            <circle class="plot" data-id="J27" data-size="tree" data-status="available" cx="295" cy="327" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J28" data-size="tree" data-status="available" cx="310" cy="327" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J29" data-size="tree" data-status="available" cx="325" cy="327" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J30" data-size="tree" data-status="available" cx="340" cy="327" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J31" data-size="tree" data-status="taken"    cx="355" cy="327" r="9" fill="#2a6880" cursor="pointer"/>
-            <circle class="plot" data-id="J32" data-size="tree" data-status="taken"    cx="370" cy="327" r="9" fill="#2a6880" cursor="pointer"/>
-            <circle class="plot" data-id="J33" data-size="tree" data-status="taken"    cx="385" cy="327" r="9" fill="#2a6880" cursor="pointer"/>
-            <circle class="plot" data-id="J34" data-size="tree" data-status="taken"    cx="400" cy="327" r="9" fill="#2a6880" cursor="pointer"/>
-            <circle class="plot" data-id="J36" data-size="tree" data-status="available" cx="295" cy="342" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J37" data-size="tree" data-status="available" cx="310" cy="342" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J38" data-size="tree" data-status="available" cx="325" cy="342" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J39" data-size="tree" data-status="available" cx="340" cy="342" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J40" data-size="tree" data-status="available" cx="355" cy="342" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J41" data-size="tree" data-status="available" cx="370" cy="342" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J42" data-size="tree" data-status="available" cx="385" cy="342" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J43" data-size="tree" data-status="available" cx="400" cy="342" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J44" data-size="tree" data-status="available" cx="415" cy="342" r="9" fill="#c8b840" cursor="pointer"/>
+            <circle class="plot" data-id="J27" data-size="tree" data-status="available" cx="296.2" cy="328.4" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J28" data-size="tree" data-status="available" cx="311.9" cy="328.4" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J29" data-size="tree" data-status="available" cx="327.7" cy="328.4" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J30" data-size="tree" data-status="available" cx="343.4" cy="328.4" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J31" data-size="tree" data-status="taken"    cx="359.2" cy="328.4" r="6" fill="#666666" cursor="pointer"/>
+            <circle class="plot" data-id="J32" data-size="tree" data-status="taken"    cx="374.9" cy="328.4" r="6" fill="#666666" cursor="pointer"/>
+            <circle class="plot" data-id="J33" data-size="tree" data-status="taken"    cx="390.7" cy="328.4" r="6" fill="#666666" cursor="pointer"/>
+            <circle class="plot" data-id="J34" data-size="tree" data-status="taken"    cx="406.5" cy="328.4" r="6" fill="#666666" cursor="pointer"/>
+            <circle class="plot" data-id="J36" data-size="tree" data-status="available" cx="296.2" cy="344.1" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J37" data-size="tree" data-status="available" cx="311.9" cy="344.1" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J38" data-size="tree" data-status="available" cx="327.7" cy="344.1" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J39" data-size="tree" data-status="available" cx="343.4" cy="344.1" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J40" data-size="tree" data-status="available" cx="359.2" cy="344.1" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J41" data-size="tree" data-status="available" cx="374.9" cy="344.1" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J42" data-size="tree" data-status="available" cx="390.7" cy="344.1" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J43" data-size="tree" data-status="available" cx="406.5" cy="344.1" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J44" data-size="tree" data-status="available" cx="422.2" cy="344.1" r="6" fill="#d8d8d8" cursor="pointer"/>
 
             <!-- J区画 下段: 1-26 -->
-            <circle class="plot" data-id="J23" data-size="tree" data-status="available" cx="295" cy="357" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J24" data-size="tree" data-status="available" cx="310" cy="357" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J25" data-size="tree" data-status="available" cx="325" cy="357" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J26" data-size="tree" data-status="available" cx="340" cy="357" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J27b" data-size="tree" data-status="available" cx="355" cy="357" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J28b" data-size="tree" data-status="available" cx="370" cy="357" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J29b" data-size="tree" data-status="available" cx="385" cy="357" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J30b" data-size="tree" data-status="available" cx="400" cy="357" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J17" data-size="tree" data-status="available" cx="310" cy="357" r="9" fill="#2a6880" cursor="pointer"/>
-            <circle class="plot" data-id="J31b" data-size="tree" data-status="available" cx="415" cy="357" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J7"  data-size="tree" data-status="available" cx="295" cy="372" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J8"  data-size="tree" data-status="available" cx="310" cy="372" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J9"  data-size="tree" data-status="available" cx="325" cy="372" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J1"  data-size="tree" data-status="available" cx="340" cy="372" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J2"  data-size="tree" data-status="taken"    cx="355" cy="372" r="9" fill="#2a6880" cursor="pointer"/>
-            <circle class="plot" data-id="J10" data-size="tree" data-status="available" cx="370" cy="372" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J11" data-size="tree" data-status="available" cx="385" cy="372" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J12" data-size="tree" data-status="available" cx="400" cy="372" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J13" data-size="tree" data-status="available" cx="415" cy="372" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J14" data-size="tree" data-status="available" cx="430" cy="372" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="J15" data-size="tree" data-status="available" cx="445" cy="372" r="9" fill="#c8b840" cursor="pointer"/>
+            <circle class="plot" data-id="J23" data-size="tree" data-status="available" cx="296.2" cy="359.9" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J24" data-size="tree" data-status="available" cx="311.9" cy="359.9" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J25" data-size="tree" data-status="available" cx="327.7" cy="359.9" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J26" data-size="tree" data-status="available" cx="343.4" cy="359.9" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J27b" data-size="tree" data-status="available" cx="359.2" cy="359.9" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J28b" data-size="tree" data-status="available" cx="374.9" cy="359.9" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J29b" data-size="tree" data-status="available" cx="390.7" cy="359.9" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J30b" data-size="tree" data-status="available" cx="406.5" cy="359.9" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J17" data-size="tree" data-status="available" cx="311.9" cy="359.9" r="6" fill="#666666" cursor="pointer"/>
+            <circle class="plot" data-id="J31b" data-size="tree" data-status="available" cx="422.2" cy="359.9" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J7"  data-size="tree" data-status="available" cx="296.2" cy="375.6" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J8"  data-size="tree" data-status="available" cx="311.9" cy="375.6" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J9"  data-size="tree" data-status="available" cx="327.7" cy="375.6" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J1"  data-size="tree" data-status="available" cx="343.4" cy="375.6" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J2"  data-size="tree" data-status="taken"    cx="359.2" cy="375.6" r="6" fill="#666666" cursor="pointer"/>
+            <circle class="plot" data-id="J10" data-size="tree" data-status="available" cx="374.9" cy="375.6" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J11" data-size="tree" data-status="available" cx="390.7" cy="375.6" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J12" data-size="tree" data-status="available" cx="406.5" cy="375.6" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J13" data-size="tree" data-status="available" cx="422.2" cy="375.6" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J14" data-size="tree" data-status="available" cx="438" cy="375.6" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="J15" data-size="tree" data-status="available" cx="453.7" cy="375.6" r="6" fill="#d8d8d8" cursor="pointer"/>
 
             <!-- 右端独立エリア -->
-            <circle class="plot" data-id="R49" data-size="tree" data-status="available" cx="440" cy="299" r="9" fill="#4a7a9a" cursor="pointer"/>
-            <circle class="plot" data-id="R47" data-size="tree" data-status="available" cx="455" cy="299" r="9" fill="#4a7a9a" cursor="pointer"/>
-            <circle class="plot" data-id="R35" data-size="tree" data-status="available" cx="470" cy="299" r="9" fill="#4a7a9a" cursor="pointer"/>
-            <circle class="plot" data-id="R20" data-size="tree" data-status="available" cx="485" cy="299" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="R48" data-size="tree" data-status="available" cx="440" cy="312" r="9" fill="#4a7a9a" cursor="pointer"/>
-            <circle class="plot" data-id="R46" data-size="tree" data-status="available" cx="455" cy="312" r="9" fill="#4a7a9a" cursor="pointer"/>
-            <circle class="plot" data-id="R34" data-size="tree" data-status="available" cx="470" cy="312" r="9" fill="#4a7a9a" cursor="pointer"/>
-            <circle class="plot" data-id="R19" data-size="tree" data-status="available" cx="485" cy="312" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="R45" data-size="tree" data-status="available" cx="455" cy="327" r="9" fill="#4a7a9a" cursor="pointer"/>
-            <circle class="plot" data-id="R33" data-size="tree" data-status="available" cx="470" cy="327" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="R11" data-size="tree" data-status="available" cx="485" cy="327" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="R6"  data-size="tree" data-status="available" cx="500" cy="327" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="R44" data-size="tree" data-status="available" cx="440" cy="342" r="9" fill="#4a7a9a" cursor="pointer"/>
-            <circle class="plot" data-id="R32" data-size="tree" data-status="available" cx="455" cy="342" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="R11b" data-size="tree" data-status="available" cx="470" cy="342" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="R5"  data-size="tree" data-status="available" cx="485" cy="342" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="R3"  data-size="tree" data-status="available" cx="440" cy="357" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="R4"  data-size="tree" data-status="available" cx="455" cy="357" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="R14" data-size="tree" data-status="available" cx="470" cy="357" r="9" fill="#c8b840" cursor="pointer"/>
-            <circle class="plot" data-id="R15" data-size="tree" data-status="available" cx="485" cy="357" r="9" fill="#c8b840" cursor="pointer"/>
+            <circle class="plot" data-id="R49" data-size="tree" data-status="available" cx="448.5" cy="299" r="6" fill="#888888" cursor="pointer"/>
+            <circle class="plot" data-id="R47" data-size="tree" data-status="available" cx="464.2" cy="299" r="6" fill="#888888" cursor="pointer"/>
+            <circle class="plot" data-id="R35" data-size="tree" data-status="available" cx="480" cy="299" r="6" fill="#888888" cursor="pointer"/>
+            <circle class="plot" data-id="R20" data-size="tree" data-status="available" cx="495.7" cy="299" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="R48" data-size="tree" data-status="available" cx="448.5" cy="312.6" r="6" fill="#888888" cursor="pointer"/>
+            <circle class="plot" data-id="R46" data-size="tree" data-status="available" cx="464.2" cy="312.6" r="6" fill="#888888" cursor="pointer"/>
+            <circle class="plot" data-id="R34" data-size="tree" data-status="available" cx="480" cy="312.6" r="6" fill="#888888" cursor="pointer"/>
+            <circle class="plot" data-id="R19" data-size="tree" data-status="available" cx="495.7" cy="312.6" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="R45" data-size="tree" data-status="available" cx="464.2" cy="328.4" r="6" fill="#888888" cursor="pointer"/>
+            <circle class="plot" data-id="R33" data-size="tree" data-status="available" cx="480" cy="328.4" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="R11" data-size="tree" data-status="available" cx="495.7" cy="328.4" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="R6"  data-size="tree" data-status="available" cx="511.5" cy="328.4" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="R44" data-size="tree" data-status="available" cx="448.5" cy="344.1" r="6" fill="#888888" cursor="pointer"/>
+            <circle class="plot" data-id="R32" data-size="tree" data-status="available" cx="464.2" cy="344.1" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="R11b" data-size="tree" data-status="available" cx="480" cy="344.1" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="R5"  data-size="tree" data-status="available" cx="495.7" cy="344.1" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="R3"  data-size="tree" data-status="available" cx="448.5" cy="359.9" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="R4"  data-size="tree" data-status="available" cx="464.2" cy="359.9" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="R14" data-size="tree" data-status="available" cx="480" cy="359.9" r="6" fill="#d8d8d8" cursor="pointer"/>
+            <circle class="plot" data-id="R15" data-size="tree" data-status="available" cx="495.7" cy="359.9" r="6" fill="#d8d8d8" cursor="pointer"/>
 
             <!-- Hover overlay (invisible, for JS) -->
             <rect id="hover-overlay" x="0" y="0" width="0" height="0" fill="rgba(255,255,255,0.15)" pointer-events="none"/>
