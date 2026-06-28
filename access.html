@@ -157,6 +157,23 @@
       background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem;
     }
     .form-field select option { background: var(--off-black); color: var(--cream); }
+    /* 種別選択：横並びボタン式 */
+    .type-options { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+    .type-option {
+      flex: 1 1 auto; min-width: 120px; text-align: center;
+      background: var(--black); color: var(--cream);
+      border: 1px solid rgba(184,149,90,0.35); padding: 1rem 1.2rem;
+      font-size: 1rem; letter-spacing: 0.06em; font-family: inherit;
+      cursor: pointer; transition: all 0.25s; line-height: 1.4;
+    }
+    .type-option:hover { border-color: var(--gold); }
+    .type-option.selected {
+      background: var(--gold); color: var(--black);
+      border-color: var(--gold); font-weight: 600;
+    }
+    /* 塔婆供養用の追加フィールド */
+    .touba-fields { display: none; }
+    .touba-fields.show { display: block; }
     .form-submit {
       margin-top: 0.5rem; background: transparent; border: 1px solid var(--gold);
       color: var(--gold); padding: 0.9rem 3rem; font-size: 0.78rem;
@@ -416,14 +433,38 @@
               <input type="tel" id="cf-tel" name="tel" autocomplete="tel" placeholder="0467-00-0000">
             </div>
             <div class="form-field">
-              <label for="cf-type">
+              <label>
                 <span data-lang="ja" class="active">お問い合わせ種別</span><span data-lang="en">Inquiry Type</span><span data-lang="zh">咨询类别</span>
               </label>
-              <select id="cf-type" name="type">
-                <option value="cemetery" data-ja="墓地分譲について" data-en="About Cemetery Lots" data-zh="关于墓地">墓地分譲について</option>
-                <option value="funeral" data-ja="葬儀・法事について" data-en="About Funerals &amp; Memorials" data-zh="关于葬礼・法事">葬儀・法事について</option>
-                <option value="other" data-ja="その他" data-en="Other" data-zh="其他">その他</option>
-              </select>
+              <div class="type-options" id="type-options" role="group">
+                <button type="button" class="type-option selected" data-value="cemetery">
+                  <span data-lang="ja" class="active">墓地分譲</span><span data-lang="en">Cemetery Lots</span><span data-lang="zh">墓地</span>
+                </button>
+                <button type="button" class="type-option" data-value="funeral">
+                  <span data-lang="ja" class="active">葬儀・法事</span><span data-lang="en">Funerals &amp; Memorials</span><span data-lang="zh">葬礼・法事</span>
+                </button>
+                <button type="button" class="type-option" data-value="touba">
+                  <span data-lang="ja" class="active">塔婆供養</span><span data-lang="en">Stupa Memorial</span><span data-lang="zh">塔婆供养</span>
+                </button>
+                <button type="button" class="type-option" data-value="other">
+                  <span data-lang="ja" class="active">その他</span><span data-lang="en">Other</span><span data-lang="zh">其他</span>
+                </button>
+              </div>
+              <input type="hidden" id="cf-type" name="type" value="cemetery">
+            </div>
+            <div class="touba-fields" id="touba-fields">
+              <div class="form-field">
+                <label for="cf-kaimyo">
+                  <span data-lang="ja" class="active">戒名</span><span data-lang="en">Posthumous Name</span><span data-lang="zh">戒名</span>
+                </label>
+                <input type="text" id="cf-kaimyo" name="kaimyo" autocomplete="off">
+              </div>
+              <div class="form-field">
+                <label for="cf-seshu">
+                  <span data-lang="ja" class="active">施主のお名前</span><span data-lang="en">Donor Name</span><span data-lang="zh">施主姓名</span>
+                </label>
+                <input type="text" id="cf-seshu" name="seshu" autocomplete="off">
+              </div>
             </div>
             <div class="form-field">
               <label for="cf-message">
@@ -466,17 +507,35 @@
       const success = document.getElementById('form-success');
       if (!form || !success) return;
       const submitBtn = form.querySelector('.form-submit');
+
+      // 種別ボタンの選択 ＆ 塔婆供養フィールドの表示切替
+      const typeInput = document.getElementById('cf-type');
+      const typeOptions = document.querySelectorAll('#type-options .type-option');
+      const toubaFields = document.getElementById('touba-fields');
+      typeOptions.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          typeOptions.forEach(function (b) { b.classList.remove('selected'); });
+          btn.classList.add('selected');
+          const value = btn.getAttribute('data-value');
+          typeInput.value = value;
+          toubaFields.classList.toggle('show', value === 'touba');
+        });
+      });
+
       form.addEventListener('submit', async function (e) {
         e.preventDefault();
         if (!form.checkValidity()) { form.reportValidity(); return; }
         if (submitBtn) submitBtn.disabled = true;
         try {
+          const isTouba = typeInput.value === 'touba';
           const payload = {
             name: form.name.value,
             email: form.email.value,
             tel: form.tel.value,
-            type: form.type.value,
+            type: typeInput.value,
             message: form.message.value,
+            kaimyo: isTouba ? form.kaimyo.value : '',
+            seshu: isTouba ? form.seshu.value : '',
           };
           const res = await fetch(form.action, {
             method: 'POST',

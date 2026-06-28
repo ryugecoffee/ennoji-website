@@ -7,6 +7,7 @@
 const TYPE_LABELS = {
   cemetery: '墓地分譲について',
   funeral: '葬儀・法事について',
+  touba: '塔婆供養について',
   other: 'その他',
 };
 
@@ -39,6 +40,8 @@ module.exports = async function handler(req, res) {
   const tel = (body.tel || '').toString().trim();
   const type = (body.type || '').toString().trim();
   const message = (body.message || '').toString().trim();
+  const kaimyo = (body.kaimyo || '').toString().trim();
+  const seshu = (body.seshu || '').toString().trim();
 
   if (!name || !email || !message) {
     return res.status(400).json({ error: 'お名前・メール・内容は必須です' });
@@ -46,13 +49,21 @@ module.exports = async function handler(req, res) {
 
   const typeLabel = TYPE_LABELS[type] || type || '（未選択）';
 
-  const text =
+  let text =
     '【円応寺 お問い合わせ】\n' +
     `お名前：${name}\n` +
     `メール：${email}\n` +
     `電話：${tel || '（未入力）'}\n` +
-    `種別：${typeLabel}\n` +
-    `内容：${message}`;
+    `種別：${typeLabel}\n`;
+
+  // 塔婆供養の場合は戒名・施主名を追記
+  if (type === 'touba') {
+    text +=
+      `戒名：${kaimyo || '（未入力）'}\n` +
+      `施主：${seshu || '（未入力）'}\n`;
+  }
+
+  text += `内容：${message}`;
 
   try {
     const lineRes = await fetch('https://api.line.me/v2/bot/message/push', {
