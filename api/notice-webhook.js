@@ -27,12 +27,16 @@ function readRawBody(req) {
 }
 
 function isValidSignature(rawBody, signature, channelSecret) {
-  if (!signature) return false;
   const expected = crypto.createHmac('sha256', channelSecret).update(rawBody).digest('base64');
-  const sigBuf = Buffer.from(signature);
+  const received = signature || '';
+  const sigBuf = Buffer.from(received);
   const expBuf = Buffer.from(expected);
-  if (sigBuf.length !== expBuf.length) return false;
-  return crypto.timingSafeEqual(sigBuf, expBuf);
+  const valid = sigBuf.length === expBuf.length && crypto.timingSafeEqual(sigBuf, expBuf);
+  if (!valid) {
+    // 署名検証が失敗したときの調査用ログ（expected と received を出力）
+    console.log('signature check:', expected, received);
+  }
+  return valid;
 }
 
 // LINEの画像コンテンツを取得し Storage に保存して公開URLを返す
