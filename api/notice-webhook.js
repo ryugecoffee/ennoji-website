@@ -2,11 +2,12 @@
 //
 // 投稿専用チャンネル（既存の api/webhook.js とは別チャンネル）からの受信。
 // - x-line-signature ヘッダーで HMAC-SHA256 署名検証
-// - 画像とテキストを最大60秒の猶予でまとめて notices_ennoji に1件保存:
-//     * 画像メッセージ → Storageに保存し、pending_images に一時保存（expiresAt=60秒後）
-//     * テキスト       → 60秒以内の保留画像があれば合わせて1件保存しpendingから削除。
-//                        無ければテキストのみ保存
-//     * 60秒以内にテキストが来なかった画像 → 画像のみで保存
+// - 画像とテキストを最大60秒の猶予でまとめて notices_ennoji に1件保存（順番はどちらでも可）:
+//     * 画像メッセージ → Storageに保存。60秒以内の保留テキスト(pending_texts)があれば結合、
+//                        無ければ pending_images に一時保存（expiresAt=60秒後）
+//     * テキスト       → 60秒以内の保留画像(pending_images)があれば結合、
+//                        無ければ pending_texts に一時保存（expiresAt=60秒後）
+//     * 60秒以内に相手が来なかった保留分 → 画像のみ／テキストのみで保存
 //       （サーバーレスにタイマーが無いため、後続のWebhook受信時に掃き出す）
 // - 「削除」と送信      → 最新のお知らせを1件削除
 //
@@ -20,6 +21,7 @@ const { admin, getDb, getBucket } = require('../lib/firebaseAdmin');
 
 const COLLECTION = 'notices_ennoji';
 const PENDING = 'pending_images';
+const PENDING_TEXTS = 'pending_texts';
 const DELETE_KEYWORD = '削除';
 const PENDING_TTL_MS = 60 * 1000; // 画像とテキストをまとめる猶予（60秒）
 
@@ -117,6 +119,41 @@ async function flushExpiredPendingImages(db) {
   }
 }
 
+// テキストを pending_texts に一時保存（expiresAt = 60秒後）
+async function addPendingText(db, text) {
+  await db.collection(PENDING_TEXTS).add({
+    text,
+    createdAt: admin.firestore.FieldValue.serverTimestamp(),
+    expiresAt: admin.firestore.Timestamp.fromMillis(Date.now() + PENDING_TTL_MS),
+  });
+}
+
+// 60秒以内（未期限切れ）の保留テキストを1件取り出す。あればそのdocを削除して本文を返す（無ければnull）。
+async function claimRecentPendingText(db) {
+  const now = admin.firestore.Timestamp.now();
+  const snap = await db
+    .collection(PENDING_TEXTS)
+    .where('expiresAt', '>', now)
+    .orderBy('expiresAt', 'desc')
+    .limit(1)
+    .get();
+  if (snap.empty) return null;
+  const doc = snap.docs[0];
+  const text = doc.data().text || '';
+  await doc.ref.delete();
+  return text;
+}
+
+// 期限切れ（60秒経過しても画像が来なかった）保留テキストを、テキストのみのお知らせとして確定。
+async function flushExpiredPendingTexts(db) {
+  const now = admin.firestore.Timestamp.now();
+  const snap = await db.collection(PENDING_TEXTS).where('expiresAt', '<=', now).get();
+  for (const doc of snap.docs) {
+    await addNotice(db, { text: doc.data().text || '', imageUrl: null });
+    await doc.ref.delete();
+  }
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -148,8 +185,10 @@ module.exports = async function handler(req, res) {
   try {
     const db = getDb();
 
-    // まず期限切れ（60秒以内にテキストが来なかった）保留画像を画像のみで確定
+    // まず期限切れ（60秒以内に相手が来なかった）保留分を単独で確定
+    // 画像のみ → 画像だけのお知らせ、テキストのみ → テキストだけのお知らせ
     await flushExpiredPendingImages(db);
+    await flushExpiredPendingTexts(db);
 
     for (const event of events) {
       if (event.type !== 'message' || !event.message) continue;
@@ -160,14 +199,25 @@ module.exports = async function handler(req, res) {
         if (text === DELETE_KEYWORD) {
           await deleteLatestNotice(db);
         } else {
-          // 60秒以内の保留画像があれば、テキストと合わせて1件として保存
+          // 60秒以内の保留画像があれば結合して1件保存（画像→テキストの順）
           const imageUrl = await claimRecentPendingImage(db);
-          await addNotice(db, { text: msg.text || '', imageUrl });
+          if (imageUrl !== null) {
+            await addNotice(db, { text: msg.text || '', imageUrl });
+          } else {
+            // 無ければテキストを一時保存（後続画像とまとめるため。テキスト→画像の順に対応）
+            await addPendingText(db, msg.text || '');
+          }
         }
       } else if (msg.type === 'image') {
-        // 画像はいったん pending_images に一時保存（後続テキストとまとめるため）
         const imageUrl = await saveImage(msg.id, accessToken);
-        await addPendingImage(db, imageUrl);
+        // 60秒以内の保留テキストがあれば結合して1件保存（テキスト→画像の順）
+        const pendingText = await claimRecentPendingText(db);
+        if (pendingText !== null) {
+          await addNotice(db, { text: pendingText, imageUrl });
+        } else {
+          // 無ければ画像を一時保存（後続テキストとまとめるため）
+          await addPendingImage(db, imageUrl);
+        }
       }
     }
   } catch (err) {
