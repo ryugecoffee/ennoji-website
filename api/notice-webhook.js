@@ -2,8 +2,12 @@
 //
 // 投稿専用チャンネル（既存の api/webhook.js とは別チャンネル）からの受信。
 // - x-line-signature ヘッダーで HMAC-SHA256 署名検証
-// - テキストメッセージ → Firestore notices_ennoji に保存
-// - 画像メッセージ     → Storageに保存し画像URLも保存
+// - 画像とテキストを最大60秒の猶予でまとめて notices_ennoji に1件保存:
+//     * 画像メッセージ → Storageに保存し、pending_images に一時保存（expiresAt=60秒後）
+//     * テキスト       → 60秒以内の保留画像があれば合わせて1件保存しpendingから削除。
+//                        無ければテキストのみ保存
+//     * 60秒以内にテキストが来なかった画像 → 画像のみで保存
+//       （サーバーレスにタイマーが無いため、後続のWebhook受信時に掃き出す）
 // - 「削除」と送信      → 最新のお知らせを1件削除
 //
 // 必要な環境変数:
@@ -15,7 +19,9 @@ const crypto = require('crypto');
 const { admin, getDb, getBucket } = require('../lib/firebaseAdmin');
 
 const COLLECTION = 'notices_ennoji';
+const PENDING = 'pending_images';
 const DELETE_KEYWORD = '削除';
+const PENDING_TTL_MS = 60 * 1000; // 画像とテキストをまとめる猶予（60秒）
 
 function readRawBody(req) {
   return new Promise((resolve, reject) => {
@@ -66,6 +72,51 @@ async function deleteLatestNotice(db) {
   }
 }
 
+// notices_ennoji に1件保存
+async function addNotice(db, { text, imageUrl }) {
+  await db.collection(COLLECTION).add({
+    timestamp: admin.firestore.FieldValue.serverTimestamp(),
+    text: text || '',
+    imageUrl: imageUrl || null,
+  });
+}
+
+// 画像を pending_images に一時保存（expiresAt = 60秒後）
+async function addPendingImage(db, imageUrl) {
+  await db.collection(PENDING).add({
+    imageUrl,
+    createdAt: admin.firestore.FieldValue.serverTimestamp(),
+    expiresAt: admin.firestore.Timestamp.fromMillis(Date.now() + PENDING_TTL_MS),
+  });
+}
+
+// 60秒以内（未期限切れ）の保留画像を1件取り出す。あればそのdocを削除してURLを返す。
+async function claimRecentPendingImage(db) {
+  const now = admin.firestore.Timestamp.now();
+  const snap = await db
+    .collection(PENDING)
+    .where('expiresAt', '>', now)
+    .orderBy('expiresAt', 'desc')
+    .limit(1)
+    .get();
+  if (snap.empty) return null;
+  const doc = snap.docs[0];
+  const imageUrl = doc.data().imageUrl || null;
+  await doc.ref.delete();
+  return imageUrl;
+}
+
+// 期限切れ（60秒経過してもテキストが来なかった）保留画像を、画像のみのお知らせとして確定。
+// サーバーレスにはタイマーが無いため、各Webhook受信のたびに掃き出す。
+async function flushExpiredPendingImages(db) {
+  const now = admin.firestore.Timestamp.now();
+  const snap = await db.collection(PENDING).where('expiresAt', '<=', now).get();
+  for (const doc of snap.docs) {
+    await addNotice(db, { text: '', imageUrl: doc.data().imageUrl });
+    await doc.ref.delete();
+  }
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -96,6 +147,10 @@ module.exports = async function handler(req, res) {
 
   try {
     const db = getDb();
+
+    // まず期限切れ（60秒以内にテキストが来なかった）保留画像を画像のみで確定
+    await flushExpiredPendingImages(db);
+
     for (const event of events) {
       if (event.type !== 'message' || !event.message) continue;
       const msg = event.message;
@@ -105,19 +160,14 @@ module.exports = async function handler(req, res) {
         if (text === DELETE_KEYWORD) {
           await deleteLatestNotice(db);
         } else {
-          await db.collection(COLLECTION).add({
-            timestamp: admin.firestore.FieldValue.serverTimestamp(),
-            text: msg.text || '',
-            imageUrl: null,
-          });
+          // 60秒以内の保留画像があれば、テキストと合わせて1件として保存
+          const imageUrl = await claimRecentPendingImage(db);
+          await addNotice(db, { text: msg.text || '', imageUrl });
         }
       } else if (msg.type === 'image') {
+        // 画像はいったん pending_images に一時保存（後続テキストとまとめるため）
         const imageUrl = await saveImage(msg.id, accessToken);
-        await db.collection(COLLECTION).add({
-          timestamp: admin.firestore.FieldValue.serverTimestamp(),
-          text: '',
-          imageUrl,
-        });
+        await addPendingImage(db, imageUrl);
       }
     }
   } catch (err) {
