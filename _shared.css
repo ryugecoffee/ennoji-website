@@ -87,7 +87,7 @@ footer {
 .footer-info .label { color: var(--gold); font-size: 0.65rem; letter-spacing: 0.2em; margin-right: 0.8rem; }
 .footer-copy {
   font-family: 'Cormorant Garamond', serif; font-size: 0.7rem;
-  letter-spacing: 0.1em; color: var(--stone); align-self: flex-end;
+  letter-spacing: 0.1em; color: var(--mist); align-self: flex-end;
 }
 [data-lang] { display: none; }
 [data-lang].active { display: block; }

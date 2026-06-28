@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>プライバシーポリシー | 圓應寺</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_shared.css">
+  <style>
+    .privacy-head {
+      background: var(--off-black);
+      padding: 8rem 2.5rem 4rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(184,149,90,0.15);
+    }
+    .privacy-head .section-label {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 0.8rem; letter-spacing: 0.3em; color: var(--gold);
+      display: block; margin-bottom: 1rem;
+    }
+    .privacy-head h1 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 300;
+      letter-spacing: 0.3em; color: var(--white);
+    }
+
+    .privacy-section {
+      background: var(--off-black);
+      padding: 4rem 2.5rem 6rem;
+    }
+    .privacy-inner { max-width: 760px; margin: 0 auto; }
+    .privacy-intro {
+      color: var(--mist); line-height: 2;
+      font-size: 0.95rem; margin-bottom: 3.5rem;
+    }
+    .privacy-item { margin-bottom: 2.75rem; }
+    .privacy-item h2 {
+      font-size: 1.05rem; font-weight: 400; color: var(--gold-light, #d4aa6e);
+      letter-spacing: 0.08em; margin-bottom: 0.9rem;
+      padding-bottom: 0.6rem; border-bottom: 1px solid rgba(184,149,90,0.18);
+    }
+    .privacy-item p {
+      color: var(--cream); line-height: 2; font-size: 0.95rem;
+    }
+    .privacy-contact {
+      margin-top: 3.5rem; padding: 2rem 2.25rem;
+      border: 1px solid rgba(184,149,90,0.2);
+      background: rgba(184,149,90,0.04);
+    }
+    .privacy-contact p { color: var(--cream); line-height: 1.9; font-size: 0.95rem; }
+    .privacy-contact .label { display: inline-block; min-width: 5.5em; color: var(--mist); }
+    .privacy-updated { margin-top: 3rem; color: var(--mist); font-size: 0.8rem; letter-spacing: 0.05em; }
+  </style>
+</head>
+<body>
+  <div class="lang-bar">
+    <span class="site-tagline">新居山 閻魔様の寺</span>
+    <div class="lang-switcher">
+      <button onclick="setLang('ja')" id="btn-ja">JP</button>
+      <button onclick="setLang('en')" id="btn-en">EN</button>
+      <button onclick="setLang('zh')" id="btn-zh">ZH</button>
+    </div>
+  </div>
+  <nav>
+    <a href="index.html" class="nav-logo">圓應寺</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="メニュー"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html" data-ja="トップページ" data-en="Home" data-zh="首页">トップページ</a></li>
+      <li><a href="about.html" data-ja="圓應寺のご案内" data-en="About" data-zh="寺院介绍">圓應寺のご案内</a></li>
+      <li><a href="funeral.html" data-ja="葬儀・法事" data-en="Funeral" data-zh="葬礼法事">葬儀・法事</a></li>
+      <li><a href="cemetery.html" data-ja="墓地分譲" data-en="Cemetery" data-zh="墓地">墓地分譲</a></li>
+      <li><a href="access.html" data-ja="アクセス・お問い合わせ" data-en="Access" data-zh="交通・联系">アクセス・お問い合わせ</a></li>
+    </ul>
+  </nav>
+
+  <header class="privacy-head">
+    <span class="section-label">Privacy Policy</span>
+    <h1><span data-lang="ja" class="active">プライバシーポリシー</span><span data-lang="en">Privacy Policy</span><span data-lang="zh">隐私政策</span></h1>
+  </header>
+
+  <section class="privacy-section">
+    <div class="privacy-inner">
+      <p class="privacy-intro">
+        <span data-lang="ja" class="active">圓應寺（以下「当寺」といいます）は、お客様の個人情報を適切に取り扱い、その保護に努めます。本ポリシーは、当ウェブサイトを通じて取得する個人情報の取り扱いについて定めるものです。</span>
+        <span data-lang="en">Ennoji ("the Temple") handles your personal information appropriately and strives to protect it. This policy sets out how personal information obtained through this website is handled.</span>
+        <span data-lang="zh">圆应寺（以下简称“本寺”）将妥善处理并保护您的个人信息。本政策规定了通过本网站获取的个人信息的处理方式。</span>
+      </p>
+
+      <div class="privacy-item">
+        <h2><span data-lang="ja" class="active">個人情報の取り扱いについて</span><span data-lang="en">Handling of Personal Information</span><span data-lang="zh">个人信息的处理</span></h2>
+        <p>
+          <span data-lang="ja" class="active">当ウェブサイトのお問い合わせフォームにご入力いただいたお名前・連絡先などの個人情報は、当寺からのご返信・ご連絡の目的にのみ使用いたします。それ以外の目的で利用することはありません。</span>
+          <span data-lang="en">Personal information such as your name and contact details entered into the contact form on this website is used solely for the purpose of replying to and contacting you from the Temple. It is not used for any other purpose.</span>
+          <span data-lang="zh">您在本网站咨询表单中填写的姓名、联系方式等个人信息，仅用于本寺回复及联络之目的，不会用于其他用途。</span>
+        </p>
+      </div>
+
+      <div class="privacy-item">
+        <h2><span data-lang="ja" class="active">第三者への提供について</span><span data-lang="en">Disclosure to Third Parties</span><span data-lang="zh">向第三方提供</span></h2>
+        <p>
+          <span data-lang="ja" class="active">当寺は、法令に基づく場合を除き、お客様の同意なく個人情報を第三者に提供・開示することはありません。</span>
+          <span data-lang="en">Except as required by law, the Temple will not provide or disclose your personal information to third parties without your consent.</span>
+          <span data-lang="zh">除法律法规要求外，本寺不会在未经您同意的情况下向第三方提供或披露您的个人信息。</span>
+        </p>
+      </div>
+
+      <div class="privacy-item">
+        <h2><span data-lang="ja" class="active">アクセス解析ツールについて</span><span data-lang="en">Access Analytics</span><span data-lang="zh">访问分析工具</span></h2>
+        <p>
+          <span data-lang="ja" class="active">当ウェブサイトでは、サイトの利用状況を把握するため Google Analytics を使用する場合があります。Google Analytics はトラフィックデータの収集のために Cookie を使用しますが、これらのデータは匿名で収集され、個人を特定するものではありません。ブラウザの設定により Cookie を無効にすることで、収集を拒否することができます。</span>
+          <span data-lang="en">This website may use Google Analytics to understand how the site is used. Google Analytics uses cookies to collect traffic data; this data is collected anonymously and does not identify individuals. You can refuse collection by disabling cookies in your browser settings.</span>
+          <span data-lang="zh">本网站可能使用 Google Analytics 来了解网站的使用情况。Google Analytics 通过 Cookie 收集流量数据，这些数据以匿名方式收集，不会识别个人身份。您可通过浏览器设置禁用 Cookie 以拒绝收集。</span>
+        </p>
+      </div>
+
+      <div class="privacy-contact">
+        <p>
+          <span class="label"><span data-lang="ja" class="active">お問い合わせ先</span><span data-lang="en">Contact</span><span data-lang="zh">联系方式</span></span><br>
+          <span data-lang="ja" class="active">臨済宗 建長寺派　圓應寺</span><span data-lang="en">Rinzai Sect, Kenchoji Branch — Ennoji</span><span data-lang="zh">临济宗 建长寺派　圆应寺</span><br>
+          <span class="label">TEL / FAX</span>0467-25-1095
+        </p>
+      </div>
+
+      <p class="privacy-updated">
+        <span data-lang="ja" class="active">制定日：2025年</span><span data-lang="en">Established: 2025</span><span data-lang="zh">制定日期：2025年</span>
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">圓應寺</div>
+      <div class="footer-info">
+        <p><span data-lang="ja" class="active">臨済宗 建長寺派　圓應寺</span><span data-lang="en">Rinzai Sect, Kenchoji Branch — Ennoji</span><span data-lang="zh">临济宗 建长寺派　圆应寺</span></p>
+        <p><span class="label"><span data-lang="ja" class="active">住所</span><span data-lang="en">Address</span><span data-lang="zh">地址</span></span>〒247-0062　神奈川県鎌倉市山ノ内1543</p>
+        <p><span class="label">TEL / FAX</span>0467-25-1095</p>
+        <p><span class="label"><span data-lang="ja" class="active">拝観時間</span><span data-lang="en">Hours</span><span data-lang="zh">参观时间</span></span><span data-lang="ja" class="active">春〜秋（3〜11月）9:00〜16:00　冬（12〜2月）9:00〜15:30</span><span data-lang="en">Spring–Autumn (Mar–Nov) 9:00–16:00 &nbsp; Winter (Dec–Feb) 9:00–15:30</span><span data-lang="zh">春秋（3〜11月）9:00〜16:00　冬（12〜2月）9:00〜15:30</span></p>
+      </div>
+      <p class="footer-copy">© 2025 圓應寺 All rights reserved.　<a href="privacy.html" style="color:var(--gold-light); text-decoration:underline;"><span data-lang="ja" class="active">プライバシーポリシー</span><span data-lang="en">Privacy Policy</span><span data-lang="zh">隐私政策</span></a></p>
+    </div>
+  </footer>
+
+  <script src="_lang.js"></script>
+</body>
+</html>

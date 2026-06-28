@@ -61,7 +61,7 @@
       display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 2.5rem;
       padding: 1.2rem 1.5rem; border: 1px solid rgba(184,149,90,0.15);
     }
-    .legend-group { display: flex; align-items: center; gap: 1.5rem; }
+    .legend-group { display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem; }
     .legend-title { font-size: 0.68rem; letter-spacing: 0.2em; color: var(--mist); margin-right: 0.5rem; }
     .legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; letter-spacing: 0.1em; color: var(--mist); }
     .legend-box { width: 16px; height: 16px; border-radius: 2px; flex-shrink: 0; }
@@ -154,7 +154,7 @@
 </head>
 <body>
   <div class="lang-bar">
-    <span class="site-tagline">Shingiyama — Temple of Enma / 新居山 閻魔様の寺</span>
+    <span class="site-tagline">新居山 閻魔様の寺</span>
     <div class="lang-switcher">
       <button onclick="setLang('ja')" id="btn-ja">JP</button>
       <button onclick="setLang('en')" id="btn-en">EN</button>
@@ -312,9 +312,9 @@
 
         <div class="cemetery-map-wrap">
           <!-- SVG MAP: green border = trees/ground, plots colored by size, pink=taken, blue=available -->
-          <svg viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="-70 -35 1040 700" xmlns="http://www.w3.org/2000/svg">
             <!-- Background ground -->
-            <rect width="900" height="600" fill="#0d120d"/>
+            <rect x="-70" y="-35" width="1040" height="700" fill="#0d120d"/>
             <rect class="plot" data-id="1-B-3" data-size="100x120" data-status="available" data-name="" x="40" y="60" width="60" height="54" rx="3" fill="#909090" stroke="#1a1a1a" stroke-width="0.7" cursor="pointer"/>
             <text x="70" y="90.85" text-anchor="middle" fill="#2a2a2a" font-size="11" font-family="sans-serif" pointer-events="none">1-B-3</text>
             <rect class="plot" data-id="1-B-2" data-size="100x120" data-status="available" data-name="" x="40" y="114" width="60" height="54" rx="3" fill="#909090" stroke="#1a1a1a" stroke-width="0.7" cursor="pointer"/>
@@ -614,6 +614,11 @@
         
           
             </g>
+            <!-- 方角・場所ラベル -->
+            <text x="450" y="-14" text-anchor="middle" fill="#b8955a" font-family="'Noto Serif JP', serif" font-size="14" letter-spacing="3">海側</text>
+            <text x="450" y="642" text-anchor="middle" fill="#b8955a" font-family="'Noto Serif JP', serif" font-size="14" letter-spacing="3">本堂側</text>
+            <text x="-40" y="305" text-anchor="middle" fill="#b8955a" font-family="'Noto Serif JP', serif" font-size="14" letter-spacing="3">門側</text>
+            <text x="940" y="305" text-anchor="middle" fill="#b8955a" font-family="'Noto Serif JP', serif" font-size="14" letter-spacing="3">山側</text>
           </svg>
         </div>
 
@@ -641,7 +646,7 @@
           <span data-lang="zh">请致电预约参观或咨询。</span>
         </p>
         <a class="btn-tel" href="tel:0467251095">
-          <span>TEL</span>
+          <span>TEL / FAX</span>
           0467-25-1095
         </a>
       </div>
@@ -653,10 +658,10 @@
         <div class="footer-info">
           <p><span data-lang="ja" class="active">臨済宗 建長寺派　圓應寺</span><span data-lang="en">Rinzai Sect, Kenchoji Branch — Ennoji</span><span data-lang="zh">临济宗 建长寺派　圆应寺</span></p>
           <p><span class="label"><span data-lang="ja" class="active">住所</span><span data-lang="en">Address</span><span data-lang="zh">地址</span></span>〒247-0062　神奈川県鎌倉市山ノ内1543</p>
-          <p><span class="label">TEL</span>0467-25-1095</p>
+          <p><span class="label">TEL / FAX</span>0467-25-1095</p>
           <p><span class="label"><span data-lang="ja" class="active">拝観時間</span><span data-lang="en">Hours</span><span data-lang="zh">参观时间</span></span><span data-lang="ja" class="active">春〜秋（3〜11月）9:00〜16:00　冬（12〜2月）9:00〜15:30</span><span data-lang="en">Spring–Autumn (Mar–Nov) 9:00–16:00 &nbsp; Winter (Dec–Feb) 9:00–15:30</span><span data-lang="zh">春秋（3〜11月）9:00〜16:00　冬（12〜2月）9:00〜15:30</span></p>
         </div>
-        <p class="footer-copy">© 2026 鎌倉 圓應寺</p>
+        <p class="footer-copy">© 2025 圓應寺 All rights reserved.　<a href="privacy.html" style="color:var(--gold-light); text-decoration:underline;"><span data-lang="ja" class="active">プライバシーポリシー</span><span data-lang="en">Privacy Policy</span><span data-lang="zh">隐私政策</span></a></p>
       </div>
     </footer>
   </div>

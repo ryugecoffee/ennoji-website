@@ -45,12 +45,12 @@
     .engi p:last-child { margin-bottom: 0; }
 
     .img-row {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      display: grid; grid-template-columns: 1fr; gap: 1px;
       background: rgba(184,149,90,0.1); border: 1px solid rgba(184,149,90,0.1);
       margin: 4rem 0;
     }
     .img-cell {
-      aspect-ratio: 4/3; overflow: hidden; background: var(--stone);
+      aspect-ratio: 5/4; max-height: 720px; overflow: hidden; background: var(--stone);
       position: relative;
     }
     .img-cell img { width:100%; height:100%; object-fit:cover; display:block; }
@@ -92,6 +92,7 @@
       color: var(--cream); font-weight: 300;
     }
     .sange-text-jp .furigana { font-size: 0.55rem; display: block; color: var(--mist); letter-spacing: 0.1em; }
+    .sange-text-jp ruby rt { font-size: 0.4em; letter-spacing: 0; font-weight: 400; color: var(--mist); }
     .sange-desc { font-size: 0.85rem; line-height: 2.1; color: var(--mist); letter-spacing: 0.05em; }
     .sange-note {
       margin-top: 1.5rem; padding: 1.2rem 1.5rem;
@@ -102,7 +103,7 @@
 </head>
 <body>
   <div class="lang-bar">
-    <span class="site-tagline">Shingiyama — Temple of Enma / 新居山 閻魔様の寺</span>
+    <span class="site-tagline">新居山 閻魔様の寺</span>
     <div class="lang-switcher">
       <button onclick="setLang('ja')" id="btn-ja">JP</button>
       <button onclick="setLang('en')" id="btn-en">EN</button>
@@ -170,14 +171,6 @@
               <span data-lang="ja" class="active">閻魔大王座像（国重要文化財）</span>
               <span data-lang="en">Enma Daio — Important Cultural Property</span>
               <span data-lang="zh">阎魔大王坐像（国家重要文化财产）</span>
-            </div>
-          </div>
-          <div class="img-cell">
-            <img src="images/juoh.jpg" alt="十王" onerror="this.style.display='none'">
-            <div class="caption">
-              <span data-lang="ja" class="active">十王</span>
-              <span data-lang="en">The Ten Kings</span>
-              <span data-lang="zh">十王</span>
             </div>
           </div>
         </div>
@@ -248,10 +241,10 @@
         <div class="sange-grid">
           <div>
             <div class="sange-text-jp">
-              我 昔 所 造 諸 惡 業<br>
-              皆 由 無 始 貪 瞋 癡<br>
-              從 身 口 意 之 所 生<br>
-              一 切 我 今 皆 懺 悔
+              <ruby>我<rt>が</rt></ruby> <ruby>昔<rt>しゃく</rt></ruby> <ruby>所<rt>しょ</rt></ruby> <ruby>造<rt>ぞう</rt></ruby> <ruby>諸<rt>しょ</rt></ruby> <ruby>惡<rt>あく</rt></ruby> <ruby>業<rt>ごう</rt></ruby><br>
+              <ruby>皆<rt>かい</rt></ruby> <ruby>由<rt>ゆう</rt></ruby> <ruby>無<rt>む</rt></ruby> <ruby>始<rt>し</rt></ruby> <ruby>貪<rt>とん</rt></ruby> <ruby>瞋<rt>じん</rt></ruby> <ruby>癡<rt>ち</rt></ruby><br>
+              <ruby>從<rt>じゅ</rt></ruby> <ruby>身<rt>しん</rt></ruby> <ruby>口<rt>く</rt></ruby> <ruby>意<rt>い</rt></ruby> <ruby>之<rt>し</rt></ruby> <ruby>所<rt>しょ</rt></ruby> <ruby>生<rt>しょう</rt></ruby><br>
+              <ruby>一<rt>いっ</rt></ruby> <ruby>切<rt>さい</rt></ruby> <ruby>我<rt>が</rt></ruby> <ruby>今<rt>こん</rt></ruby> <ruby>皆<rt>かい</rt></ruby> <ruby>懺<rt>さん</rt></ruby> <ruby>悔<rt>げ</rt></ruby>
             </div>
           </div>
           <div>
@@ -276,10 +269,10 @@
         <div class="footer-info">
           <p><span data-lang="ja" class="active">臨済宗 建長寺派　圓應寺</span><span data-lang="en">Rinzai Sect, Kenchoji Branch — Ennoji</span><span data-lang="zh">临济宗 建长寺派　圆应寺</span></p>
           <p><span class="label"><span data-lang="ja" class="active">住所</span><span data-lang="en">Address</span><span data-lang="zh">地址</span></span>〒247-0062　神奈川県鎌倉市山ノ内1543</p>
-          <p><span class="label">TEL</span>0467-25-1095</p>
+          <p><span class="label">TEL / FAX</span>0467-25-1095</p>
           <p><span class="label"><span data-lang="ja" class="active">拝観時間</span><span data-lang="en">Hours</span><span data-lang="zh">参观时间</span></span><span data-lang="ja" class="active">春〜秋（3〜11月）9:00〜16:00　冬（12〜2月）9:00〜15:30</span><span data-lang="en">Spring–Autumn (Mar–Nov) 9:00–16:00 &nbsp; Winter (Dec–Feb) 9:00–15:30</span><span data-lang="zh">春秋（3〜11月）9:00〜16:00　冬（12〜2月）9:00〜15:30</span></p>
         </div>
-        <p class="footer-copy">© 2026 鎌倉 圓應寺</p>
+        <p class="footer-copy">© 2025 圓應寺 All rights reserved.　<a href="privacy.html" style="color:var(--gold-light); text-decoration:underline;"><span data-lang="ja" class="active">プライバシーポリシー</span><span data-lang="en">Privacy Policy</span><span data-lang="zh">隐私政策</span></a></p>
       </div>
     </footer>
   </div>
