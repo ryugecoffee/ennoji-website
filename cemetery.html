@@ -54,6 +54,29 @@
     }
     .dot { width: 12px; height: 12px; border-radius: 2px; display: inline-block; margin-right: 6px; vertical-align: middle; }
 
+    /* 護寺費・墓石について */
+    .fee-block { margin-top: 3.5rem; }
+    .fee-heading {
+      font-size: 0.95rem; letter-spacing: 0.15em; color: var(--gold-light);
+      font-weight: 400; margin-bottom: 1.4rem; padding-bottom: 0.7rem;
+      border-bottom: 1px solid rgba(184,149,90,0.2);
+    }
+    .fee-list { list-style: none; padding: 0; margin: 0 0 1.4rem; }
+    .fee-list li {
+      display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+      padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .fee-list li:last-child { border-bottom: none; }
+    .fee-label { color: var(--white); font-size: 0.88rem; letter-spacing: 0.06em; }
+    .fee-amount {
+      color: var(--gold); font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem; letter-spacing: 0.08em; text-align: right;
+    }
+    .fee-note {
+      color: var(--mist); font-size: 0.78rem; line-height: 1.9;
+      letter-spacing: 0.04em; margin-bottom: 0;
+    }
+
     /* MAP SECTION */
     .map-section { background: var(--black); padding: 5rem 2.5rem; }
     .map-inner { max-width: 900px; margin: 0 auto; }
@@ -261,6 +284,28 @@
             <td class="price">70<span style="font-size:0.7rem;">万円〜</span></td>
           </tr>
         </table>
+
+        <!-- 護寺費について -->
+        <div class="fee-block">
+          <h3 class="fee-heading" data-ja="護寺費について" data-en="Temple Maintenance Fee" data-zh="关于护寺费">護寺費について</h3>
+          <ul class="fee-list">
+            <li>
+              <span class="fee-label" data-ja="一般墓地" data-en="General plots" data-zh="一般墓地">一般墓地</span>
+              <span class="fee-amount" data-ja="年間1万円" data-en="¥10,000 / year" data-zh="每年1万日元">年間1万円</span>
+            </li>
+            <li>
+              <span class="fee-label" data-ja="樹木墓" data-en="Natural burial" data-zh="树木葬">樹木墓</span>
+              <span class="fee-amount" data-ja="10万円（年間1万円の分割納付可）" data-en="¥100,000 (yearly installments of ¥10,000 available)" data-zh="10万日元（可按每年1万日元分期缴纳）">10万円（年間1万円の分割納付可）</span>
+            </li>
+          </ul>
+          <p class="fee-note" data-ja="※護寺費を3年以上滞納された場合、墓地使用契約を解除し、墓石の撤去を行う場合がございます。" data-en="* If the maintenance fee remains unpaid for three years or more, the cemetery use agreement may be terminated and the gravestone removed." data-zh="※如护寺费拖欠三年以上，可能解除墓地使用合同并拆除墓石。">※護寺費を3年以上滞納された場合、墓地使用契約を解除し、墓石の撤去を行う場合がございます。</p>
+        </div>
+
+        <!-- 墓石について -->
+        <div class="fee-block">
+          <h3 class="fee-heading" data-ja="墓石について" data-en="About the Gravestone" data-zh="关于墓石">墓石について</h3>
+          <p data-ja="墓石加工代は別途必要となります。費用の目安はおよそ7万円〜となりますが、石材店との打ち合わせにより異なります。ご希望の方はお気軽にご相談ください。" data-en="Gravestone fabrication is charged separately. As a guide, costs start from around ¥70,000, but vary depending on consultation with the stonemason. Please feel free to contact us if you are interested." data-zh="墓石加工费用需另行支付。大致费用约为7万日元起，但会根据与石材店的商议而有所不同。有意者欢迎随时咨询。">墓石加工代は別途必要となります。費用の目安はおよそ7万円〜となりますが、石材店との打ち合わせにより異なります。ご希望の方はお気軽にご相談ください。</p>
+        </div>
       </div>
     </section>
 
