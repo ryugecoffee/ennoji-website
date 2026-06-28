@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>住職だより | 圓應寺</title>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_shared.css">
+  <style>
+    .page-hero {
+      position: relative; height: 50vh; min-height: 360px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .page-hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(10,10,8,0.3), rgba(10,10,8,0.7)),
+        url('images/hero.jpg') center/cover no-repeat;
+      background-color: #1a1510;
+    }
+    .page-hero h1 {
+      position: relative; z-index: 1;
+      font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 300;
+      letter-spacing: 0.4em; color: var(--white);
+      opacity: 0; animation: fadeUp 1s ease 0.3s forwards;
+    }
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(16px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    .content-section { padding: 5rem 2.5rem; }
+    .news-inner { max-width: 860px; margin: 0 auto; }
+    .news-item {
+      display: grid; grid-template-columns: 140px 1fr; gap: 2rem;
+      padding: 1.6rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+      align-items: start;
+    }
+    .news-item:last-child { border-bottom: none; }
+    .news-date {
+      font-family: 'Cormorant Garamond', serif; font-size: 0.82rem;
+      letter-spacing: 0.1em; color: var(--gold); padding-top: 0.1rem;
+    }
+    .news-text { font-size: 0.85rem; line-height: 1.9; color: var(--cream); letter-spacing: 0.05em; white-space: pre-wrap; }
+    .news-image { display: block; margin-top: 1rem; width: 100%; max-height: 400px; object-fit: cover; border: 1px solid rgba(184,149,90,0.2); }
+    .news-empty { color: var(--mist); font-size: 0.85rem; letter-spacing: 0.05em; }
+
+    @media (max-width: 720px) {
+      .news-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="lang-bar">
+    <span class="site-tagline">新居山 閻魔様の寺</span>
+    <div class="lang-switcher">
+      <button onclick="setLang('ja')" id="btn-ja">JP</button>
+      <button onclick="setLang('en')" id="btn-en">EN</button>
+      <button onclick="setLang('zh')" id="btn-zh">ZH</button>
+    </div>
+  </div>
+  <nav>
+    <a href="index.html" class="nav-logo">圓應寺</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="メニュー"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html" data-ja="トップページ" data-en="Home" data-zh="首页">トップページ</a></li>
+      <li><a href="tayori.html" class="current" data-ja="住職だより" data-en="Newsletter" data-zh="住持随笔">住職だより</a></li>
+      <li><a href="about.html" data-ja="圓應寺のご案内" data-en="About" data-zh="寺院介绍">圓應寺のご案内</a></li>
+      <li><a href="funeral.html" data-ja="葬儀・法事" data-en="Funeral" data-zh="葬礼法事">葬儀・法事</a></li>
+      <li><a href="cemetery.html" data-ja="墓地分譲" data-en="Cemetery" data-zh="墓地">墓地分譲</a></li>
+      <li><a href="access.html" data-ja="アクセス・お問い合わせ" data-en="Access" data-zh="交通・联系">アクセス・お問い合わせ</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-top">
+    <!-- HERO -->
+    <div class="page-hero">
+      <div class="page-hero-bg"></div>
+      <h1>
+        <span data-lang="ja" class="active">住職だより</span>
+        <span data-lang="en">Newsletter</span>
+        <span data-lang="zh">住持随笔</span>
+      </h1>
+    </div>
+
+    <!-- 住職だより一覧 -->
+    <section class="content-section">
+      <div class="news-inner">
+        <p class="section-label">
+          <span data-lang="ja" class="active">住職だより</span>
+          <span data-lang="en">Newsletter</span>
+          <span data-lang="zh">住持随笔</span>
+        </p>
+        <h2 class="section-title">
+          <span data-lang="ja" class="active">これまでのお知らせ</span>
+          <span data-lang="en">All Updates</span>
+          <span data-lang="zh">全部资讯</span>
+        </h2>
+        <div id="news-list">
+          <p class="news-empty">
+            <span data-lang="ja" class="active">読み込み中…</span>
+            <span data-lang="en">Loading…</span>
+            <span data-lang="zh">加载中…</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-logo">圓應寺</div>
+        <div class="footer-info">
+          <p><span data-lang="ja" class="active">臨済宗 建長寺派　圓應寺</span><span data-lang="en">Rinzai Sect, Kenchoji Branch — Ennoji</span><span data-lang="zh">临济宗 建长寺派　圆应寺</span></p>
+          <p><span class="label"><span data-lang="ja" class="active">住所</span><span data-lang="en">Address</span><span data-lang="zh">地址</span></span>〒247-0062　神奈川県鎌倉市山ノ内1543</p>
+          <p><span class="label">TEL / FAX</span>0467-25-1095</p>
+          <p><span class="label"><span data-lang="ja" class="active">拝観時間</span><span data-lang="en">Hours</span><span data-lang="zh">参观时间</span></span><span data-lang="ja" class="active">春〜秋（3〜11月）9:00〜16:00　冬（12〜2月）9:00〜15:30</span><span data-lang="en">Spring–Autumn (Mar–Nov) 9:00–16:00 &nbsp; Winter (Dec–Feb) 9:00–15:30</span><span data-lang="zh">春秋（3〜11月）9:00〜16:00　冬（12〜2月）9:00〜15:30</span></p>
+        </div>
+        <p class="footer-copy">© 2025 圓應寺 All rights reserved.　<a href="privacy.html" style="color:var(--gold-light); text-decoration:underline;"><span data-lang="ja" class="active">プライバシーポリシー</span><span data-lang="en">Privacy Policy</span><span data-lang="zh">隐私政策</span></a></p>
+      </div>
+    </footer>
+  </div>
+  <script src="_lang.js"></script>
+  <script type="module">
+    // 住職だより：notices_ennoji を timestamp 降順で全件取得して表示
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+    import { getFirestore, collection, query, orderBy, getDocs }
+      from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+
+    // ▼ Firebase Web アプリの設定（公開情報・秘密ではありません）
+    const firebaseConfig = {
+      apiKey: 'AIzaSyBY3T4W9U6iNQizcI_9JCFnuCuU7vdFsgM',
+      authDomain: 'ryuge-command-center.firebaseapp.com',
+      projectId: 'ryuge-command-center',
+      storageBucket: 'ryuge-command-center.firebasestorage.app',
+      messagingSenderId: '514565060595',
+      appId: '1:514565060595:web:477f9a53b24d0240974486',
+      measurementId: 'G-9R183THKK3',
+    };
+
+    const list = document.getElementById('news-list');
+    const lang = () => localStorage.getItem('ennoji-lang') || 'ja';
+    const MSG = {
+      empty: { ja: '現在お知らせはありません。', en: 'No updates yet.', zh: '暂无资讯。' },
+      error: { ja: '読み込みに失敗しました。時間をおいて再度お試しください。', en: 'Failed to load. Please try again later.', zh: '加载失败，请稍后再试。' },
+      imgAlt: { ja: 'お知らせ画像', en: 'Notice image', zh: '通知图片' },
+    };
+
+    function fmtDate(date) {
+      if (!date) return '';
+      const p = (n) => String(n).padStart(2, '0');
+      return date.getFullYear() + ' / ' + p(date.getMonth() + 1) + ' / ' + p(date.getDate());
+    }
+
+    function showMessage(text) {
+      list.innerHTML = '';
+      const p = document.createElement('p');
+      p.className = 'news-empty';
+      p.textContent = text;
+      list.appendChild(p);
+    }
+
+    function render(notices) {
+      if (!notices.length) { showMessage(MSG.empty[lang()] || MSG.empty.ja); return; }
+      list.innerHTML = '';
+      notices.forEach((n) => {
+        const item = document.createElement('div');
+        item.className = 'news-item';
+
+        const date = document.createElement('span');
+        date.className = 'news-date';
+        date.textContent = fmtDate(n.date);
+        item.appendChild(date);
+
+        const body = document.createElement('div');
+        if (n.text) {
+          const p = document.createElement('p');
+          p.className = 'news-text';
+          p.textContent = n.text;
+          body.appendChild(p);
+        }
+        if (n.imageUrl) {
+          const img = document.createElement('img');
+          img.className = 'news-image';
+          img.src = n.imageUrl;
+          img.alt = MSG.imgAlt[lang()] || MSG.imgAlt.ja;
+          img.loading = 'lazy';
+          body.appendChild(img);
+        }
+        item.appendChild(body);
+        list.appendChild(item);
+      });
+    }
+
+    async function loadNotices() {
+      if (!list) return;
+      try {
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const q = query(collection(db, 'notices_ennoji'), orderBy('timestamp', 'desc'));
+        const snap = await getDocs(q);
+        const notices = snap.docs.map((doc) => {
+          const data = doc.data();
+          const ts = data.timestamp;
+          return {
+            text: data.text || '',
+            imageUrl: data.imageUrl || null,
+            date: ts && typeof ts.toDate === 'function' ? ts.toDate() : null,
+          };
+        });
+        render(notices);
+      } catch (err) {
+        console.error('notices load failed:', err);
+        showMessage(MSG.error[lang()] || MSG.error.ja);
+      }
+    }
+
+    loadNotices();
+  </script>
+</body>
+</html>

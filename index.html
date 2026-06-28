@@ -71,6 +71,13 @@
     .news-text { font-size: 0.85rem; line-height: 1.9; color: var(--cream); letter-spacing: 0.05em; white-space: pre-wrap; }
     .news-image { display: block; margin-top: 1rem; width: 100%; max-height: 400px; object-fit: cover; border: 1px solid rgba(184,149,90,0.2); }
     .news-empty { color: var(--mist); font-size: 0.85rem; letter-spacing: 0.05em; }
+    .news-more {
+      display: inline-block; margin-top: 2.5rem; color: var(--gold);
+      font-size: 0.8rem; letter-spacing: 0.15em; text-decoration: none;
+      border-bottom: 1px solid rgba(184,149,90,0.4); padding-bottom: 0.3rem;
+      transition: color 0.3s, border-color 0.3s;
+    }
+    .news-more:hover { color: var(--gold-light); border-color: var(--gold-light); }
 
     /* CARDS */
     .cards { background: var(--black); padding: 6rem 2.5rem; }
@@ -144,6 +151,7 @@
     <button class="nav-toggle" id="nav-toggle" aria-label="メニュー"><span></span><span></span><span></span></button>
     <ul class="nav-links" id="nav-links">
       <li><a href="index.html" class="current" data-ja="トップページ" data-en="Home" data-zh="首页">トップページ</a></li>
+      <li><a href="tayori.html" data-ja="住職だより" data-en="Newsletter" data-zh="住持随笔">住職だより</a></li>
       <li><a href="about.html" data-ja="圓應寺のご案内" data-en="About" data-zh="寺院介绍">圓應寺のご案内</a></li>
       <li><a href="funeral.html" data-ja="葬儀・法事" data-en="Funeral" data-zh="葬礼法事">葬儀・法事</a></li>
       <li><a href="cemetery.html" data-ja="墓地分譲" data-en="Cemetery" data-zh="墓地">墓地分譲</a></li>
@@ -208,6 +216,11 @@
           </p>
         </div>
       </div>
+      <a class="news-more" href="tayori.html">
+        <span data-lang="ja" class="active">住職だよりをもっと見る →</span>
+        <span data-lang="en">Read more in the Newsletter →</span>
+        <span data-lang="zh">查看更多住持随笔 →</span>
+      </a>
     </div>
   </section>
 
@@ -289,7 +302,7 @@
   </footer>
   <script src="_lang.js"></script>
   <script type="module">
-    // お知らせを Firestore（クライアントSDK）から取得して最新5件を表示
+    // お知らせを Firestore（クライアントSDK）から取得して最新3件を表示
     // notices_ennoji を timestamp 降順で取得。取得失敗時はHTML記載の静的内容を維持。
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
     import { getFirestore, collection, query, orderBy, limit, getDocs }
@@ -359,7 +372,7 @@
       try {
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-        const q = query(collection(db, 'notices_ennoji'), orderBy('timestamp', 'desc'), limit(5));
+        const q = query(collection(db, 'notices_ennoji'), orderBy('timestamp', 'desc'), limit(3));
         const snap = await getDocs(q);
         const notices = snap.docs.map((doc) => {
           const data = doc.data();
