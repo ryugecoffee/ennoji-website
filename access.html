@@ -422,16 +422,16 @@
             <div class="form-field">
               <label for="cf-email">
                 <span data-lang="ja" class="active">メールアドレス</span><span data-lang="en">Email</span><span data-lang="zh">电子邮箱</span>
-                <span class="req"><span data-lang="ja" class="active">必須</span><span data-lang="en">Required</span><span data-lang="zh">必填</span></span>
+                <span class="opt"><span data-lang="ja" class="active">任意</span><span data-lang="en">Optional</span><span data-lang="zh">选填</span></span>
               </label>
-              <input type="email" id="cf-email" name="email" required autocomplete="email" placeholder="example@email.com">
+              <input type="email" id="cf-email" name="email" autocomplete="email" placeholder="example@email.com">
             </div>
             <div class="form-field">
               <label for="cf-tel">
                 <span data-lang="ja" class="active">電話番号</span><span data-lang="en">Phone</span><span data-lang="zh">电话号码</span>
-                <span class="opt"><span data-lang="ja" class="active">任意</span><span data-lang="en">Optional</span><span data-lang="zh">选填</span></span>
+                <span class="req"><span data-lang="ja" class="active">必須</span><span data-lang="en">Required</span><span data-lang="zh">必填</span></span>
               </label>
-              <input type="tel" id="cf-tel" name="tel" autocomplete="tel" placeholder="0467-00-0000">
+              <input type="tel" id="cf-tel" name="tel" required autocomplete="tel" placeholder="0467-00-0000">
             </div>
             <div class="form-field">
               <label>
@@ -564,6 +564,20 @@
           form.style.display = 'none';
           success.classList.add('show');
           success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          // 3秒後に完了メッセージを消してフォームを再表示
+          setTimeout(function () {
+            success.classList.remove('show');
+            form.reset();
+            // 種別の選択状態を初期化（既定：墓地分譲）
+            typeOptions.forEach(function (b) { b.classList.remove('selected'); });
+            const defaultBtn = document.querySelector('#type-options .type-option[data-value="cemetery"]');
+            if (defaultBtn) defaultBtn.classList.add('selected');
+            typeInput.value = 'cemetery';
+            toubaFields.classList.remove('show');
+            applyPlaceholder('cemetery');
+            if (submitBtn) submitBtn.disabled = false;
+            form.style.display = '';
+          }, 3000);
         } catch (err) {
           alert('送信に失敗しました。お手数ですがお電話にてお問い合わせください。');
           if (submitBtn) submitBtn.disabled = false;
