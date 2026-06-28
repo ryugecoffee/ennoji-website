@@ -512,6 +512,22 @@
       const typeInput = document.getElementById('cf-type');
       const typeOptions = document.querySelectorAll('#type-options .type-option');
       const toubaFields = document.getElementById('touba-fields');
+      const messageField = document.getElementById('cf-message');
+
+      // 種別ごとのお問い合わせ内容placeholder
+      const MESSAGE_PLACEHOLDERS = {
+        cemetery: '例）ご希望の区画サイズ、見学希望日（複数可）、\n　　現在のお墓の状況などをお書きください。',
+        funeral: '例）希望日（複数可）、会場（お寺／霊園／ご自宅）、\n　　法事の種類（四十九日・一周忌など）、\n　　参列人数の目安などをお書きください。',
+        touba: '例）ご命日、塔婆の本数、\n　　受け取り方法（郵送／直接受け取り）\n　　などをお書きください。',
+        other: '例）お問い合わせ内容をご自由にお書きください。',
+      };
+      function applyPlaceholder(value) {
+        if (messageField) {
+          messageField.placeholder = MESSAGE_PLACEHOLDERS[value] || MESSAGE_PLACEHOLDERS.other;
+        }
+      }
+      applyPlaceholder(typeInput.value);
+
       typeOptions.forEach(function (btn) {
         btn.addEventListener('click', function () {
           typeOptions.forEach(function (b) { b.classList.remove('selected'); });
@@ -519,6 +535,7 @@
           const value = btn.getAttribute('data-value');
           typeInput.value = value;
           toubaFields.classList.toggle('show', value === 'touba');
+          applyPlaceholder(value);
         });
       });
 
