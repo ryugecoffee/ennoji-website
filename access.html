@@ -393,7 +393,7 @@
             <span data-lang="en">Inquiry Form</span>
             <span data-lang="zh">表单咨询</span>
           </h3>
-          <form class="contact-form" id="contact-form">
+          <form class="contact-form" id="contact-form" action="/api/contact" method="post">
             <div class="form-field">
               <label for="cf-name">
                 <span data-lang="ja" class="active">お名前</span><span data-lang="en">Name</span><span data-lang="zh">姓名</span>
@@ -465,13 +465,32 @@
       const form = document.getElementById('contact-form');
       const success = document.getElementById('form-success');
       if (!form || !success) return;
-      form.addEventListener('submit', function (e) {
+      const submitBtn = form.querySelector('.form-submit');
+      form.addEventListener('submit', async function (e) {
         e.preventDefault();
         if (!form.checkValidity()) { form.reportValidity(); return; }
-        // TODO: ここでバックエンド送信処理（fetch等）に接続する
-        form.style.display = 'none';
-        success.classList.add('show');
-        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (submitBtn) submitBtn.disabled = true;
+        try {
+          const payload = {
+            name: form.name.value,
+            email: form.email.value,
+            tel: form.tel.value,
+            type: form.type.value,
+            message: form.message.value,
+          };
+          const res = await fetch(form.action, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          if (!res.ok) throw new Error('送信に失敗しました');
+          form.style.display = 'none';
+          success.classList.add('show');
+          success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } catch (err) {
+          alert('送信に失敗しました。お手数ですがお電話にてお問い合わせください。');
+          if (submitBtn) submitBtn.disabled = false;
+        }
       });
     })();
   </script>
