@@ -55,7 +55,8 @@
     .dot { width: 12px; height: 12px; border-radius: 2px; display: inline-block; margin-right: 6px; vertical-align: middle; }
 
     /* 護寺費・墓石について */
-    .fee-block { margin-top: 3.5rem; }
+    /* 数字を読みやすく：等幅数字＋数字はsans-serifにfallback（漢字は和文セリフのまま） */
+    .fee-block { margin-top: 3.5rem; font-variant-numeric: tabular-nums lining-nums; }
     .fee-heading {
       font-size: 0.95rem; letter-spacing: 0.15em; color: var(--gold-light);
       font-weight: 400; margin-bottom: 1.4rem; padding-bottom: 0.7rem;
@@ -69,8 +70,10 @@
     .fee-list li:last-child { border-bottom: none; }
     .fee-label { color: var(--white); font-size: 0.88rem; letter-spacing: 0.06em; }
     .fee-amount {
-      color: var(--gold); font-family: 'Cormorant Garamond', serif;
+      color: var(--gold);
+      font-family: 'Helvetica Neue', Arial, 'Noto Serif JP', sans-serif;
       font-size: 1rem; letter-spacing: 0.08em; text-align: right;
+      font-variant-numeric: tabular-nums lining-nums;
     }
     .fee-note {
       color: var(--mist); font-size: 0.78rem; line-height: 1.9;
