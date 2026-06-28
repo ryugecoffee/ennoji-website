@@ -94,6 +94,8 @@ module.exports = async function handler(req, res) {
     for (const event of events) {
       // 受信元グループIDの確認用ログ
       console.log('source.groupId:', event.source && event.source.groupId);
+      // グループからのメッセージは無視（保存処理をスキップ）
+      if (event.source && event.source.type === 'group') continue;
       if (event.type !== 'message' || !event.message) continue;
       const msg = event.message;
 
