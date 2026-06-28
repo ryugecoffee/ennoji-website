@@ -68,7 +68,9 @@
       font-family: 'Cormorant Garamond', serif; font-size: 0.82rem;
       letter-spacing: 0.1em; color: var(--gold); padding-top: 0.1rem;
     }
-    .news-text { font-size: 0.85rem; line-height: 1.9; color: var(--cream); letter-spacing: 0.05em; }
+    .news-text { font-size: 0.85rem; line-height: 1.9; color: var(--cream); letter-spacing: 0.05em; white-space: pre-wrap; }
+    .news-image { display: block; margin-top: 1rem; max-width: 100%; border: 1px solid rgba(184,149,90,0.2); }
+    .news-empty { color: var(--mist); font-size: 0.85rem; letter-spacing: 0.05em; }
 
     /* CARDS */
     .cards { background: var(--black); padding: 6rem 2.5rem; }
@@ -179,29 +181,32 @@
         <span data-lang="en">Latest Updates</span>
         <span data-lang="zh">最新资讯</span>
       </h2>
-      <div class="news-item">
-        <span class="news-date">2026 / 06 / 02</span>
-        <p class="news-text">
-          <span data-lang="ja" class="active">明日、六月三日は台風接近が予想されておりますので、拝観中止と致します。</span>
-          <span data-lang="en">Due to an approaching typhoon, the temple will be closed on June 3rd.</span>
-          <span data-lang="zh">因台风临近，六月三日暂停参观。</span>
-        </p>
-      </div>
-      <div class="news-item">
-        <span class="news-date">2026 / 01 / 02</span>
-        <p class="news-text">
-          <span data-lang="ja" class="active">お正月三日間、拝観中止とさせて頂きます。四日より拝観と致します。</span>
-          <span data-lang="en">The temple will be closed for three days during the New Year holiday. Visits resume from January 4th.</span>
-          <span data-lang="zh">元旦三天暂停参观，1月4日起恢复。</span>
-        </p>
-      </div>
-      <div class="news-item">
-        <span class="news-date">2025 / 10 / 30</span>
-        <p class="news-text">
-          <span data-lang="ja" class="active">日中韓文化交流 in 円応寺</span>
-          <span data-lang="en">Japan–China–Korea Cultural Exchange at Ennoji</span>
-          <span data-lang="zh">日中韩文化交流活动在圆应寺举办</span>
-        </p>
+      <!-- お知らせ一覧（Firestoreから動的取得。取得失敗時は以下の静的内容をフォールバック表示） -->
+      <div id="news-list">
+        <div class="news-item">
+          <span class="news-date">2026 / 06 / 02</span>
+          <p class="news-text">
+            <span data-lang="ja" class="active">明日、六月三日は台風接近が予想されておりますので、拝観中止と致します。</span>
+            <span data-lang="en">Due to an approaching typhoon, the temple will be closed on June 3rd.</span>
+            <span data-lang="zh">因台风临近，六月三日暂停参观。</span>
+          </p>
+        </div>
+        <div class="news-item">
+          <span class="news-date">2026 / 01 / 02</span>
+          <p class="news-text">
+            <span data-lang="ja" class="active">お正月三日間、拝観中止とさせて頂きます。四日より拝観と致します。</span>
+            <span data-lang="en">The temple will be closed for three days during the New Year holiday. Visits resume from January 4th.</span>
+            <span data-lang="zh">元旦三天暂停参观，1月4日起恢复。</span>
+          </p>
+        </div>
+        <div class="news-item">
+          <span class="news-date">2025 / 10 / 30</span>
+          <p class="news-text">
+            <span data-lang="ja" class="active">日中韓文化交流 in 円応寺</span>
+            <span data-lang="en">Japan–China–Korea Cultural Exchange at Ennoji</span>
+            <span data-lang="zh">日中韩文化交流活动在圆应寺举办</span>
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -283,5 +288,66 @@
     </div>
   </footer>
   <script src="_lang.js"></script>
+  <script>
+    // お知らせをFirestore（/api/notices）から取得して最新5件を表示
+    (function () {
+      const list = document.getElementById('news-list');
+      if (!list) return;
+
+      function fmtDate(ms) {
+        if (!ms) return '';
+        const d = new Date(ms);
+        const p = (n) => String(n).padStart(2, '0');
+        return d.getFullYear() + ' / ' + p(d.getMonth() + 1) + ' / ' + p(d.getDate());
+      }
+
+      function render(notices) {
+        list.innerHTML = '';
+        if (!notices.length) {
+          const empty = document.createElement('p');
+          empty.className = 'news-empty';
+          empty.textContent = '現在お知らせはありません。';
+          list.appendChild(empty);
+          return;
+        }
+        notices.forEach(function (n) {
+          const item = document.createElement('div');
+          item.className = 'news-item';
+
+          const date = document.createElement('span');
+          date.className = 'news-date';
+          date.textContent = fmtDate(n.createdAt);
+          item.appendChild(date);
+
+          const body = document.createElement('div');
+          if (n.text) {
+            const p = document.createElement('p');
+            p.className = 'news-text';
+            p.textContent = n.text;
+            body.appendChild(p);
+          }
+          if (n.imageUrl) {
+            const img = document.createElement('img');
+            img.className = 'news-image';
+            img.src = n.imageUrl;
+            img.alt = 'お知らせ画像';
+            img.loading = 'lazy';
+            body.appendChild(img);
+          }
+          item.appendChild(body);
+          list.appendChild(item);
+        });
+      }
+
+      fetch('/api/notices')
+        .then(function (res) { if (!res.ok) throw new Error('fetch failed'); return res.json(); })
+        .then(function (data) {
+          if (data && Array.isArray(data.notices)) render(data.notices);
+        })
+        .catch(function () {
+          // 取得失敗時はHTMLに記載済みの静的お知らせをそのまま表示
+        });
+    })();
+  </script>
 </body>
 </html>

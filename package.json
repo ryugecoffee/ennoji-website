@@ -1,0 +1,9 @@
+{
+  "name": "ennoji-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "圓應寺 公式サイト（静的サイト ＋ Vercel Serverless Functions）",
+  "dependencies": {
+    "firebase-admin": "^12.7.0"
+  }
+}
