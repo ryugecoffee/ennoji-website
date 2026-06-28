@@ -288,66 +288,95 @@
     </div>
   </footer>
   <script src="_lang.js"></script>
-  <script>
-    // お知らせをFirestore（/api/notices）から取得して最新5件を表示
-    (function () {
-      const list = document.getElementById('news-list');
-      if (!list) return;
+  <script type="module">
+    // お知らせを Firestore（クライアントSDK）から取得して最新5件を表示
+    // notices_ennoji を timestamp 降順で取得。取得失敗時はHTML記載の静的内容を維持。
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+    import { getFirestore, collection, query, orderBy, limit, getDocs }
+      from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 
-      function fmtDate(ms) {
-        if (!ms) return '';
-        const d = new Date(ms);
-        const p = (n) => String(n).padStart(2, '0');
-        return d.getFullYear() + ' / ' + p(d.getMonth() + 1) + ' / ' + p(d.getDate());
+    // ▼ Firebase Web アプリの設定（公開情報・秘密ではありません）
+    //   Firebase Console → プロジェクトの設定 → マイアプリ（ウェブ）の値を貼り付けてください。
+    //   ※ RCCと同じFirestoreプロジェクトの設定を使用します。
+    const firebaseConfig = {
+      apiKey: 'YOUR_FIREBASE_API_KEY',
+      authDomain: 'YOUR_PROJECT_ID.firebaseapp.com',
+      projectId: 'YOUR_PROJECT_ID',
+      storageBucket: 'YOUR_PROJECT_ID.appspot.com',
+      messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
+      appId: 'YOUR_APP_ID',
+    };
+
+    const list = document.getElementById('news-list');
+
+    function fmtDate(date) {
+      if (!date) return '';
+      const p = (n) => String(n).padStart(2, '0');
+      return date.getFullYear() + ' / ' + p(date.getMonth() + 1) + ' / ' + p(date.getDate());
+    }
+
+    function render(notices) {
+      list.innerHTML = '';
+      if (!notices.length) {
+        const empty = document.createElement('p');
+        empty.className = 'news-empty';
+        empty.textContent = '現在お知らせはありません。';
+        list.appendChild(empty);
+        return;
       }
+      notices.forEach((n) => {
+        const item = document.createElement('div');
+        item.className = 'news-item';
 
-      function render(notices) {
-        list.innerHTML = '';
-        if (!notices.length) {
-          const empty = document.createElement('p');
-          empty.className = 'news-empty';
-          empty.textContent = '現在お知らせはありません。';
-          list.appendChild(empty);
-          return;
+        const date = document.createElement('span');
+        date.className = 'news-date';
+        date.textContent = fmtDate(n.date);
+        item.appendChild(date);
+
+        const body = document.createElement('div');
+        if (n.text) {
+          const p = document.createElement('p');
+          p.className = 'news-text';
+          p.textContent = n.text;
+          body.appendChild(p);
         }
-        notices.forEach(function (n) {
-          const item = document.createElement('div');
-          item.className = 'news-item';
+        if (n.imageUrl) {
+          const img = document.createElement('img');
+          img.className = 'news-image';
+          img.src = n.imageUrl;
+          img.alt = 'お知らせ画像';
+          img.loading = 'lazy';
+          body.appendChild(img);
+        }
+        item.appendChild(body);
+        list.appendChild(item);
+      });
+    }
 
-          const date = document.createElement('span');
-          date.className = 'news-date';
-          date.textContent = fmtDate(n.createdAt);
-          item.appendChild(date);
-
-          const body = document.createElement('div');
-          if (n.text) {
-            const p = document.createElement('p');
-            p.className = 'news-text';
-            p.textContent = n.text;
-            body.appendChild(p);
-          }
-          if (n.imageUrl) {
-            const img = document.createElement('img');
-            img.className = 'news-image';
-            img.src = n.imageUrl;
-            img.alt = 'お知らせ画像';
-            img.loading = 'lazy';
-            body.appendChild(img);
-          }
-          item.appendChild(body);
-          list.appendChild(item);
+    async function loadNotices() {
+      if (!list) return;
+      try {
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const q = query(collection(db, 'notices_ennoji'), orderBy('timestamp', 'desc'), limit(5));
+        const snap = await getDocs(q);
+        const notices = snap.docs.map((doc) => {
+          const data = doc.data();
+          const ts = data.timestamp;
+          return {
+            text: data.text || '',
+            imageUrl: data.imageUrl || null,
+            date: ts && typeof ts.toDate === 'function' ? ts.toDate() : null,
+          };
         });
+        render(notices);
+      } catch (err) {
+        // 取得失敗時はHTMLに記載済みの静的お知らせをそのまま表示
+        console.error('notices load failed:', err);
       }
+    }
 
-      fetch('/api/notices')
-        .then(function (res) { if (!res.ok) throw new Error('fetch failed'); return res.json(); })
-        .then(function (data) {
-          if (data && Array.isArray(data.notices)) render(data.notices);
-        })
-        .catch(function () {
-          // 取得失敗時はHTMLに記載済みの静的お知らせをそのまま表示
-        });
-    })();
+    loadNotices();
   </script>
 </body>
 </html>

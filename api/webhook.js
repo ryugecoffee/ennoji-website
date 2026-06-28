@@ -55,7 +55,7 @@ async function saveImage(messageId, accessToken) {
 }
 
 async function deleteLatestNotice(db) {
-  const snap = await db.collection(COLLECTION).orderBy('createdAt', 'desc').limit(1).get();
+  const snap = await db.collection(COLLECTION).orderBy('timestamp', 'desc').limit(1).get();
   if (!snap.empty) {
     await snap.docs[0].ref.delete();
   }
@@ -101,19 +101,17 @@ module.exports = async function handler(req, res) {
           await deleteLatestNotice(db);
         } else {
           await db.collection(COLLECTION).add({
+            timestamp: admin.firestore.FieldValue.serverTimestamp(),
             text: msg.text || '',
             imageUrl: null,
-            createdAt: admin.firestore.FieldValue.serverTimestamp(),
-            source: 'line',
           });
         }
       } else if (msg.type === 'image') {
         const imageUrl = await saveImage(msg.id, accessToken);
         await db.collection(COLLECTION).add({
+          timestamp: admin.firestore.FieldValue.serverTimestamp(),
           text: '',
           imageUrl,
-          createdAt: admin.firestore.FieldValue.serverTimestamp(),
-          source: 'line',
         });
       }
     }
