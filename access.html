@@ -121,6 +121,58 @@
       padding: 0.3rem 1rem; font-size: 0.7rem; letter-spacing: 0.2em;
       color: var(--mist); margin-bottom: 2rem;
     }
+
+    /* Contact form */
+    .form-block { margin-top: 4rem; padding-top: 3rem; border-top: 1px solid rgba(184,149,90,0.15); }
+    .form-heading {
+      font-size: 0.85rem; letter-spacing: 0.2em; color: var(--gold);
+      font-weight: 400; margin-bottom: 2rem;
+    }
+    .contact-form { max-width: 640px; }
+    .form-field { margin-bottom: 1.6rem; }
+    .form-field label {
+      display: block; font-size: 0.7rem; letter-spacing: 0.18em; color: var(--gold);
+      margin-bottom: 0.6rem; font-family: 'Cormorant Garamond', serif;
+    }
+    .form-field .req, .form-field .opt {
+      margin-left: 0.6rem; font-size: 0.6rem; letter-spacing: 0.15em;
+      padding: 0.1rem 0.4rem; border: 1px solid rgba(184,149,90,0.4);
+    }
+    .form-field .req { color: var(--gold-light); }
+    .form-field .opt { color: var(--mist); border-color: rgba(168,158,142,0.3); }
+    .form-field input, .form-field select, .form-field textarea {
+      width: 100%; background: var(--black); color: var(--cream);
+      border: 1px solid rgba(184,149,90,0.25); padding: 0.85rem 1rem;
+      font-size: 0.88rem; letter-spacing: 0.04em; font-family: inherit;
+      box-sizing: border-box; transition: border-color 0.3s;
+    }
+    .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
+      outline: none; border-color: var(--gold);
+    }
+    .form-field input::placeholder, .form-field textarea::placeholder { color: rgba(168,158,142,0.5); }
+    .form-field textarea { resize: vertical; min-height: 150px; line-height: 1.7; }
+    .form-field select {
+      appearance: none; -webkit-appearance: none; cursor: pointer;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%23b8955a' stroke-width='1.5'/></svg>");
+      background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem;
+    }
+    .form-field select option { background: var(--off-black); color: var(--cream); }
+    .form-submit {
+      margin-top: 0.5rem; background: transparent; border: 1px solid var(--gold);
+      color: var(--gold); padding: 0.9rem 3rem; font-size: 0.78rem;
+      letter-spacing: 0.25em; cursor: pointer; transition: all 0.3s; font-family: inherit;
+    }
+    .form-submit:hover { background: var(--gold); color: var(--black); }
+    .form-success {
+      display: none; padding: 2.5rem 2rem; border: 1px solid var(--gold);
+      background: rgba(184,149,90,0.06); color: var(--cream);
+      text-align: center; line-height: 2; letter-spacing: 0.06em; max-width: 640px;
+    }
+    .form-success.show { display: block; animation: fadeUp 0.6s ease forwards; }
+
+    @media (max-width: 720px) {
+      .form-submit { width: 100%; }
+    }
   </style>
 </head>
 <body>
@@ -333,6 +385,63 @@
             </div>
           </div>
         </div>
+
+        <!-- INQUIRY FORM -->
+        <div class="form-block">
+          <h3 class="form-heading">
+            <span data-lang="ja" class="active">フォームでのお問い合わせ</span>
+            <span data-lang="en">Inquiry Form</span>
+            <span data-lang="zh">表单咨询</span>
+          </h3>
+          <form class="contact-form" id="contact-form">
+            <div class="form-field">
+              <label for="cf-name">
+                <span data-lang="ja" class="active">お名前</span><span data-lang="en">Name</span><span data-lang="zh">姓名</span>
+                <span class="req"><span data-lang="ja" class="active">必須</span><span data-lang="en">Required</span><span data-lang="zh">必填</span></span>
+              </label>
+              <input type="text" id="cf-name" name="name" required autocomplete="name">
+            </div>
+            <div class="form-field">
+              <label for="cf-email">
+                <span data-lang="ja" class="active">メールアドレス</span><span data-lang="en">Email</span><span data-lang="zh">电子邮箱</span>
+                <span class="req"><span data-lang="ja" class="active">必須</span><span data-lang="en">Required</span><span data-lang="zh">必填</span></span>
+              </label>
+              <input type="email" id="cf-email" name="email" required autocomplete="email" placeholder="example@email.com">
+            </div>
+            <div class="form-field">
+              <label for="cf-tel">
+                <span data-lang="ja" class="active">電話番号</span><span data-lang="en">Phone</span><span data-lang="zh">电话号码</span>
+                <span class="opt"><span data-lang="ja" class="active">任意</span><span data-lang="en">Optional</span><span data-lang="zh">选填</span></span>
+              </label>
+              <input type="tel" id="cf-tel" name="tel" autocomplete="tel" placeholder="0467-00-0000">
+            </div>
+            <div class="form-field">
+              <label for="cf-type">
+                <span data-lang="ja" class="active">お問い合わせ種別</span><span data-lang="en">Inquiry Type</span><span data-lang="zh">咨询类别</span>
+              </label>
+              <select id="cf-type" name="type">
+                <option value="cemetery" data-ja="墓地分譲について" data-en="About Cemetery Lots" data-zh="关于墓地">墓地分譲について</option>
+                <option value="funeral" data-ja="葬儀・法事について" data-en="About Funerals &amp; Memorials" data-zh="关于葬礼・法事">葬儀・法事について</option>
+                <option value="other" data-ja="その他" data-en="Other" data-zh="其他">その他</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="cf-message">
+                <span data-lang="ja" class="active">お問い合わせ内容</span><span data-lang="en">Message</span><span data-lang="zh">咨询内容</span>
+                <span class="req"><span data-lang="ja" class="active">必須</span><span data-lang="en">Required</span><span data-lang="zh">必填</span></span>
+              </label>
+              <textarea id="cf-message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="form-submit">
+              <span data-lang="ja" class="active">送信する</span><span data-lang="en">Send</span><span data-lang="zh">发送</span>
+            </button>
+          </form>
+          <div class="form-success" id="form-success">
+            <span data-lang="ja" class="active">お問い合わせありがとうございます。送信が完了しました。<br>担当者より追ってご連絡いたします。</span>
+            <span data-lang="en">Thank you for your inquiry. Your message has been sent.<br>We will get back to you shortly.</span>
+            <span data-lang="zh">感谢您的咨询，已成功提交。<br>我们将尽快与您联系。</span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -350,5 +459,21 @@
     </footer>
   </div>
   <script src="_lang.js"></script>
+  <script>
+    // お問い合わせフォーム（フロントエンドのみ。送信処理は後でバックエンドに接続）
+    (function () {
+      const form = document.getElementById('contact-form');
+      const success = document.getElementById('form-success');
+      if (!form || !success) return;
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!form.checkValidity()) { form.reportValidity(); return; }
+        // TODO: ここでバックエンド送信処理（fetch等）に接続する
+        form.style.display = 'none';
+        success.classList.add('show');
+        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    })();
+  </script>
 </body>
 </html>
