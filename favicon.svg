@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="12" fill="#0a0a08"/>
-  <rect x="2.5" y="2.5" width="59" height="59" rx="10" fill="none" stroke="#b8955a" stroke-width="1.5" opacity="0.5"/>
-  <text x="32" y="34" text-anchor="middle" dominant-baseline="central" font-family="'Noto Serif JP','Hiragino Mincho ProN',serif" font-weight="500" font-size="42" fill="#b8955a">圓</text>
-</svg>
