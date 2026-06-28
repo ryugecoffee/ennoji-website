@@ -92,6 +92,8 @@ module.exports = async function handler(req, res) {
   try {
     const db = getDb();
     for (const event of events) {
+      // 受信元グループIDの確認用ログ
+      console.log('source.groupId:', event.source && event.source.groupId);
       if (event.type !== 'message' || !event.message) continue;
       const msg = event.message;
 
