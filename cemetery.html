@@ -121,7 +121,7 @@
       color: var(--gold); letter-spacing: 0.15em; margin-bottom: 1rem;
     }
     .detail-panel .detail-status {
-      font-size: 0.75rem; letter-spacing: 0.2em; padding: 0.3rem 0.8rem;
+      font-size: 0.9rem; letter-spacing: 0.2em; padding: 0.4rem 1rem;
       border-radius: 2px; display: inline-block; margin-bottom: 1rem;
     }
     .detail-panel .detail-status.available { background: #1a2a1a; color: #c8c8c8; border: 1px solid #3a5a3a; }
@@ -168,7 +168,7 @@
     .tree-detail { margin-top: 1.5rem; min-height: 1.5rem; }
     .tree-detail .td-id { font-size: 1rem; letter-spacing: 0.15em; color: var(--white); }
     .tree-detail .td-size { font-family: 'Cormorant Garamond', serif; color: var(--gold); letter-spacing: 0.1em; margin: 0.35rem 0 0.6rem; }
-    .tree-detail .td-status { display: inline-block; font-size: 0.72rem; letter-spacing: 0.2em; padding: 0.3rem 0.8rem; border-radius: 2px; }
+    .tree-detail .td-status { display: inline-block; font-size: 0.88rem; letter-spacing: 0.2em; padding: 0.4rem 1rem; border-radius: 2px; }
     .tree-detail .td-status.available { background: #1a2a1a; color: #c8c8c8; border: 1px solid #3a5a3a; }
     .tree-detail .td-status.taken { background: rgba(180,80,80,0.15); color: #c48b8b; border: 1px solid rgba(180,80,80,0.3); }
     .tree-preview { cursor: pointer; margin: 1rem auto 0; max-width: 640px; border: 1px solid rgba(184,149,90,0.15); transition: border-color 0.3s; }
@@ -1068,9 +1068,15 @@
           statusEl.className = 'detail-status taken';
         }
 
-        // Photo: try to load images/cemetery_{id}.jpg
+        // Photo: try to load images/cemetery_{id}.jpg (skip entirely when contracted)
         const photoEl = document.getElementById('detail-photo');
-        photoEl.innerHTML = `<img src="images/cemetery_${id}.jpg" alt="${id}" onerror="this.parentElement.innerHTML='<span>${lang==='ja'?'写真準備中':lang==='en'?'Photo coming soon':'照片准备中'}</span>'">`;
+        if (status === 'available') {
+          photoEl.style.display = '';
+          photoEl.innerHTML = `<img src="images/cemetery_${id}.jpg" alt="${id}" onerror="this.parentElement.innerHTML='<span>${lang==='ja'?'写真準備中':lang==='en'?'Photo coming soon':'照片准备中'}</span>'">`;
+        } else {
+          photoEl.style.display = 'none';
+          photoEl.innerHTML = '';
+        }
 
         panel.classList.add('visible');
         panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -1097,7 +1103,9 @@
           '<div class="td-id">区画 ' + id + '</div>' +
           '<div class="td-size">' + info[lang] + (status==='available' ? '\u3000' + info.price : '') + '</div>' +
           '<span class="td-status ' + status + '">' + stt + '</span>' +
-          `<div class="td-photo"><img src="images/tree_${id}.jpg" alt="${id}" onerror="this.parentElement.innerHTML='<span>${lang==='ja'?'写真準備中':lang==='en'?'Photo coming soon':'照片准备中'}</span>'"></div>`;
+          (status === 'available'
+            ? `<div class="td-photo"><img src="images/tree_${id}.jpg" alt="${id}" onerror="this.parentElement.innerHTML='<span>${lang==='ja'?'写真準備中':lang==='en'?'Photo coming soon':'照片准备中'}</span>'"></div>`
+            : '');
       });
     });
   </script>
