@@ -92,8 +92,6 @@
       letter-spacing: 0.1em; color: var(--gold); padding-top: 0.1rem;
     }
     .news-text { font-size: 0.85rem; line-height: 1.9; color: var(--cream); letter-spacing: 0.05em; white-space: pre-wrap; }
-    .news-image { display: block; margin-top: 1rem; width: 100%; max-height: 400px; object-fit: cover; border: 1px solid rgba(184,149,90,0.2); }
-    .news-empty { color: var(--mist); font-size: 0.85rem; letter-spacing: 0.05em; }
     .news-more {
       display: inline-block; margin-top: 2.5rem; color: var(--gold);
       font-size: 0.8rem; letter-spacing: 0.15em; text-decoration: none;
@@ -158,6 +156,16 @@
       transition: background 0.3s, color 0.3s;
     }
     .btn-gold:hover { background: var(--gold); color: var(--black); }
+
+    @media (max-width: 768px) {
+      .hero { padding: 0 1.5rem 3.5rem; min-height: 560px; }
+      .hero-title { font-size: clamp(2.8rem, 16vw, 4.5rem); letter-spacing: 0.18em; }
+      .news, .cards, .gallery-cta { padding-left: 1.2rem; padding-right: 1.2rem; }
+      .news-item { grid-template-columns: 1fr; gap: 0.6rem; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .card, .card.wide { grid-column: auto; height: 240px; }
+      .section-title { letter-spacing: 0.12em; }
+    }
   </style>
 </head>
 <body>
@@ -213,7 +221,6 @@
         <span data-lang="en">Latest Updates</span>
         <span data-lang="zh">最新资讯</span>
       </h2>
-      <!-- お知らせ一覧（Firestoreから動的取得。取得失敗時は以下の静的内容をフォールバック表示） -->
       <div id="news-list">
         <div class="news-item">
           <span class="news-date">2026 / 06 / 02</span>
@@ -325,96 +332,5 @@
     </div>
   </footer>
   <script src="_lang.js"></script>
-  <script type="module">
-    // お知らせを Firestore（クライアントSDK）から取得して最新3件を表示
-    // notices_ennoji を timestamp 降順で取得。取得失敗時はHTML記載の静的内容を維持。
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-    import { getFirestore, collection, query, orderBy, limit, getDocs }
-      from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
-
-    // ▼ Firebase Web アプリの設定（公開情報・秘密ではありません）
-    //   Firebase Console → プロジェクトの設定 → マイアプリ（ウェブ）の値を貼り付けてください。
-    //   ※ RCCと同じFirestoreプロジェクトの設定を使用します。
-    const firebaseConfig = {
-      apiKey: 'AIzaSyBY3T4W9U6iNQizcI_9JCFnuCuU7vdFsgM',
-      authDomain: 'ryuge-command-center.firebaseapp.com',
-      projectId: 'ryuge-command-center',
-      storageBucket: 'ryuge-command-center.firebasestorage.app',
-      messagingSenderId: '514565060595',
-      appId: '1:514565060595:web:477f9a53b24d0240974486',
-      measurementId: 'G-9R183THKK3',
-    };
-
-    const list = document.getElementById('news-list');
-
-    function fmtDate(date) {
-      if (!date) return '';
-      const p = (n) => String(n).padStart(2, '0');
-      return date.getFullYear() + ' / ' + p(date.getMonth() + 1) + ' / ' + p(date.getDate());
-    }
-
-    function render(notices) {
-      list.innerHTML = '';
-      if (!notices.length) {
-        const empty = document.createElement('p');
-        empty.className = 'news-empty';
-        empty.textContent = '現在お知らせはありません。';
-        list.appendChild(empty);
-        return;
-      }
-      notices.forEach((n) => {
-        const item = document.createElement('div');
-        item.className = 'news-item';
-
-        const date = document.createElement('span');
-        date.className = 'news-date';
-        date.textContent = fmtDate(n.date);
-        item.appendChild(date);
-
-        const body = document.createElement('div');
-        if (n.text) {
-          const p = document.createElement('p');
-          p.className = 'news-text';
-          p.textContent = n.text;
-          body.appendChild(p);
-        }
-        if (n.imageUrl) {
-          const img = document.createElement('img');
-          img.className = 'news-image';
-          img.src = n.imageUrl;
-          img.alt = 'お知らせ画像';
-          img.loading = 'lazy';
-          body.appendChild(img);
-        }
-        item.appendChild(body);
-        list.appendChild(item);
-      });
-    }
-
-    async function loadNotices() {
-      if (!list) return;
-      try {
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const q = query(collection(db, 'notices_ennoji'), orderBy('timestamp', 'desc'), limit(3));
-        const snap = await getDocs(q);
-        const notices = snap.docs.map((doc) => {
-          const data = doc.data();
-          const ts = data.timestamp;
-          return {
-            text: data.text || '',
-            imageUrl: data.imageUrl || null,
-            date: ts && typeof ts.toDate === 'function' ? ts.toDate() : null,
-          };
-        });
-        render(notices);
-      } catch (err) {
-        // 取得失敗時はHTMLに記載済みの静的お知らせをそのまま表示
-        console.error('notices load failed:', err);
-      }
-    }
-
-    loadNotices();
-  </script>
 </body>
 </html>
